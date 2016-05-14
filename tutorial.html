@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<style>
+			body {
+				margin-left: 20%;
+			}
+			
+			code {
+				font-style: italic;
+				background-color: #EEEEEE;
+			}
+			
+			li {
+				padding-bottom: 20px;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<p>
+			<h1>HEX TUTORIAL</h1>
+			Welcome to HEX<br>
+			<br>
+			Lets Get straight in,<br>
+			HEX is a board game where the aim<br>
+			is to draw a line to connect<br>
+			the two sides of the board.<br>
+			RED (player 1) draws a horizontal<br>
+			line while BLUE (player 2) draws<br>
+			a vertical line.<br>
+			<br>
+			The Difference in HEX is that<br>
+			YOU can't interact with the board<br>
+			except by writing a program to think<br>
+			for you.<br>
+			<br>
+			The game asks the question:<br>
+			<br>
+			"Which hex do you want to take?"<br>
+			<br>
+			and you specify an X value<br>
+			and Y value of the hex you want<br>
+			to take, like this:<br>
+			<br>
+			<code>return hex(X,Y);</code><br>
+			<br>
+			For Instance if i wanted to<br>
+			choose the position 4,6:<br>
+			<br>
+			<code>return hex(4,6);</code><br>
+			<br>
+			And the rest of your program<br>
+			is deciding which one to choose.<br>
+			<br>
+			This Tutorial assumes basic knowledge<br>
+			of the Javascript language, there is<br>
+			a good tutorial <a href="https://goo.gl/45Qhl0">here</a><br>
+			(start at the "language basics" section.)<br>
+			<br>
+			<br>
+			Lets have a quick look at the default HEX program<br>
+			<code><br>
+			var x = rnd(gridSize-1);<br>
+			var y = rnd(gridSize-1);<br>
+			return hex(x,y);<br>
+			</code><br>
+			<br>
+			The 'rnd(x)' function returns a random<br>
+			value from 0 to x so in this case we <br>
+			take a random x and a random y value in the <br>
+			range of the HEX grid.<br>
+			(JS arrays start at 0 so we take 1 from gridSize)<br>
+			<br>
+			There are many other functions like 'rnd(x)' that you<br>
+			can use.<br>
+			<br>
+			<h1>FUNCTIONS</h1>
+			<ul>
+				<li><strong><code>clamp(value,min,max)</code></strong><br>Returns a restricted value between min & max.</li>
+				<li><strong><code>rnd(x)</code></strong><br>Returns a value between 0 and x.</li>
+				<li><strong><code>round(value)</code></strong><br>Returns given value to the nearest integer.</li>
+				<li><strong><code>hex(x,y)</code></strong><br> Returns info about hex in given position.</li>
+				<li><strong><code>skip()</code></strong><br>Debug function - use <code>return skip();</code> to pass turn</li>
+				<li><strong><code>trace(x,y,colour)</code></strong><br>Sets highlighted hex to given position & colour</li>
+				<li><strong><code>empty(x,y)</code></strong><br>Returns whether given hex is not claimed</li>
+				<li><strong><code>value(x,y)</code></strong><br>Returns the value of given hex, 0=empty, 1=red, 2=blue</li>
+				<li><strong><code>colour(x,y)</code></strong><br>Returns the colour of given hex, either red, blue or blank (returned as a colour string)</li>
+				<li><strong><code>neighbours(x,y,value/colour)</code></strong><br>Returns amount of neighbours a given hex has of a certain value or colour.</li>
+				<li><strong><code>connected(x1,y1,x2,y2)</code></strong><br>Returns whether given hex's are neighbours.</li>
+				<li><strong><code>isEdgeConnected(x,y,edge)</code></strong><br>Returns whether given hex is indirectly connected to the given edge.</li>
+				<li><strong><code>valid()</code></strong><br>Returns whether code is being run through the game. (rather than through error checker)</li>
+				<li><strong><code>clone()</code></strong><br>Returns a copy of the game grid.</li>
+				<li><strong><code>game_update_connections_ext(board,connectionsBoard)</code></strong><br>Updates given boards connections values and returns whether anyone won. (0 - noone won, 1 - player 1 won, 2 - player 2 won)</li>
+			</ul>
+		</p>
+	</body>
+</html>

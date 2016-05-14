@@ -1,0 +1,20 @@
+@name Line
+@author Ewan_Breakey
+@version 1.0
+@desc
+This one works for both
+red & blue, it draws a 
+horizontal/vertical line
+with size 'range' feel free
+to muck around w/ this one
+and any others in this folder
+@descend
+@script
+var range = 4;var x = 0; var y = 0;
+x = rnd(gridSize-1);
+y = 5+rnd(range-1)-round((range)/2)+1;
+if (turn == 0)
+{return hex(x,y);}
+else
+{return hex(y,x);}
+@scriptend

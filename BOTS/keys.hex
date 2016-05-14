@@ -1,0 +1,43 @@
+@name Keys
+@author Ewan_Breakey
+@version 1.0
+@desc
+YOU NEED THIS IN ALL THE AI BOX'S
+THAT YOU WANT TO CONTROL
+Control the selected hex
+with WASD and press E to choose it.
+@descend
+@script
+if (attemptCount == 0)
+{
+sx = 0;sy = 0;
+}
+
+//MOVE SELECTED
+if (getKeyPressed("a"))
+{sx -= 1;}
+
+if (getKeyPressed("d"))
+{sx += 1;}
+
+if (getKeyPressed("w"))
+{sy -= 1;}
+
+if (getKeyPressed("s"))
+{sy += 1;}
+
+//TRACE
+trace(sx,sy,redSat);
+
+//RESET?
+if (getKeyPressed("c"))
+{
+sx = 0;sy = 0;
+}
+
+//RETURN
+if (getKey("e"))
+{return hex(sx,sy);}
+else
+{return hex(-1,-1);}
+@scriptend

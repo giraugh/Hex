@@ -1,0 +1,17 @@
+@name Mocha_Random_Example
+@author Ewan_Breakey
+@version 1.0
+@description
+This is the same as the default code
+but written in Mocha and has an extra
+log. Note the '#MOCHA' which denotes that
+the script should be pre-interpreted as
+Mocha before it is run.
+@descriptionend
+@script
+#MOCHA
+say >> "turn: #{turnCount}"| ?? %valid
+~x = rnd>>gridSize-1
+~y = rnd>>gridSize-1
+@hex>>x y
+@scriptend
