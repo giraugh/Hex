@@ -55,7 +55,7 @@ function game_init(game){
 	gridPad = 10;
 	gridOff = 2;
 
-	//DEBUG CONSTANTS
+	//DEBUG VALUES
 	showConnectionValues = false;
 	saturateColours = false;
 	customScriptLeft = true;
@@ -75,6 +75,8 @@ function game_init(game){
 	gameStopped = 0;
 	willDisplayEnd = '';
 	validated = false;
+	initialized1 = false;
+	initialized2 = false;
 	doEventsL = false;
 	doEventsR = false;
 
@@ -148,11 +150,15 @@ function game_turns()
 
 	//INIT (if we need to)
 	if (doEventsL && turnCount == 0) {
-		init1();
+		if (init1 != undefined)
+			init1();
+			initialized1 = true;
 	}
 
 	if (doEventsR && turnCount == 1) {
-		init2();
+		if (init2 != undefined)
+			init2();
+			initialized2 = true;
 	}
 
 

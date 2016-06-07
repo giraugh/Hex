@@ -37,6 +37,7 @@ player2 = 2;
 
 //RETURNS WHETHER THIS IS THE GAME RUNNING IT OR THE SYNTAX CHECKER
 function valid(){return validated};
+function init(){if (turn == 0){ return initialized1; } else { return initialized2; } }
 
 //RETURNS HEX AS ARRAY
 function hex(x,y,verbose)

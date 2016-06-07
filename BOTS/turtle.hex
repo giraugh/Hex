@@ -6,77 +6,80 @@ this is like a little turtle you
 can give instructions to get him
 to move around.
 You can pretty much get him to do
-whatever but here he is doing a 
+whatever but here he is doing a
 spiral. this program is a little slow though
 
 NOTE:
 valid() means that its only run once per turn
-but also means that it's got no error checking.
+but also means that it has got no error checking.
 i.e its validated by the game & not the error checker.
 so if you want to change anything in the MOVE or CHANGE STATE
 sections, i recommend you change valid() to !valid() and change
 it back once your done
 @descend
 @script
-//DEFINE
-if ((!turn && turnCount==0)||(turn && turnCount ==0))
-{
-turtle = {x:5, y:5, state:"up", moves: 1, max: -1};
+#EVENTS
+init {
+   turtle = {x:5, y:5, state:"up", moves: 1, max: -1};
 }
 
-if (valid())
-{
-//MOVE
-switch (turtle.state)
-{
-case "up" :
-turtle.y --;
-break;
-case "down" :
-turtle.y ++;
-break;
-case "right" :
-turtle.x ++;
-break;
-case "left" :
-turtle.x --;
-break;
+main {
+   if (valid())
+   {
+      //MOVE
+      switch (turtle.state)
+      {
+         case "up" :
+         turtle.y --;
+         break;
+         case "down" :
+         turtle.y ++;
+         break;
+         case "right" :
+         turtle.x ++;
+         break;
+         case "left" :
+         turtle.x --;
+         break;
+      }
+
+      //CHANGE STATE
+      if (turtle.moves == 0)
+      {
+         switch (turtle.state)
+         {
+            case "up" :
+               turtle.state = "right";
+            break;
+
+            case "right" :
+               turtle.state = "down";
+            break;
+
+            case "down" :
+               turtle.state = "left";
+            break;
+
+            case "left" :
+               turtle.state = "up";
+            break;
+         }
+
+         turtle.max ++;
+         turtle.moves = turtle.max;
+      }else{
+         turtle.moves -= 1;
+      }
+   }
+
+   //CLAMP TO GRID
+   turtle.x = clamp(turtle.x,0,gridSize-1);
+   turtle.y = clamp(turtle.y,0,gridSize-1);
+
+   //TRACE (Green for turtle colours)
+   trace(turtle.x,turtle.y,"green");
+
+   //RETURN
+   return hex(turtle.x,turtle.y);
 }
-
-//CHANGE STATE
-if (turtle.moves == 0)
-{
-switch (turtle.state)
-{
-
-case "up" : 
-turtle.state = "right";
-break;
-
-case "right" : 
-turtle.state = "down";
-break;
-
-case "down" : 
-turtle.state = "left";
-break;
-
-case "left" : 
-turtle.state = "up";
-break;
-}
-turtle.max ++;
-turtle.moves = turtle.max;
-}else{turtle.moves -= 1;}
-}
-
-//CLAMP TO GRID
-turtle.x = clamp(turtle.x,0,gridSize-1);
-turtle.y = clamp(turtle.y,0,gridSize-1);
-
-//TRACE (Green for turtle colours)
-trace(turtle.x,turtle.y,"green");
-
-//RETURN
-return hex(turtle.x,turtle.y);
 @scriptend

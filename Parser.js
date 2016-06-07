@@ -6,11 +6,6 @@ function load_scripts()
 	var rcode = document.getElementById("right").value;
 	var lworked = true;var rworked = true;
 
-	//check if Mocha
-	var mochaReg = /#\s?mocha/i;
-	if (mochaReg.test(lcode)) {lcode = Mocha(lcode);}
-	if (mochaReg.test(rcode)) {rcode = Mocha(rcode);}
-
 	//check if events
 	var eventReg = /#\s?events?/i;
 	var initReg = /(init|start|setup)\s?(\(.*\))?\s?{/i; //For Replacing init() with init1/2()
@@ -19,6 +14,12 @@ function load_scripts()
 	doEventsR = false;
 	if (eventReg.test(lcode)) {lcode = lcode.replace(eventReg,"");doEventsL = true;lcode = lcode.replace(initReg,'window.init1$2 = function() {');lcode = lcode.replace(updateReg,'window.update1$2 = function() {');}
 	if (eventReg.test(rcode)) {rcode = rcode.replace(eventReg,"");doEventsR = true;rcode = rcode.replace(initReg,'window.init2$2 = function() {');rcode = rcode.replace(updateReg,'window.update2$2 = function() {');}
+
+	//check if Mocha
+	var mochaReg = /#\s?mocha/i;
+	if (mochaReg.test(lcode)) {lcode = Mocha(lcode);}
+	if (mochaReg.test(rcode)) {rcode = Mocha(rcode);}
+
 
 	try {
 		eval("function lcode_ee(){"+lcode+"};lcode_ee();");

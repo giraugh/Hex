@@ -6,79 +6,83 @@ Basically it uses a fill algorithim with spread
 weights and a check for finishing moves.
 @descend
 @script
-//FIRST TURN IS CENTRE
-if (turnCount == turn && get(hex(5,5),"value") == 0)
-{
-	return hex(5,5);
-}
+#EVENTS
 
-//DEFINE EVALUATE FUNCTION
-function evaluate(board,cboard)
-{
-	var score = 0;
-	for (var i=0;i<gridSize;i++)
+update {
+	//FIRST TURN IS CENTRE
+	if (turnCount == turn && empty(5,5))
 	{
-		for (var j=0;j<gridSize;j++)
+		return hex(5,5);
+	}
+
+	//DEFINE EVALUATE FUNCTION
+	function evaluate(board,cboard)
+	{
+		var score = 0;
+		for (var i=0;i<gridSize;i++)
 		{
-			//IF ITS OUR PEICE
-			if (board[i][j] == turn+1)
+			for (var j=0;j<gridSize;j++)
 			{
-				//GET SCORE FOR BEING NEAR US
-				score += neighbours_ext(i,j,red,board);
-				score -= Math.abs(gridSize/2 - i)*((turn==0) ? 0.75 : 1.0);
-				score -= Math.abs(gridSize/2 - j)*((turn==1) ? 0.75 : 1.0);
+				//IF ITS OUR PEICE
+				if (board[i][j] == turn+1)
+				{
+					//GET SCORE FOR BEING NEAR US
+					score += neighbours_ext(i,j,red,board);
+					score -= Math.abs(gridSize/2 - i)*((turn==0) ? 0.75 : 1.0);
+					score -= Math.abs(gridSize/2 - j)*((turn==1) ? 0.75 : 1.0);
+				}
+			}
+		}
+
+		//IF WE DO THIS DO WE WIN?
+		if (game_update_connections_ext(board,cboard,false) == turn+1) //MAKING SURE TO UNAUTHORIZE SO WE DON'T END THE GAME!
+		{
+			//THEN DO IT!
+			score += 1000;
+		}
+
+		return score;
+	}
+
+	//GET ALL POSIBLE MOVES
+	var moves = new Array();
+	for (i=0;i<gridSize;i++)
+	{
+		for (j=0;j<gridSize;j++)
+		{
+			if (empty(i,j))
+			{
+				moves.push({x: i,y: j});
 			}
 		}
 	}
-	
-	//IF WE DO THIS DO WE WIN?
-	if (game_update_connections_ext(board,cboard,false) == turn+1) //MAKING SURE TO UNAUTHORIZE SO WE DON'T END THE GAME!
-	{
-		//THEN DO IT!
-		score += 1000;
-	}
-	
-	return score;
-}
 
-//GET ALL POSIBLE MOVES
-var moves = new Array();
-for (i=0;i<gridSize;i++)
-{
-	for (j=0;j<gridSize;j++)
+
+	//CREATE ARRAY OF SCORES
+	var scores = new Array();
+
+	//CREATE WORKING COPY
+	for (i=0;i<moves.length;i++)
 	{
-		if (!get(hex(i,j),"value"))
+		var work = clone();
+		var cwork = clone3d();
+		work[moves[i].x][moves[i].y] = turn+1;
+		scores.push(evaluate(work,cwork));
+	}
+
+
+	//CHOOSE MOVE BY LOOKING AT SCORES
+	var best = -999;
+	var bestI = 0;
+	for (i=0;i<scores.length;i++)
+	{
+		if (scores[i] > best)
 		{
-			moves.push({x: i,y: j});
+			best = scores[i];
+			bestI = i;
 		}
 	}
+
+	return hex(moves[bestI].x,moves[bestI].y);
 }
-
-
-//CREATE ARRAY OF SCORES
-var scores = new Array();
-
-//CREATE WORKING COPY
-for (i=0;i<moves.length;i++)
-{
-	var work = clone();
-	var cwork = clone3d();
-	work[moves[i].x][moves[i].y] = turn+1;
-	scores.push(evaluate(work,cwork));
-}
-
-
-//CHOOSE MOVE BY LOOKING AT SCORES
-var best = -999;
-var bestI = 0;
-for (i=0;i<scores.length;i++)
-{
-	if (scores[i] > best)
-	{
-		best = scores[i];
-		bestI = i;
-	}
-}
-
-return hex(moves[bestI].x,moves[bestI].y);
 @scriptend
