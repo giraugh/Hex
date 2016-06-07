@@ -35,6 +35,16 @@ function game_height(){return 760;}
 traceHex = {x: -1,y: -1,colour: 'black'};
 doLogReturns = false;
 
+/*SET UP BOXES*/
+defaultProgram =
+`var x = rndg();
+var y = rndg();
+return hex(x,y);`;
+
+document.getElementById("left").value = defaultProgram;
+document.getElementById("right").value = defaultProgram;
+
+
 
 /*GAME EVENTS*/
 function game_init(game){

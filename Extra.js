@@ -7,7 +7,7 @@ function create2dArray(x) {
   for (var i=0;i<x;i++) {
      arr[i] = new Array;
   }
-  
+
   return arr;
 }
 
@@ -25,6 +25,7 @@ function clamp(a,min,max)
 {return Math.min(Math.max(a,min),max);}
 
 function rnd(x){return Math.round(Math.random()*(x));}
+function rndg(x){return rnd(gridSize-1);}
 
 function round(x){return Math.round(x);}
 
@@ -78,7 +79,7 @@ function getOffset( el ) {
     }
     return { top: _y, left: _x };
 }
-var x = getOffset( document.getElementById('yourElId') ).left; 
+var x = getOffset( document.getElementById('yourElId') ).left;
 
 //GET HEX PROPERTY (OUTDATED)
 function get(hex,what)
@@ -122,7 +123,7 @@ function clone()
 		for (var j=0;j<gridSize;j++)
 		{
 			clone[i][j] = grid[i][j];
-		}		
+		}
 	}
 	return clone;
 }
@@ -137,8 +138,8 @@ function clone3d()
 			for (var b=0;b<2;b++)
 			{
 				clone[i][j][b] = cgrid[i][j][b];
-			}	
-		}		
+			}
+		}
 	}
 	return clone;
 }
@@ -150,9 +151,9 @@ function neighbours_ext(x1,y1,colour,board)
 	if (colour == blank || colour == "blank" || colour == "grey" || colour == "white"){colour = 0;}
 	if (colour == "same"){colour = board[x1][y1];}
 	if (colour == "other" || colour == "different" || colour == "opposite"){colour = board[x1][y1] == 1 ? 2 : 1;}
-	
+
 	var count = 0;
-	
+
 	// FOR ALL HEX'S IN A GRID AROUND HEX 1
 	for (var i=-1;i<2;i++)
 	{
@@ -167,7 +168,7 @@ function neighbours_ext(x1,y1,colour,board)
 			}
 		}
 	}
-	
+
 	return count;
 }
 
@@ -194,7 +195,7 @@ function connected(x1,y1,x2,y2)
 			}
 		}
 	}
-	
+
 	return false;
 }
 
