@@ -1,5 +1,5 @@
 /* NOTES
-	HEX.html by Ewan Breakey 
+	HEX.html by Ewan Breakey
 
 	The goal is to draw a line across/down the screen before your opponent.
 
@@ -38,26 +38,26 @@ doLogReturns = false;
 
 /*GAME EVENTS*/
 function game_init(game){
-	
+
 	//GRID CONSTANTS
 	gridSize = 11;
 	gridRes = 64;
 	gridPad = 10;
 	gridOff = 2;
-	
+
 	//DEBUG CONSTANTS
 	showConnectionValues = false;
 	saturateColours = false;
 	customScriptLeft = true;
 	customScriptRight = true;
-	
+
 	//COLOUR CONSTANTS
 	blank = '#3D3D3D';
 	red = '#E52D3D';
 	blue = '#655DE2';
 	redSat = '#FF0000';
 	blueSat = '#0000FF';
-	
+
 	//DYNAMIC
 	turn = 0;
 	turnCount = 0;
@@ -65,7 +65,9 @@ function game_init(game){
 	gameStopped = 0;
 	willDisplayEnd = '';
 	validated = false;
-	
+	doEventsL = false;
+	doEventsR = false;
+
 	//SET COLOURS
 	color = '#3D3D3D';
 	window.document.getElementById("title").style = "color:"+color+";";
@@ -73,7 +75,7 @@ function game_init(game){
 	window.document.getElementById("right-title").style = "color:"+color+";";
 	window.document.getElementById("right").style = "background-color:"+color+";";
 	window.document.getElementById("left").style = "background-color:"+color+";";
-	
+
 	//CREATE AND POPULATE GRID (STORES WHO OWNS A HEX)
 	grid = create2dArray(gridSize);
 	for (var x=0;x<gridSize;x++)
@@ -83,7 +85,7 @@ function game_init(game){
 			grid[x][y] = 0;
 		}
 	}
-	
+
 	//CREATE AND POPULATE ANOTHER GRID (STORES WHETHER A HEX IS CONNECTED)
 	cgrid = create3dArray(gridSize);
 	for (var x=0;x<gridSize;x++)
@@ -94,8 +96,8 @@ function game_init(game){
 			cgrid[x][y][1] = 0;
 		}
 	}
-	
-	
+
+
 	//INITIALIZE SPRITES
 	init_sprites();
 }
@@ -117,38 +119,54 @@ function clear()
 			//SET TO BLANK
 			grid[x][y] = 0;
 		}
-	}	
-	
-	
+	}
+
+
 }
 
 function game_turns()
 {
-	
+
 	var success = false; //BOOL - DID THE PLAYER CHOOSE A LEGITIMATE HEX?
 	var hex = new Array();
-	
+
 	hex[0] = 0;
 	hex[1] = 0;
-	
+
 	//VALIDATE
 	validated = true;
-	
+
+	//INIT (if we need to)
+	if (doEventsL && turnCount == 0) {
+		init1();
+	}
+
+	if (doEventsR && turnCount == 1) {
+		init2();
+	}
+
+
 	//WHO'S TURN IS IT?
 	if (turn == 0)
 	{
 		//FUNCTION DECIDES WHICH PEICE
-		hex = player1_turn();
+		if (doEventsL)
+			hex = update1();
+		else
+			hex = player1_turn();
 	}
-	
+
 	if (turn == 1)
 	{
-		hex = player2_turn();
+		if (doEventsR)
+			hex = update2();
+		else
+			hex = player2_turn();
 	}
-	
+
 	//UNVALIDATE
 	validated = false;
-	
+
 	if (hex == undefined || hex==null || typeof hex != 'object' || hex.length < 2)
 	{
 		//IMPROPER HEX
@@ -157,19 +175,19 @@ function game_turns()
 	else
 	{
 		//CONTINUE AS NORMAL
-		
+
 		//LOG RETURN VALUE IF WE SHOULD
 		if (doLogReturns){log(turn+": "+hex);}
-		
+
 		//GET RETURNED VALUES
 		var xx = hex[0];
 		var yy = hex[1];
-		
+
 		//WAS IT A SKIP?
 		if (xx== -3140 && y== -3140) {
 			success = true;
 		}
-		
+
 		//WAS IT LEGIT MOVE?
 		if ((hex[0] >= 0 && hex[1] >= 0) && (hex[0] < gridSize && hex[1] < gridSize))
 		{
@@ -180,7 +198,7 @@ function game_turns()
 				success = true;
 			}
 		}
-		
+
 		//IF PLAYER CLAIMED A HEX
 		if (success)
 		{
@@ -205,7 +223,7 @@ function game_update_connections_ext(board,cboard,auth)
 			{var check = x;}
 			if (board[x][y] == 2)
 			{var check = y;}
-		
+
 			//WE HAVE A VALUE TO CHECK
 			if (check != -1)
 			{
@@ -215,7 +233,7 @@ function game_update_connections_ext(board,cboard,auth)
 			}
 		}
 	}
-	
+
 	// FOR EACH HEX
 	for (var x=0;x<gridSize;x++)
 	{
@@ -238,7 +256,7 @@ function game_update_connections_ext(board,cboard,auth)
 									{
 										// SET VALUE!
 										cboard[x+i][y+j][e] = 1;
-										
+
 										if (cboard[x+i][y+j][e == 0 ? 1 : 0] && !gameStopped)
 										{
 											if(auth){if (board[x][y] != 0){gameStopped = true;log("STOPPED GAME W/ VAL: " + board[x][y]);}}
@@ -288,7 +306,7 @@ function game_loop()
 	{
 		//IF NOT HOLDING THE PAUSE KEY, TAKE TURN
 		if (!getKey("p")){game_turns();}
-		
+
 		//UPDATE HEX CONNECTIONS
 		game_update_connections();
 	}
@@ -307,7 +325,7 @@ function game_draw_hexs(ctx)
 			var xx = (gridOff + (x*(gridRes+gridPad)))+y*(gridRes/2);
 			var yy = (gridOff + (y*(gridRes+(1/2*gridPad))));
 			var colour = blank;
-			
+
 			//WHICH COLOUR?
 			colour = grid[x][y]==0 ? blank : grid[x][y]==1 ? red : blue;
 			//SATURATE?
@@ -316,13 +334,13 @@ function game_draw_hexs(ctx)
 				if (colour == red){colour = cgrid[x][y][0]+cgrid[x][y][1] > 0 ? redSat : colour;}
 				if (colour == blue){colour = cgrid[x][y][0]+cgrid[x][y][1] > 0 ? blueSat : colour;}
 			}
-			
+
 			//ARE WE THE TRACE HEX?
 			if (traceHex.x == x && traceHex.y == y && !gameStopped)
 			{
 				colour = traceHex.colour;
 			}
-			
+
 			//DRAW HEX
 			ctx.drawImage(sHex,xx,yy);
 			//COLOUR HEX
@@ -330,7 +348,7 @@ function game_draw_hexs(ctx)
 			ctx.fillStyle=colour;
 			ctx.fillRect(xx,yy,gridRes,gridRes);
 			ctx.globalCompositeOperation = "source-over";
-			
+
 			//DRAW CONNECTION DEBUG TEST?
 			if (showConnectionValues)
 			{
@@ -342,10 +360,10 @@ function game_draw_hexs(ctx)
 }
 
 function game_draw(ctx,game){
-	
+
 	game_loop();
 	game_draw_hexs(ctx);
-	
+
 	//DISPLAY END MESSAGE IF NECESSARY
 	if (willDisplayEnd != "")
 	{
