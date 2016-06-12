@@ -79,6 +79,8 @@ function game_init(game){
 	initialized2 = false;
 	doEventsL = false;
 	doEventsR = false;
+	props1 = undefined;
+	props2 = undefined;
 
 	//SET COLOURS
 	color = '#3D3D3D';
@@ -178,6 +180,15 @@ function game_turns()
 			hex = update2();
 		else
 			hex = player2_turn();
+	}
+
+	if (props1 != undefined) {
+		useProps(props1.name,props1.author,props1.version,props1.description,'left');
+		
+	}
+
+	if (props2 != undefined) {
+		useProps(props2.name,props2.author,props2.version,props2.description,'right');
 	}
 
 	//UNVALIDATE
