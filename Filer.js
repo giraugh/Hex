@@ -10,11 +10,12 @@
 		scripts = {};
 
 		function useProps(name,author,version,description,person) {
-			if (author != ""){scripts[person+'-author'] = author;}
-			if (version != ""){scripts[person+'-version'] = version;}
-			if (description != ""){scripts[person+'-description'] = description;}
-			if (name != ""){document.getElementById(person+"-title").innerHTML = name.replaceAll("_","&nbsp;");;}
-			if (description != ""){document.getElementById(person+"-desc").innerHTML = "<span style='color: grey;'>"+author.replaceAll("_","&nbsp;")+"</span><br>"+description.replaceAll("\n","<br>");}
+			if (description == "" || description == undefined){description = " ";}
+			if (author != "" && author != undefined){scripts[person+'-author'] = author;}
+			if (version != "" && version != undefined){scripts[person+'-version'] = version;}
+			if (description != "" && description != undefined){scripts[person+'-description'] = description;}
+			if (name != "" && name != undefined){document.getElementById(person+"-title").innerHTML = name.replaceAll("_","&nbsp;");;}
+			if (description != "" && description != undefined){document.getElementById(person+"-desc").innerHTML = "<span style='color: grey;'>"+author.replaceAll("_","&nbsp;")+"</span><br>"+description.replaceAll("\n","<br>");}
 		}
 
 		function gotContents(contents, person) {

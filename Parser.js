@@ -20,6 +20,11 @@ function load_scripts()
 	if (mochaReg.test(lcode)) {lcode = Mocha(lcode);}
 	if (mochaReg.test(rcode)) {rcode = Mocha(rcode);}
 
+	//Set up props DEFINITIONS
+	var propReg = /prop(?:ertie)?s?\s?=?\s?{/i;
+	if (propReg.test(lcode)){lcode = lcode.replace(propReg,"window.props1 = {");}
+	if (propReg.test(rcode)){rcode = rcode.replace(propReg,"window.props2 = {");}
+
 
 	try {
 		eval("function lcode_ee(){"+lcode+"};lcode_ee();");
