@@ -78,22 +78,22 @@
 			<br>
 			<h1>FUNCTIONS</h1>
 			<ul>
-				<li><strong><code>clamp(value,min,max)</code></strong><br>Returns a restricted value between min & max.</li>
+				<li><strong><code>clamp(value, min, max)</code></strong><br>Returns a restricted value between min &amp; max.</li>
 				<li><strong><code>rnd(x)</code></strong><br>Returns a value between 0 and x.</li>
 				<li><strong><code>rndg()</code></strong><br>Returns a random grid integer.</li>
 				<li><strong><code>round(value)</code></strong><br>Returns given value to the nearest integer.</li>
-				<li><strong><code>hex(x,y)</code></strong><br> Returns info about hex in given position.</li>
-				<li><strong><code>skip()</code></strong><br>Debug function - use <code>return skip();</code> to pass turn</li>
-				<li><strong><code>trace(x,y,colour)</code></strong><br>Sets highlighted hex to given position & colour</li>
-				<li><strong><code>empty(x,y)</code></strong><br>Returns whether given hex is not claimed</li>
-				<li><strong><code>value(x,y)</code></strong><br>Returns the value of given hex, 0=empty, 1=red, 2=blue</li>
-				<li><strong><code>colour(x,y)</code></strong><br>Returns the colour of given hex, either red, blue or blank (returned as a colour string)</li>
-				<li><strong><code>neighbours(x,y,value/colour)</code></strong><br>Returns amount of neighbours a given hex has of a certain value or colour.</li>
-				<li><strong><code>connected(x1,y1,x2,y2)</code></strong><br>Returns whether given hex's are neighbours.</li>
-				<li><strong><code>isEdgeConnected(x,y,edge)</code></strong><br>Returns whether given hex is indirectly connected to the given edge.</li>
+				<li><strong><code>hex(x, y)</code></strong><br> Returns info about hex in given position.</li>
+				<li><strong><code>skip()</code></strong><br>Debug function - use <code>return skip();</code> to pass turn.</li>
+				<li><strong><code>trace(x, y, colour)</code></strong><br>Sets highlighted hex to given position &amp; colour</li>
+				<li><strong><code>empty(x, y)</code></strong><br>Returns whether given hex is not claimed</li>
+				<li><strong><code>value(x, y)</code></strong><br>Returns the value of given hex, 0=empty, 1=red, 2=blue</li>
+				<li><strong><code>colour(x, y)</code></strong><br>Returns the colour of given hex, either red, blue or blank (returned as a colour string)</li>
+				<li><strong><code>neighbours(x, y, value/colour)</code></strong><br>Returns amount of neighbours a given hex has of a certain value or colour.</li>
+				<li><strong><code>connected(x1, y1, x2, y2)</code></strong><br>Returns whether given hex's are neighbours.</li>
+				<li><strong><code>isEdgeConnected(x, y, edge)</code></strong><br>Returns whether given hex is indirectly connected to the given edge.</li>
 				<li><strong><code>valid()</code></strong><br>Returns whether code is being run through the game. (rather than through error checker)</li>
 				<li><strong><code>clone()</code></strong><br>Returns a copy of the game grid.</li>
-				<li><strong><code>game_update_connections_ext(board,connectionsBoard)</code></strong><br>Updates given boards connections values and returns whether anyone won. (0 - noone won, 1 - player 1 won, 2 - player 2 won)</li>
+				<li><strong><code>game_update_connections_ext(board, connectionsBoard)</code></strong><br>Updates given boards connections values and returns whether anyone won. (0 - no-one won, 1 - player 1 won, 2 - player 2 won)</li>
 			</ul>
 		</p>
 	</body>
