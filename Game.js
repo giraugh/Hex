@@ -184,7 +184,7 @@ function game_turns()
 
 	if (props1 != undefined) {
 		useProps(props1.name,props1.author,props1.version,props1.description,'left');
-		
+
 	}
 
 	if (props2 != undefined) {
@@ -211,8 +211,9 @@ function game_turns()
 		var yy = hex[1];
 
 		//WAS IT A SKIP?
-		if (xx== -3140 && y== -3140) {
+		if (xx== -3140 && yy== -3140) {
 			success = true;
+			console.log("Player " + String(turn+1) + " Skipped");
 		}
 
 		//WAS IT LEGIT MOVE?

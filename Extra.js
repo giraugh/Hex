@@ -108,10 +108,15 @@ function empty(x,y) {
 }
 
 //RETURNS SPECIAL SKIP VALUE
-function skip() {
+function skip(verbose) {
+   if (verbose == undefined || verbose==null){verbose = true;}
 	var ret = [];
 	ret[0] = -3140;
 	ret[1] = -3140;
+   if (!verbose) {
+		ret[2] = cgrid[0][0];
+		ret[3] = grid[0][0];
+	}
 	return ret;
 }
 
