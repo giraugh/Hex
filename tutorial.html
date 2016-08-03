@@ -76,6 +76,20 @@
 			There are many other functions like 'rnd(x)' that you<br>
 			can use.<br>
 			<br>
+			<h1>HASH PARAMS</h1>
+			In hex you write your code in Javascript, but you can also write it<br>
+			in <a href="http://Coffeescript.org">CoffeeScript</a>. In order to do this,<br>
+			you must put <code>#COFFEE</code> at the start of your program.<br>
+			Other hash parameters you can set are listed below.<br>
+			<ul>
+				<li><strong><code>#COFFEE or #COFFEESCRIPT</code></strong><br>Compile code as coffeescript.<br>
+					Note that the structures such as props and event definitions are also compiled.</li>
+				<li><strong><code>#MOCHA or #MOCHASCRIPT</code></strong><br>Compile code as mochascript. not recommended.</li>
+				<li><strong><code>#EVENTS</code></strong><br>Rather than set up code as a function that returns a hex, allow the code to define<br>
+					event functions which are run at different points. the <code>main</code> event is run every step<br>
+					like normal but the <code>init</code> event is run only once, on your first turn before the <code>main</code> event.</li>
+				<li><strong><code>#MATHS</code></strong><br>Releases maths objects to global namespace i.e use <code>round(x)</code> instead of <code>Math.round(x)</code>.</li>
+			</ul>
 			<h1>FUNCTIONS</h1>
 			<ul>
 				<li><strong><code>clamp(value, min, max)</code></strong><br>Returns a restricted value between min &amp; max.</li>

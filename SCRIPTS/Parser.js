@@ -14,6 +14,7 @@ function load_scripts()
 	var propReg = /prop(?:ertie)?s?\s?=?\s?{/i;
 	var mochaReg = /#\s?mocha/i;
 	var coffeeReg = /#\s?coffee(script)?/i;
+	var mathsReg = /#\s?math(s)?/i;
 
 	//check if events
 	doEventsL = false;
@@ -36,6 +37,13 @@ function load_scripts()
 	//check if props
 	if (propReg.test(lcode)){lcode = lcode.replace(propReg,"window.props1 = {");}
 	if (propReg.test(rcode)){rcode = rcode.replace(propReg,"window.props2 = {");}
+
+	if (mathsReg.test(lcode) || mathsReg.test(rcode)){
+		keys = Object.getOwnPropertyNames(Math);
+		for (let i = 0;i<keys.length;i++) {
+			window[keys[i]] = Math[keys[i]];
+		}
+	}
 
 	try {
 		eval("function lcode_ee(){"+lcode+"};lcode_ee();");
