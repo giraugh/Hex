@@ -99,8 +99,9 @@
 				</p>
 				<textarea id="left" rows="20" cols="50" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
 				<br>
-				<input id="left-input" class="fileinput" type="file"></input>&nbsp;<input id="left-export" type="button" value="Export" onclick="exportScript('left');">Export</input>
-			</div>
+				<input id="left-input" class="fileinput" type="file"></input>&nbsp;<input id="left-export" type="button" value="Export" onclick="exportScript('left');"></input>
+            <button onclick="load_scripts()">Apply</button>
+         </div>
 
 			<!--RIGHT DIV!-->
 			<div id="right-div" class="box">
@@ -110,7 +111,8 @@
 				</p>
 				<textarea id="right" rows="20" cols="50" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
 				<br>
-				<input id="right-input" class="fileinput" type="file"></input>&nbsp;<input id="right-export" type="button" value="Export" onclick="exportScript('right');">Export</input>
+				<input id="right-input" class="fileinput" type="file"></input>&nbsp;<input id="right-export" type="button" value="Export" onclick="exportScript('right');"></input>
+            <button onclick="load_scripts()">Apply</button>
 			</div>
 		</div>
 	</body>
@@ -138,6 +140,7 @@
 
         /*BONUS FUNCTION*/
         function log(x){console.log(x);}
+        function show(x){console.log(x);}
 
         /*INITIALIZE GAME*/
         window.game = {};
@@ -215,6 +218,7 @@
 
      </script>
       <script src="https://rawgit.com/retroverse/Mocha/master/Mocha.js"></script>
+      <script src="coffee.js"></script>
      <script type="text/javascript" src="Parser.js"></script>
      <script type="text/javascript" src="Extra.js"></script>
         <script type="text/javascript" src="Game.js"></script>
@@ -231,7 +235,6 @@
            game_draw(ctx,window.game);
            updatePressed();
            updateMouse();
-           if (!gameStopped){load_scripts();}
            window.requestAnimationFrame(engine_draw);
         }
 

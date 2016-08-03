@@ -20,6 +20,11 @@ function load_scripts()
 	if (mochaReg.test(lcode)) {lcode = Mocha(lcode);}
 	if (mochaReg.test(rcode)) {rcode = Mocha(rcode);}
 
+	//check if Coffee
+	var coffeeReg = /#\s?coffee(script)?/i;
+	if (coffeeReg.test(lcode)) {lcode = lcode.replace(coffeeReg, "");lcode = hexCoffee(lcode);}
+	if (coffeeReg.test(rcode)) {rcode = rcode.replace(coffeeReg, "");rcode = hexCoffee(rcode);}
+
 	//Set up props DEFINITIONS
 	var propReg = /prop(?:ertie)?s?\s?=?\s?{/i;
 	if (propReg.test(lcode)){lcode = lcode.replace(propReg,"window.props1 = {");}
