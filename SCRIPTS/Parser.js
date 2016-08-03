@@ -6,30 +6,36 @@ function load_scripts()
 	var rcode = document.getElementById("right").value;
 	var lworked = true;var rworked = true;
 
-	//check if events
 	var eventReg = /#\s?events?/i;
 	var initReg = /(init|start|setup)\s?(\(.*\))?\s?{/i; //For Replacing init() with init1/2()
 	var updateReg = /(update|loop|main)\s?(\(.*\))?\s?{/i; //For Replacing update() with update1/2()
+	var initCReg = /(init|start|setup)\s?=\s?\(\)\s?->/i; //For Replacing init() with init1/2()
+	var updateCReg = /(update|loop|main)\s?=\s?\(\)\s?->/i; //For Replacing update() with update1/2()
+	var propReg = /prop(?:ertie)?s?\s?=?\s?{/i;
+	var mochaReg = /#\s?mocha/i;
+	var coffeeReg = /#\s?coffee(script)?/i;
+
+	//check if events
 	doEventsL = false;
 	doEventsR = false;
-	if (eventReg.test(lcode)) {lcode = lcode.replace(eventReg,"");doEventsL = true;lcode = lcode.replace(initReg,'window.init1$2 = function() {');lcode = lcode.replace(updateReg,'window.update1$2 = function() {');}
-	if (eventReg.test(rcode)) {rcode = rcode.replace(eventReg,"");doEventsR = true;rcode = rcode.replace(initReg,'window.init2$2 = function() {');rcode = rcode.replace(updateReg,'window.update2$2 = function() {');}
+	if (eventReg.test(lcode) && !coffeeReg.test(lcode)) {lcode = lcode.replace(eventReg,"");doEventsL = true;lcode = lcode.replace(initReg,'window.init1$2 = function() {');lcode = lcode.replace(updateReg,'window.update1$2 = function() {');}
+	if (eventReg.test(rcode) && !coffeeReg.test(rcode)) {rcode = rcode.replace(eventReg,"");doEventsR = true;rcode = rcode.replace(initReg,'window.init2$2 = function() {');rcode = rcode.replace(updateReg,'window.update2$2 = function() {');}
+
+	//check if coffee events
+	if (eventReg.test(lcode) && coffeeReg.test(lcode)) {console.log("EVENTS");lcode = lcode.replace(eventReg,"");doEventsL = true;lcode = lcode.replace(initCReg,'window.init1 = () ->');lcode = lcode.replace(updateCReg,'window.update1 = () ->');}
+	if (eventReg.test(rcode) && coffeeReg.test(rcode)) {rcode = rcode.replace(eventReg,"");doEventsR = true;rcode = rcode.replace(initCReg,'window.init2 = () ->');rcode = rcode.replace(updateCReg,'window.update2 = () ->');}
 
 	//check if Mocha
-	var mochaReg = /#\s?mocha/i;
 	if (mochaReg.test(lcode)) {lcode = Mocha(lcode);}
 	if (mochaReg.test(rcode)) {rcode = Mocha(rcode);}
 
 	//check if Coffee
-	var coffeeReg = /#\s?coffee(script)?/i;
 	if (coffeeReg.test(lcode)) {lcode = lcode.replace(coffeeReg, "");lcode = hexCoffee(lcode);}
 	if (coffeeReg.test(rcode)) {rcode = rcode.replace(coffeeReg, "");rcode = hexCoffee(rcode);}
 
-	//Set up props DEFINITIONS
-	var propReg = /prop(?:ertie)?s?\s?=?\s?{/i;
+	//check if props
 	if (propReg.test(lcode)){lcode = lcode.replace(propReg,"window.props1 = {");}
 	if (propReg.test(rcode)){rcode = rcode.replace(propReg,"window.props2 = {");}
-
 
 	try {
 		eval("function lcode_ee(){"+lcode+"};lcode_ee();");
@@ -81,8 +87,8 @@ function load_scripts()
 		}
 	}
 
-	if (!lworked){window.document.getElementById("left-title").style = "background-color: white;";}else{window.document.getElementById("left-title").style = "background-color: black;";}
-	if (!rworked){window.document.getElementById("right-title").style = "background-color: white;";}else{window.document.getElementById("right-title").style = "background-color: black;";}
+	if (!lworked){window.document.getElementById("left-title").style = "background-color: white;";}else{window.document.getElementById("left-title").style = "background-color: "+game_wbackground();}
+	if (!rworked){window.document.getElementById("right-title").style = "background-color: white;";}else{window.document.getElementById("right-title").style = "background-color: "+game_wbackground();}
 
 	if (lworked && customScriptLeft){player1_turn = Function(lcode);}
 	if (rworked && customScriptRight){player2_turn = Function(rcode);}

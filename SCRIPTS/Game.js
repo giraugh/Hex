@@ -156,13 +156,13 @@ function game_turns()
 
 	//INIT (if we need to)
 	if (doEventsL && turnCount == 0) {
-		if (init1 != undefined)
+		if (typeof window.init1 == "function")
 			init1();
 			initialized1 = true;
 	}
 
 	if (doEventsR && turnCount == 1) {
-		if (init2 != undefined)
+		if (typeof window.init2 == "function")
 			init2();
 			initialized2 = true;
 	}
@@ -343,7 +343,7 @@ function game_loop()
 		game_update_connections();
 	}
 	//RESTART GAME IF USER PRESSES R
-	if (getKeyPressed("r")){console.clear();game_init();}
+	if (getKeyPressed("r")){console.clear();game_init();load_scripts();}
 }
 
 function game_draw_hexs(ctx)
