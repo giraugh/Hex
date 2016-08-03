@@ -37,9 +37,25 @@ doLogReturns = false;
 
 /*SET UP BOXES*/
 defaultProgram =
-`var x = rndg();
-var y = rndg();
-return hex(x,y);`;
+`#EVENTS
+
+properties = {
+	name: "New Bot",
+	author: "Me",
+	description: "New Bot, its very cool.",
+	version: 1.0
+}
+
+
+init {
+
+}
+
+main {
+	let x = rndg();
+	let y = rndg();
+	return hex(x, y);
+}`;
 
 document.getElementById("left").value = defaultProgram;
 document.getElementById("right").value = defaultProgram;
@@ -186,15 +202,6 @@ function game_turns()
 			hex = player2_turn();
 	}
 
-	if (props1 != undefined) {
-		useProps(props1.name,props1.author,props1.version,props1.description,'left');
-
-	}
-
-	if (props2 != undefined) {
-		useProps(props2.name,props2.author,props2.version,props2.description,'right');
-	}
-
 	//UNVALIDATE
 	validated = false;
 
@@ -333,6 +340,16 @@ function game_update_connections()
 
 function game_loop()
 {
+
+	//UPDATE PROPERTIES
+	if (props1 != undefined) {
+		useProps(props1.name,props1.author,props1.version,props1.description,'left');
+	}
+
+	if (props2 != undefined) {
+		useProps(props2.name,props2.author,props2.version,props2.description,'right');
+	}
+
 	//IF SOMEONE HASN'T ALREADY WON
 	if (!gameStopped)
 	{
