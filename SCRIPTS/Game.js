@@ -26,8 +26,8 @@ function player2_turn()
 
 /*GAME DEFINITIONS*/
 function game_title(){return 'HEX';}
-function game_background(){return 'black';}
-function game_wbackground(){return 'black';}
+function game_background(){return '#1d1d1d';}
+function game_wbackground(){return '#1d1d1d';}
 function game_width(){return 1130;}
 function game_height(){return 760;}
 
@@ -120,7 +120,11 @@ function init_sprites()
 {
 	//DEFINE HEX SPRITE
 	sHex = new Image();
-	sHex.src = "Hex.png"
+	sHex.src = "IMAGES/Hex.png"
+
+	//DEFINE INVERTED HEX SPRITE
+	sHexI = new Image();
+	sHexI.src = "IMAGES/InvertedHex.png"
 }
 
 function clear()
@@ -371,17 +375,19 @@ function game_draw_hexs(ctx)
 
 			//DRAW HEX
 			ctx.drawImage(sHex,xx,yy);
+
+			ctx.globalCompositeOperation = "darken";
 			//COLOUR HEX
-			ctx.globalCompositeOperation = "multiply";
 			ctx.fillStyle=colour;
 			ctx.fillRect(xx,yy,gridRes,gridRes);
 			ctx.globalCompositeOperation = "source-over";
 
+
 			//DRAW CONNECTION DEBUG TEST?
 			if (showConnectionValues)
 			{
-			ctx.fillStyle='black';
-			ctx.fillText(cgrid[x][y][0].toString()+cgrid[x][y][1].toString(),xx+(gridRes/2),yy+(gridRes/2));
+				ctx.fillStyle='black';
+				ctx.fillText(cgrid[x][y][0].toString()+cgrid[x][y][1].toString(),xx+(gridRes/2),yy+(gridRes/2));
 			}
 		}
 	}

@@ -1,0 +1,63 @@
+#content {
+    padding-left: 20%;
+}
+
+* {
+    tab-size: 4;
+}
+
+h1 {
+    color: #3D3D3D;
+    font-family: "Courier New", Georgia;
+    margin-bottom: 5px;
+}
+
+a {
+    color: #3D3D3D;
+    font-family: "Courier New", Georgia;
+}
+
+canvas {
+    margin-left: 20px;
+}
+
+h1#title {
+    font-size: 100px;
+    margin-left: 100px;
+}
+
+textarea {
+    background-color: #3D3D3D;
+    border: none;
+}
+
+#boxes {
+    width: 600px;
+    margin: auto;
+    display: inline;
+}
+
+div.box {
+    width: 300;
+    float: left;
+    padding-left: 10%;
+    padding-bottom: 100px;
+}
+
+input.fileinput {
+    background-color: #3D3D3D;
+}
+
+p {
+    color: #3D3D3D;
+    font-family: "Courier New", Georgia;
+}
+
+a.link {
+    text-decoration: none;
+    color: grey;
+}
+
+a.biglink:hover {
+    color: grey;
+}
