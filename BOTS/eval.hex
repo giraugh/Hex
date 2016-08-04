@@ -1,42 +1,48 @@
-@name Eval
-@author Ewan_Breakey
-@version 1.0
-@desc
-More of a technique than a bot
-the 'eval' method involves
-storing all posible moves,
-'eval'uating them and choosing
-the best one. the complexity comes
-in your start, how you evaluate,
-how you cull (remove moves).
-This example uses a very basic eval
-function which checks for a hex
-with the most neighbours of type
-'checkFor' stored in a variable.
-feel free to modify or build off
-of this example.
-@descend
-@script
+#EVENTS
+props = {
+	name: "Eval",
+	author: "Ewan Breakey",
+	version: 1.0,
+	desc: `
+	More of a technique than a bot
+	the 'eval' method involves
+	storing all posible moves,
+	'eval'uating them and choosing
+	the best one. the complexity comes
+	in your start, how you evaluate,
+	how you cull (remove moves).
+	This example uses a very basic eval
+	function which checks for a hex
+	with the most neighbours of type
+	'checkFor' stored in a variable.
+	feel free to modify or build off
+	of this example.`
+}
 
-var checkFor = "'same'";
+init {
+	var checkFor = "'same'";
 
-//DEFINE EVALUATE FUNCTION
-function evaluate(board)
-{
-	var score = 0;
-	for (var i=0;i<gridSize;i++)
+	//DEFINE EVALUATE FUNCTION
+	function evaluate(board)
 	{
-		for (var j=0;j<gridSize;j++)
+		var score = 0;
+		for (var i=0;i<gridSize;i++)
 		{
-			//IF ITS OUR PEICE
-			if (board[i][j] == turn+1)
+			for (var j=0;j<gridSize;j++)
 			{
-				score += 1+neighbours_ext(i,j,eval(checkFor),board);
+				//IF ITS OUR PEICE
+				if (board[i][j] == turn+1)
+				{
+					score += 1+neighbours_ext(i,j,eval(checkFor),board);
+				}
 			}
 		}
+		return score;
 	}
-	return score;
+
 }
+
+main {
 
 //GET ALL POSIBLE MOVES
 var moves = new Array();
@@ -77,4 +83,4 @@ for (i=0;i<scores.length;i++)
 }
 
 return hex(moves[bestI].x,moves[bestI].y);
-@scriptend
+}
