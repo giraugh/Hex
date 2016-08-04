@@ -106,7 +106,7 @@ function colour(x,y) {
 function empty(x,y) {
    if (x < gridSize && y < gridSize)
 	  return grid[x][y] == 0;
-   console.warning("Empty: Outside bounds");
+   console.warn("Empty: Outside bounds");
    return false
 }
 
