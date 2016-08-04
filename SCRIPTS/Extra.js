@@ -104,7 +104,10 @@ function colour(x,y) {
 
 //GETS WHETHER HEX IS EMPTY
 function empty(x,y) {
-	return grid[x][y] == 0;
+   if (x < gridSize && y < gridSize)
+	  return grid[x][y] == 0;
+   console.warning("Empty: Outside bounds");
+   return false
 }
 
 //RETURNS SPECIAL SKIP VALUE
