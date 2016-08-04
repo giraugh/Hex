@@ -44,7 +44,7 @@ for (i=0;i<gridSize;i++)
 {
 	for (j=0;j<gridSize;j++)
 	{
-		if (!get(hex(i,j),"value"))
+		if (empty(i, j))
 		{
 			moves.push({x: i,y: j});
 		}
