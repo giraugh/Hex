@@ -97,6 +97,8 @@ function game_init(game){
 	doEventsR = false;
 	props1 = undefined;
 	props2 = undefined;
+	vP1 = {} //For storing player 1 vars
+	vP2 = {} //For storing player 2 vars
 
 	//SET COLOURS
 	color = '#3D3D3D';
