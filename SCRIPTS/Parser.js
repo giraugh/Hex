@@ -17,8 +17,8 @@ function load_scripts()
 	var mathsReg = /#\s?math(s)?/i;
 
 	//Make references relate to variable STORES
-	lcode.split("~").join("vP1.");
-	rcode.split("~").join("vP2.");
+	lcode = lcode.split("~").join("vP1.");
+	rcode = rcode.split("~").join("vP2.");
 
 	//check if events
 	doEventsL = false;
