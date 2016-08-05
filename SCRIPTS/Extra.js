@@ -153,6 +153,22 @@ function clone3d()
 	return clone;
 }
 
+//Return whether board will win
+//0 - no
+//1 - player 1
+//2 - player 2
+function will_win(board) {
+   return game_update_connections_ext(board, clone3d(), false) == turn+1;
+}
+
+function get_future(board) {
+   return game_update_connections_ext(board, clone3d(), false);
+}
+
+function perform_move(board, x, y) {
+   board[x][y] = turn+1;
+}
+
 function neighbours_ext(x1,y1,colour,board)
 {
 	if (colour == red || colour == "red" || colour == "1"){colour = 1;}

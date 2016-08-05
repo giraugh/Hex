@@ -107,8 +107,10 @@
 				<li><strong><code>isEdgeConnected(x, y, edge)</code></strong><br>Returns whether given hex is indirectly connected to the given edge.</li>
 				<li><strong><code>valid()</code></strong><br>Returns whether code is being run through the game. (rather than through error checker)</li>
 				<li><strong><code>clone()</code></strong><br>Returns a copy of the game grid.</li>
-				<li><strong><code>clone3d()</code></strong><br>Returns a copy of the games connections grid.</li>
-				<li><strong><code>game_update_connections_ext(board, connectionsBoard)</code></strong><br>Updates given boards connections values and returns whether anyone won. (0 - no-one won, 1 - player 1 won, 2 - player 2 won)</li>
+				<li><strong><code>clone3d()</code></strong><br>Returns a copy of the games connections grid. You shouldn't have to do this.</li>
+				<li><strong><code>will_win(cloned_board)</code></strong><br>Returns whether this board is in a winning state for the current player.</li>
+				<li><strong><code>get_future(cloned_board)</code></strong><br>Returns the game state at the end of the turn. 0 = Continue, 1 = Player 1 will win, 2 = Player 2 will win</li>
+				<li><strong><code>performe_move(cloned_board, x, y)</code></strong><br>Performs a move on a cloned board.</li>
 			</ul>
 		</p>
 	</body>
