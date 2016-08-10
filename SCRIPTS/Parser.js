@@ -14,11 +14,17 @@ function load_scripts()
 	var propReg = /prop(?:ertie)?s?\s?=?\s?{/i;
 	var mochaReg = /#\s?mocha/i;
 	var coffeeReg = /#\s?coffee(script)?/i;
+	var latteReg = /#\s?(python(script)?|latte(script)?|tippy(toe)?(script)?)/i;
 	var mathsReg = /#\s?math(s)?/i;
 
 	//Make references relate to variable STORES
 	lcode = lcode.split("~").join("vP1.");
 	rcode = rcode.split("~").join("vP2.");
+
+	//We make the latte code into coffee code
+	//check if Coffee
+	if (latteReg.test(lcode)) {lcode = lcode.replace(latteReg, "");lcode = "#COFFEE\n"+tpt_compile(lcode);}
+	if (latteReg.test(rcode)) {rcode = rcode.replace(latteReg, "");rcode = "#COFFEE\n"+tpt_compile(rcode);}
 
 	//check if events
 	doEventsL = false;

@@ -1,0 +1,30 @@
+* {
+   font-family: "Courier New", Georgia;
+}
+
+body {
+   margin-left: 20%;
+   background-color: #1d1d1d;
+}
+
+h1 {
+   color: #3F3F3F;
+   margin-bottom: 5px;
+}
+
+a {
+   color: white;
+}
+
+p {
+      color: grey;
+}
+
+code {
+   font-style: italic;
+   background-color: grey
+}
+
+li {
+   padding-bottom: 20px;
+}
