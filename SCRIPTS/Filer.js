@@ -99,9 +99,11 @@
 				  alert("Failed to load file");
 				}
 			}
-
-			document.getElementById('left-input').addEventListener('change', readSingleFile1, false);
-			document.getElementById('right-input').addEventListener('change', readSingleFile2, false);
+			
+			if (document.getElementById('left-input'))
+				document.getElementById('left-input').addEventListener('change', readSingleFile1, false);
+			if (document.getElementById('right-input'))
+				document.getElementById('right-input').addEventListener('change', readSingleFile2, false);
 		}
 		else
 		{

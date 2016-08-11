@@ -6,7 +6,10 @@ function engine_draw() {
     }
     ctx.fillStyle = game_background();
     ctx.fillRect(0, 0, document.getElementById('canvas').width, document.getElementById('canvas').height);
+    ctx.save()
+    ctx.scale(game_scale, game_scale);
     game_draw(ctx, window.game);
+    ctx.restore()
     updatePressed();
     updateMouse();
     window.requestAnimationFrame(engine_draw);

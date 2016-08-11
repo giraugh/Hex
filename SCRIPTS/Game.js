@@ -28,8 +28,9 @@ function player2_turn()
 function game_title(){return 'HEX';}
 function game_background(){return '#1d1d1d';}
 function game_wbackground(){return '#1d1d1d';}
-function game_width(){return 1130;}
+function game_width(){return 1200;}
 function game_height(){return 760;}
+window.game_scale = 1;
 
 /*AI DEBUGGING*/
 traceHex = {x: -1,y: -1,colour: 'black'};
@@ -57,8 +58,10 @@ main {
 	return hex(x, y);
 }`;
 
-document.getElementById("left").value = defaultProgram;
-document.getElementById("right").value = defaultProgram;
+if (document.getElementById("left"))
+	document.getElementById("left").value = defaultProgram;
+if (document.getElementById("right"))
+	document.getElementById("right").value = defaultProgram;
 
 
 
@@ -102,11 +105,22 @@ function game_init(game){
 
 	//SET COLOURS
 	color = '#3D3D3D';
-	window.document.getElementById("title").style = "color:"+color+";";
-	window.document.getElementById("left-title").style = "color:"+color+";";
-	window.document.getElementById("right-title").style = "color:"+color+";";
-	window.document.getElementById("right").style = "background-color:"+color+";";
-	window.document.getElementById("left").style = "background-color:"+color+";";
+	setStyle = function(c){
+		let colour = c
+		dg = (x) => {document.getElementById(x);}
+		if (dg("title"))
+			dg("title").style = "color:"+color+";";
+		if (dg("left-title"))
+			dg("left-title").style = "color:"+color+";";
+		if (dg("right-title"))
+			dg("right-title").style = "color:"+color+";";
+		if (dg("right"))
+			dg("right").style = "background-color:"+color+";";
+		if (dg("left"))
+			dg("left").style = "background-color:"+color+";";
+	}
+
+	setStyle(color);
 
 	//CREATE AND POPULATE GRID (STORES WHO OWNS A HEX)
 	grid = create2dArray(gridSize);
@@ -332,11 +346,7 @@ function game_update_connections()
 		col = blue;
 	}
 	if (win != 0){
-		document.getElementById("title").style = "color: "+col+";";
-		document.getElementById("left-title").style = "color: "+col+";";
-		document.getElementById("right-title").style = "color: "+col+";";
-		document.getElementById("left").style = "background-color: "+col+";";
-		document.getElementById("right").style = "background-color: "+col+";";
+		setStyle(col);
 	}
 }
 

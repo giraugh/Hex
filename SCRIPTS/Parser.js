@@ -1,9 +1,17 @@
+function getContents() {
+	return
+	[
+		document.getElementById("left").value,
+		document.getElementById("right").value
+	]
+}
+
 function load_scripts()
 {
-	gotContents(document.getElementById("left").value,"left");
-	gotContents(document.getElementById("right").value,"right");
-	var lcode = document.getElementById("left").value;
-	var rcode = document.getElementById("right").value;
+	var lcode = getContents()[0];
+	var rcode = getContents()[1];
+	gotContents(lcode, "left");
+	gotContents(rcode, "right");
 	var lworked = true;var rworked = true;
 
 	var eventReg = /#\s?events?/i;
