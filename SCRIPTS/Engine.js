@@ -1,3 +1,15 @@
+function doResizeCanvas(min) {
+   var scale, scale_x, scale_y;
+   scale_x = innerWidth / game_width();
+   scale_y = innerHeight / game_height();
+   scale = Math.min(Math.min(scale_x, scale_y), 1);
+   scale = Math.round(scale*10)/10;
+   window.game_scale = scale;
+   document.getElementById('canvas').width = scale*game_width();
+   document.getElementById('canvas').height = scale*game_height();
+   return window.requestAnimationFrame(doResizeCanvas);
+}
+
 function engine_draw() {
     if (document.getElementById('canvas').getContext) {
         var ctx = document.getElementById('canvas').getContext('2d');
