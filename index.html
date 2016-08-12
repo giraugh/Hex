@@ -1,73 +1,165 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8" />
-    <title>HEX</title>
-    <link rel="icon" href="IMAGES/Icon.png">
-    <link rel="stylesheet" type="text/css" href="STYLE/generic.css">
-</head>
+   <head>
+      <meta charset="utf-8" />
+      <title>HEX</title>
+      <link rel="icon" href="IMAGES/Icon.png">
+      <link rel="stylesheet" type="text/css" href="STYLE/generic.css">
+   </head>
 
-<body id="body" onload="engine_init();" style="background-color: black;">
-    <div id="content">
-        <h1 id="title">HEX</h1>
-        <p style="font-size: 30px;">
+   <body id="body" onload="engine_init();" style="background-color: black;">
+      <div id="content">
 
-            <b>Hex</b> is a board game originally by <a class="link" href="https://en.wikipedia.org/wiki/Piet_Hein_(scientist)#Work" target="_blank">Piet Hein</a>
-			<br>and popularized by <a class="link" href="https://en.wikipedia.org/wiki/John_Forbes_Nash,_Jr." target="_blank">John Nash</a>.<br> The goal of the game is to connect your sides of the board. <br>
-            <span style="color:#E52D3D;">red</span> connects the left and right of the board whilst <br>
-            <span style="color:#655DE2;">blue</span> connect the top and bottom of the board.<br> You take turns to choose a hex to take. <br> In HEX though, you program an AI in <a class="link" href="https://en.wikipedia.org/wiki/JavaScript" target="_blank">Javascript</a> to choose your hex's for you.<br>
-			<br>Below You can see an example two AI's which choose hex's<br>
-			at random playing against each other, feel free to muck<br>
-			around with the code there.
-		</p>
-		<h2 id="link"><a class="biglink" href="https://github.com/retroverse/HEX/tree/gh-pages/BOTS" target="_blank" style="text-decoration: none;">BROWSE BOT EXAMPLES<span style="color: grey;text-decoration: none;">(new)<span></a> &nbsp &nbsp <a href="tutorial.html" target="_blank" style="text-decoration: none;" class="biglink"> VIEW TUTORIAL </a><a> - press 'R' to <a onclick="console.clear();game_init();load_scripts();"  class="link">restart game</a></a>
-            </h2>
-            <canvas id="canvas" width="50%" height="50%" style="background-color: white;"></canvas>
 
-            <div id="boxes">
-                <!--LEFT DIV!-->
-                <div id="left-div" class="box">
-                    <h1 id="left-title" <!--onclick="customScriptLeft = !customScriptLeft;" !-->Player 1</h1>
-                    <p id="left-desc" style="color: white;font-family: 'Courier New',Georgia;margin-top: 0px;">
+         <h1
+            id="title">
+            HEX
+         </h1>
+         <p style="font-size: 30px;">
 
-                    </p>
-                    <textarea id="left" rows="20" cols="50" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
-                    <br>
-                    <input id="left-input" class="fileinput" type="file"></input>&nbsp;<input id="left-export" type="button" value="Export" onclick="exportScript('left');"></input>
-                    <button onclick="game_init();load_scripts();">Apply</button>
-                </div>
+         <b>Hex</b> is a board game originally by <a class="link" href="https://en.wikipedia.org/wiki/Piet_Hein_(scientist)#Work" target="_blank">Piet Hein</a>
+         <br>and popularized by <a class="link" href="https://en.wikipedia.org/wiki/John_Forbes_Nash,_Jr." target="_blank">John Nash</a>.<br> The goal of the game is to connect your sides of the board. <br>
+         <span style="color:#E52D3D;">red</span> connects the left and right of the board whilst <br>
+         <span style="color:#655DE2;">blue</span> connect the top and bottom of the board.<br> You take turns to choose a hex to take. <br> In HEX though, you program an AI in <a class="link" href="https://en.wikipedia.org/wiki/JavaScript" target="_blank">Javascript</a> to choose your hex's for you.<br>
+         <br>Below You can see an example two AI's which choose hex's<br>
+         at random playing against each other, feel free to muck<br>
+         around with the code there.
+         </p>
+         <h2 id="link">
+            <a
+               class="biglink"
+               href="https://github.com/retroverse/HEX/tree/gh-pages/BOTS"
+               target="_blank"
+               style="text-decoration: none;">
+                  BROWSE BOT EXAMPLES
+            </a>
+            &nbsp;
+            &nbsp;
+            <a
+               href="tutorial.html"
+               target="_blank"
+               style="text-decoration: none;"
+               class="biglink">
+                  VIEW TUTORIAL
+            </a>
+            <a>
+                - press 'R' to
+                  <a
+                     onclick="console.clear();game_init();load_scripts();"
+                     class="link">
+                        restart game
+                  </a>
+            </a>
+         </h2>
 
-                <!--RIGHT DIV!-->
-                <div id="right-div" class="box">
-                    <h1 id="right-title" <!--onclick="customScriptRight = !customScriptRight;" !-->Player 2</h1>
-                    <p id="right-desc" style="color: white;font-family: 'Courier New',Georgia;margin-top: 0px;">
 
-                    </p>
-                    <textarea id="right" rows="20" cols="50" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
-                    <br>
-                    <input id="right-input" class="fileinput" type="file"></input>&nbsp;<input id="right-export" type="button" value="Export" onclick="exportScript('right');"></input>
-                    <button onclick="game_init();load_scripts();">Apply</button>
-                </div>
+         <canvas id="canvas"></canvas>
+
+
+
+         <div id="boxes">
+            <div id="left-div" class="box">
+               <h1
+                  id="left-title">
+                     Player 1
+               </h1>
+               <p
+                  id="left-desc"
+                  style="color: white;
+                         font-family: 'Courier New', Georgia;
+                         margin-top: 0px;">
+               </p>
+               <textarea
+                  id="left"
+                  rows="20"
+                  cols="50"
+                  autocomplete="off"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  spellcheck="false">
+               </textarea>
+               <br>
+               <input
+                  id="left-input"
+                  class="fileinput"
+                  type="file">
+               </input>
+               &nbsp;
+               <input
+                  id="left-export"
+                  type="button"
+                  value="Export"
+                  onclick="exportScript('left');">
+               </input>
+               <button
+                  onclick="game_init();load_scripts();">
+                     Apply
+               </button>
             </div>
-</body>
-</div>
 
-<footer>
-   <!--LANGUAGES-->
-    <script src="SCRIPTS/Engine.js"></script>
-    <script src="https://rawgit.com/retroverse/Mocha/master/Mocha.js"></script>
-    <script src="SCRIPTS/LANG/coffee.js"></script>
-    <script src="SCRIPTS/LANG/tpt.js"></script>
-    <!--FRAMEWORK-->
-    <script type="text/javascript" src="SCRIPTS/Parser.js"></script>
-    <script type="text/javascript" src="SCRIPTS/Extra.js"></script>
-    <script type="text/javascript" src="SCRIPTS/Game.js"></script>
-    <script src="SCRIPTS/Filer.js"></script>
-    <script>
-    doResizeCanvas(1);
-    document.title = game_title();
-    </script>
-</footer>
+
+
+            <div id="right-div" class="box">
+               <h1
+                  id="right-title">
+                     Player 2
+               </h1>
+               <p
+                  id="right-desc"
+                  style="color: white;
+                         font-family: 'Courier New',
+                         Georgia;
+                         margin-top: 0px;">
+               </p>
+               <textarea
+                  id="right"
+                  rows="20"
+                  cols="50"
+                  autocomplete="off"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  spellcheck="false">
+               </textarea>
+               <br>
+               <input
+                  id="right-input"
+                  class="fileinput"
+                  type="file">
+               </input>
+               &nbsp;
+               <input
+                  id="right-export"
+                  type="button"
+                  value="Export"
+                  onclick="exportScript('right');">
+               </input>
+               <button
+                  onclick="game_init();load_scripts();">
+                     Apply
+               </button>
+            </div>
+         </div>
+      </div>
+   </body>
+
+
+
+   <footer>
+      <!--LANGUAGES-->
+         <script src="SCRIPTS/Engine.js"></script>
+         <script src="https://rawgit.com/retroverse/Mocha/master/Mocha.js"></script>
+         <script src="SCRIPTS/LANG/coffee.js"></script>
+         <script src="SCRIPTS/LANG/tpt.js"></script>
+      <!--FRAMEWORK-->
+         <script type="text/javascript" src="SCRIPTS/Parser.js"></script>
+         <script type="text/javascript" src="SCRIPTS/Extra.js"></script>
+         <script type="text/javascript" src="SCRIPTS/Game.js"></script>
+         <script src="SCRIPTS/Filer.js"></script>
+      <script>
+         doResizeCanvas(1);
+         document.title = game_title();
+      </script>
+   </footer>
 
 </html>

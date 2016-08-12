@@ -41,7 +41,7 @@ defaultProgram =
 `#EVENTS
 
 properties = {
-	name: "New Bot",
+	name: "Player 1",
 	author: "Me",
 	description: "New Bot, its very cool.",
 	version: 1.0
@@ -61,7 +61,9 @@ main {
 if (document.getElementById("left"))
 	document.getElementById("left").value = defaultProgram;
 if (document.getElementById("right"))
-	document.getElementById("right").value = defaultProgram;
+	document.getElementById("right").value = defaultProgram.replace("Player 1","Player 2");
+
+
 
 
 
