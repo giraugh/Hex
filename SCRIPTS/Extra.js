@@ -1,3 +1,19 @@
+/* UTILITY CONSTS */
+const PLAYER1 = 0;
+const PLAYER2 = 1;
+const P1 = 0;
+const P2 = 1;
+const RED = 0;
+const BLUE = 1;
+const VAL_EMPTY = 0;
+const VAL_P1 = 1;
+const VAL_P2 = 2;
+const VAL_RED = 1;
+const VAL_BLUE = 2;
+const VAL_PLAYER1 = 1;
+const VAL_PLAYER2 = 2;
+
+
 
 /* UTILITY FUNCTIONS */
 

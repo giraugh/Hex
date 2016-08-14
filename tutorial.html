@@ -62,19 +62,17 @@
 			<br>
 			Lets have a quick look at the default HEX program<br>
 			<code><br>
-			var x = rnd(gridSize-1);<br>
-			var y = rnd(gridSize-1);<br>
+			let x = rndg()<br>
+			let y = rndg()<br>
 			return hex(x,y);<br>
 			</code><br>
 			<br>
-			The 'rnd(x)' function returns a random<br>
-			value from 0 to x so in this case we <br>
-			take a random x and a random y value in the <br>
-			range of the HEX grid.<br>
-			(JS arrays start at 0 so we take 1 from gridSize)<br>
-			<br>
-			There are many other functions like 'rnd(x)' that you<br>
-			can use.<br>
+			The code here defines two variables, <code>x</code> and <code>y</code>.<br>
+			It defines them to be the result of the function <code>rndg()</code> which returns<br>
+			a random number from zero to the grid size minus one. We subtract one because when we<br>
+			return a hex value it is from zero to the grid size subtract one.<br>
+			The code also then returns its chosen hex. We tell it which hex by giving it the two<br>
+			positions we defined earlier.
 			<br>
 			<h1>BOT VARIABLE OBJECTS</h1>
 			Use a <code>~</code> before variables in your script to make them available
@@ -95,6 +93,26 @@
 					event functions which are run at different points. the <code>main</code> event is run every step<br>
 					like normal but the <code>init</code> event is run only once, on your first turn before the <code>main</code> event.</li>
 				<li><strong><code>#MATHS</code></strong><br>Releases maths objects to global namespace i.e use <code>round(x)</code> instead of <code>Math.round(x)</code>.</li>
+			</ul>
+			<h1>GLOBAL VARIABLES</h1>
+			<ul>
+				<li><strong><code>turn</code></strong><br>Returns who's turn, its either <code>PLAYER1</code> or <code>PLAYER2</code> (<code>0</code> or <code>1</code>)</li>
+				<li><strong><code>turnCount</code></strong><br>Which turn we are on, increments for both players.</li>
+				<li><strong><code>attemptCount</code></strong><br>How many times a hex has been returned for both players.</li>
+				<li><strong><code>gridSize</code></strong><br>Returns size of grid. (11)</li>
+				<li><strong><code>PLAYER1</code></strong><br>Player 1 value. e.g <code>turn == PLAYER1</code></li>
+				<li><strong><code>PLAYER2</code></strong><br>Player 2 value. e.g <code>turn == PLAYER2</code></li>
+				<li><strong><code>P1</code></strong><br>Player 1 value.</li>
+				<li><strong><code>P2</code></strong><br>Player 2 value.</li>
+				<li><strong><code>RED</code></strong><br>Player 1 value.</li>
+				<li><strong><code>BLUE</code></strong><br>Player 2 value.</li>
+				<li><strong><code>VAL_EMPTY</code></strong><br>Hex value that is empty. e.g <code>value(0, 0) == VAL_EMPTY</code></li>
+				<li><strong><code>VAL_PLAYER1</code></strong><br>Hex value that is player 1. e.g <code>value(0, 0) == VAL_PLAYER1</code></li>
+				<li><strong><code>VAL_PLAYER2</code></strong><br>Hex value that is player 2. e.g <code>value(0, 0) == VAL_PLAYER2</code></li>
+				<li><strong><code>VAL_RED</code></strong><br>Hex value that is player 1.</li>
+				<li><strong><code>VAL_BLUE</code></strong><br>Hex value that is player 2.</li>
+				<li><strong><code>VAL_P1</code></strong><br>Hex value that is player 1.</li>
+				<li><strong><code>VAL_P2</code></strong><br>Hex value that is player 2.</li>
 			</ul>
 			<h1>FUNCTIONS</h1>
 			<ul>
