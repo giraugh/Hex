@@ -278,3 +278,8 @@ function isEdgeConnected(x,y,edge)
 	if (edge == "right" || edge == "bottom"){edge = 1;}
 	return cgrid[x][y][edge];
 }
+
+//notify functions
+function say(x) {
+   note(x, turn);
+}

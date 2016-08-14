@@ -112,8 +112,8 @@ function load_scripts()
 		}
 	}
 
-	if (!lworked){window.document.getElementById("left-title").style = "background-color: white;";}else{window.document.getElementById("left-title").style = "background-color: "+game_wbackground();}
-	if (!rworked){window.document.getElementById("right-title").style = "background-color: white;";}else{window.document.getElementById("right-title").style = "background-color: "+game_wbackground();}
+	if (!lworked){window.document.getElementById("left-title").style = "background-color: white;";note("P1: Compiler Error");}else{window.document.getElementById("left-title").style = "background-color: "+game_wbackground();}
+	if (!rworked){window.document.getElementById("right-title").style = "background-color: white;";note("P2: Compiler Error");}else{window.document.getElementById("right-title").style = "background-color: "+game_wbackground();}
 
 	if (lworked && customScriptLeft){player1_turn = Function(lcode);}
 	if (rworked && customScriptRight){player2_turn = Function(rcode);}

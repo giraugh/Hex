@@ -207,16 +207,20 @@ function game_turns()
 	if (turn == 0)
 	{
 		//FUNCTION DECIDES WHICH PEICE
-		if (doEventsL)
-			hex = update1();
+		if (doEventsL) {
+			if (typeof window.update1 == "function")
+				hex = update1();
+		}
 		else
 			hex = player1_turn();
 	}
 
 	if (turn == 1)
 	{
-		if (doEventsR)
-			hex = update2();
+		if (doEventsR) {
+			if (typeof window.update2 == "function")
+				hex = update2();
+		}
 		else
 			hex = player2_turn();
 	}
@@ -341,12 +345,14 @@ function game_update_connections()
 	{
 		//PLAYER 1 WON
 		log("RED WON!");
+		noteRed("Red Won!")
 		col = red;
 	}
 	if (win == 2)
 	{
-		log("BLUE WON!");
 		//PLAYER 2 WON
+		log("BLUE WON!");
+		noteBlue("Blue Won!")
 		col = blue;
 	}
 	if (win != 0){

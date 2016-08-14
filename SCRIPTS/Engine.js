@@ -143,3 +143,24 @@ function updateMouse() {
             }
         }
     }
+
+//NOTIFICATIONS
+function noteRed(x) {
+   alertify.success(x || "");
+}
+
+function noteBlue(x) {
+   alertify.error(x || "");
+}
+
+function note(x, col) {
+   if (col == "red" || col == 0) {
+      noteRed(x);
+      return;
+   }
+   if (col == "blue" || col == 1) {
+      noteBlue(x);
+      return;
+   }
+   alertify.warning(x || "");
+}
