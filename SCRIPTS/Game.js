@@ -104,6 +104,7 @@ function game_init(game){
 	props2 = undefined;
 	vP1 = {} //For storing player 1 vars
 	vP2 = {} //For storing player 2 vars
+	turns = [];
 
 	//SET COLOURS
 	color = '#3D3D3D';
@@ -252,6 +253,7 @@ function game_turns()
 			if (grid[xx][yy] == 0)
 			{
 				grid[xx][yy] = turn+1;
+				turns.push({player: turn, position: [xx, yy], x: xx, y: yy, count: turnCount});
 				success = true;
 			}
 		}

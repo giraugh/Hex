@@ -153,6 +153,37 @@ function clone3d()
 	return clone;
 }
 
+//Get info about turns
+function get_turn(x) {
+   if (x < 0)
+      x = turns.length-x;
+   return turns[x];
+}
+
+//get info about lastTurn
+function last_turn() {
+   return get_turn(-1);
+}
+
+//extract info from turn object
+function turn_position(turn) {
+   return turn.position;
+}
+
+function turn_position_x(turn) {
+   return turn.x;
+}
+
+function turn_position_y(turn) {
+   return turn.y;
+}
+
+function turn_player(turn) {
+   return turn.player;
+}
+
+
+
 //Return whether board will win
 //0 - no
 //1 - player 1
