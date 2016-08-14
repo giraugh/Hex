@@ -108,8 +108,8 @@ function game_init(game){
 	//SET COLOURS
 	color = '#3D3D3D';
 	setStyle = function(c){
-		let colour = c
-		dg = (x) => {document.getElementById(x);}
+		let color = c
+		dg = function(x){return document.getElementById(x);}
 		if (dg("title"))
 			dg("title").style = "color:"+color+";";
 		if (dg("left-title"))
