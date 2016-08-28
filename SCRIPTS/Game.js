@@ -8,22 +8,6 @@
 	player 2 (BLUE) goes DOWN the page
 */
 
-//YOU WILL OVERRIDE THESE, THEY MUST RETURN AN ARRAY WITH 2 INTEGERS BETWEEN 0 & 10
-function player1_turn()
-{
-	var x = Math.round(Math.random()*(gridSize-1));
-	var y = Math.round(Math.random()*(gridSize-1));
-	return hex(x,y);
-}
-
-function player2_turn()
-{
-	var x = Math.round(Math.random()*(gridSize-1));
-	var y = Math.round(Math.random()*(gridSize-1));
-	return hex(x,y);
-}
-
-
 /*GAME DEFINITIONS*/
 function game_title(){return 'HEX';}
 function game_background(){return '#1d1d1d';}
@@ -38,9 +22,8 @@ doLogReturns = false;
 
 /*SET UP BOXES*/
 defaultProgram =
-`#EVENTS
-
-properties = {
+`
+var properties = {
 	name: "Player 1",
 	author: "Me",
 	description: "New Bot, its very cool.",
@@ -48,11 +31,11 @@ properties = {
 }
 
 
-init {
+function init (){
 
 }
 
-main {
+function main (){
 	let x = rndg();
 	let y = rndg();
 	return hex(x, y);
@@ -149,6 +132,9 @@ function game_init(game){
 
 	//INITIALIZE SPRITES
 	init_sprites();
+	
+	// Load all scripts
+	load_scripts();
 }
 
 function init_sprites()
@@ -191,15 +177,13 @@ function game_turns()
 
 	//INIT (if we need to)
 	if (doEventsL && turnCount == 0) {
-		if (typeof window.init1 == "function")
-			init1();
-			initialized1 = true;
+		player1_turn("init");
+		initialized1 = true;
 	}
 
 	if (doEventsR && turnCount == 1) {
-		if (typeof window.init2 == "function")
-			init2();
-			initialized2 = true;
+		player2_turn("init");
+		initialized2 = true;
 	}
 
 
@@ -212,7 +196,7 @@ function game_turns()
 				hex = update1();
 		}
 		else
-			hex = player1_turn();
+			hex = player1_turn("main");
 	}
 
 	if (turn == 1)
@@ -222,7 +206,7 @@ function game_turns()
 				hex = update2();
 		}
 		else
-			hex = player2_turn();
+			hex = player2_turn("main");
 	}
 
 	//UNVALIDATE
@@ -364,12 +348,18 @@ function game_loop()
 {
 
 	//UPDATE PROPERTIES
-	if (props1 != undefined) {
-		useProps(props1.name,props1.author,props1.version,props1.description,'left');
+	if(player1_turn){
+		let props1 = player1_turn("props");
+		if (props1 != undefined) {
+			useProps(props1.name,props1.author,props1.version,props1.description,'left');
+		}
 	}
 
-	if (props2 != undefined) {
-		useProps(props2.name,props2.author,props2.version,props2.description,'right');
+	if(player2_turn){
+		let props2 = player2_turn("props");
+		if (props2 != undefined) {
+			useProps(props2.name,props2.author,props2.version,props2.description,'right');
+		}
 	}
 
 	//IF SOMEONE HASN'T ALREADY WON
