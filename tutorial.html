@@ -8,8 +8,8 @@
 			}
 
 			code {
-				font-style: italic;
 				background-color: #EEEEEE;
+				font-family: "Courier New", Courier, monospace;
 			}
 
 			li {
@@ -62,17 +62,46 @@
 			<br>
 			Lets have a quick look at the default HEX program<br>
 			<code><br>
-			let x = rndg()<br>
-			let y = rndg()<br>
-			return hex(x,y);<br>
+			
+var properties = { <br>
+	name: "Player 1", <br>
+	author: "Me", <br>
+	description: "New Bot, its very cool.", <br>
+	version: 1.0 <br>
+} <br>
+ <br>
+ <br>
+function init (){ <br>
+ <br>
+} <br>
+ <br>
+function main (){ <br>
+	let x = rndg(); <br>
+	let y = rndg(); <br>
+	return hex(x, y); <br>
+} <br>
 			</code><br>
+			<br>
+			The code has 3 parts, at the top. You can define the AI's "properties"<br>
+			like name, author, version and description, which are shown when the bot is used.<br>
+			This is a standard JS object.
+			<br>
+			The init function can also be defined which is the code that is run at the start of the game, <br>
+			before the ai starts playing. This is useful for writing code that initializes values that you <br>
+			would like to use later. <br>
+			<br>
+			Finally, there is the main function, this function is called every time it is the AI's turn <br>
+			<br>
+			The main function needs to returns a hex. As shown above, this can be done with <code>return hex(x,y);</code><br>
+			where <code>x</code> and <code>y</code> are the coordinates of the selected hex.<br>
+			<br>
+			In hex, you play on an 11x11 board. The coordinates go from (0,0) in the top left to <br>
+			(10, 10) in the bottom right. Notice how the coordinates start from 0, not 1. <br>
 			<br>
 			The code here defines two variables, <code>x</code> and <code>y</code>.<br>
 			It defines them to be the result of the function <code>rndg()</code> which returns<br>
-			a random number from zero to the grid size minus one. We subtract one because when we<br>
-			return a hex value it is from zero to the grid size subtract one.<br>
-			The code also then returns its chosen hex. We tell it which hex by giving it the two<br>
-			positions we defined earlier.
+			a random number from zero to the grid size minus one, that is, a random number from 0 to 10.<br>
+			The code then returns the chosen hex, and that piece is taken and it is then the other player's turn<br>
 			<br>
 			<h1>BOT VARIABLE OBJECTS</h1>
 			Use a <code>~</code> before variables in your script to make them available
@@ -89,9 +118,6 @@
 					Note that the structures such as props and event definitions are also compiled.</li>
 				<li><strong><code>#MOCHA or #MOCHASCRIPT</code></strong><br>Compile code as mochascript. not recommended.</li>
 				<li><strong><code>#LATTE or #TIPPYTOE</code></strong><br>Pre-compile code as pythonic coffeescript (or lattescript or tipPYToe).</li>
-				<li><strong><code>#EVENTS</code></strong><br>Rather than set up code as a function that returns a hex, allow the code to define<br>
-					event functions which are run at different points. the <code>main</code> event is run every step<br>
-					like normal but the <code>init</code> event is run only once, on your first turn before the <code>main</code> event.</li>
 				<li><strong><code>#MATHS</code></strong><br>Releases maths objects to global namespace i.e use <code>round(x)</code> instead of <code>Math.round(x)</code>.</li>
 			</ul>
 			<h1>GLOBAL VARIABLES</h1>
