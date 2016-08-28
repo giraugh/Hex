@@ -22,9 +22,35 @@ function load_scripts()
 	lcode = lcode.split("~").join("vP1.");
 	rcode = rcode.split("~").join("vP2.");
 
+	//We make the latte code into coffee code
+	//check if Coffee
+	if (latteReg.test(lcode)) {lcode = lcode.replace(latteReg, "");lcode = "#COFFEE\n"+tpt_compile(lcode);}
+	if (latteReg.test(rcode)) {rcode = rcode.replace(latteReg, "");rcode = "#COFFEE\n"+tpt_compile(rcode);}
+
+	//check if Mocha
+	if (mochaReg.test(lcode)) {lcode = Mocha(lcode);}
+	if (mochaReg.test(rcode)) {rcode = Mocha(rcode);}
+
+	//check if Coffee
+	if (coffeeReg.test(lcode)) {
+		// Remove header
+		lcode = lcode.replace(coffeeReg, "");
+
+		// Compile code
+		lcode = hexCoffee(lcode);
+	}
+
+	if (coffeeReg.test(rcode)) {
+		// Remove header
+		rcode = rcode.replace(coffeeReg, "");
+
+		// Compile code
+		rcode = hexCoffee(rcode);
+	}
+
 	// Add JS call selector, interface for calling functions within the code
 	let callSelector = `
-if (` + longVariable + ` == "init") 
+if (` + longVariable + ` == "init")
 	return init();
  else if (`+longVariable+` == "main")
 	return main();
@@ -33,32 +59,6 @@ else if (`+longVariable+` == "props")
 
 	lcode += callSelector;
 	rcode += callSelector;
-	
-	//We make the latte code into coffee code
-	//check if Coffee
-	if (latteReg.test(lcode)) {lcode = lcode.replace(latteReg, "");lcode = "#COFFEE\n"+tpt_compile(lcode);}
-	if (latteReg.test(rcode)) {rcode = rcode.replace(latteReg, "");rcode = "#COFFEE\n"+tpt_compile(rcode);}
-	
-	//check if Mocha
-	if (mochaReg.test(lcode)) {lcode = Mocha(lcode);}
-	if (mochaReg.test(rcode)) {rcode = Mocha(rcode);}
-	
-	//check if Coffee
-	if (coffeeReg.test(lcode)) {
-		// Remove header
-		lcode = lcode.replace(coffeeReg, "");
-		
-		// Compile code
-		lcode = hexCoffee(lcode);
-	}
-	
-	if (coffeeReg.test(rcode)) {
-		// Remove header
-		rcode = rcode.replace(coffeeReg, "");
-		
-		// Compile code
-		rcode = hexCoffee(rcode);
-	}
 
 	if (mathsReg.test(lcode) || mathsReg.test(rcode)){
 		keys = Object.getOwnPropertyNames(Math);

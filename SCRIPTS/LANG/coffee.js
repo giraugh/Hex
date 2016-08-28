@@ -13,14 +13,10 @@ this.trace(e)},parse:function(e){function t(){var e;return e=f.lex()||p,"number"
 
 window.coffee = CoffeeScript.compile
 window.hexCoffee = function(x) {
-   lines = x.split("\n")
-   for (i=0;i<lines.length;i++) {
-      lines[i] = "   "+lines[i];
-   }
-   x = lines.join("\n");
-   x = "func = ()->\n" + x;
-   x = x + "\nreturn func()";
    code = coffee(x);
-   code = "return " + code
+   code = code.split("\n")
+   code.splice(0, 2)
+   code.splice(-2,2)
+   code = code.join("\n")
    return code;
 }
