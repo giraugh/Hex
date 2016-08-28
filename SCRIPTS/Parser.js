@@ -4,7 +4,7 @@ function getContents() {
 		document.getElementById("right").value
 	]
 }
-var longVariable = "anIncrediblyLongNameForAVariableBecauseItIsActuallyASecretParamaterToTheFunctionThatSelectsWhetherOrNotToRunInitOrMainOrReturnProperties";
+var longVariable = "aNotSoLongNameThatNooneWillGuess";
 function load_scripts()
 {
 	var lcode = getContents()[0];
@@ -24,11 +24,11 @@ function load_scripts()
 
 	// Add JS call selector, interface for calling functions within the code
 	let callSelector = `
-if (` + longVariable + ` == \"init\") 
+if (` + longVariable + ` == "init") 
 	return init();
- else if (`+longVariable+` == \"main\")
+ else if (`+longVariable+` == "main")
 	return main();
-else if (`+longVariable+` == \"props\")
+else if (`+longVariable+` == "props")
 	return properties;`
 
 	lcode += callSelector;
