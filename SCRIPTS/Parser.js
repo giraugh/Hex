@@ -51,9 +51,9 @@ function load_scripts()
 	// Add JS call selector, interface for calling functions within the code
 	let callSelector = `
 if (` + longVariable + ` == "init")
-	return init();
+	return init.bind(vP1)();
  else if (`+longVariable+` == "main")
-	return main();
+	return main.bind(vP1)();
 else if (`+longVariable+` == "props")
 	return properties;`
 
