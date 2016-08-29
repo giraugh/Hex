@@ -132,7 +132,7 @@ function game_init(game){
 
 	//INITIALIZE SPRITES
 	init_sprites();
-	
+
 	// Load all scripts
 	load_scripts();
 }
@@ -176,12 +176,12 @@ function game_turns()
 	validated = true;
 
 	//INIT (if we need to)
-	if (doEventsL && turnCount == 0) {
+	if (turnCount == 0) {
 		player1_turn("init");
 		initialized1 = true;
 	}
 
-	if (doEventsR && turnCount == 1) {
+	if (turnCount == 1) {
 		player2_turn("init");
 		initialized2 = true;
 	}
@@ -191,22 +191,12 @@ function game_turns()
 	if (turn == 0)
 	{
 		//FUNCTION DECIDES WHICH PEICE
-		if (doEventsL) {
-			if (typeof window.update1 == "function")
-				hex = update1();
-		}
-		else
-			hex = player1_turn("main");
+		hex = player1_turn("main");
 	}
 
 	if (turn == 1)
 	{
-		if (doEventsR) {
-			if (typeof window.update2 == "function")
-				hex = update2();
-		}
-		else
-			hex = player2_turn("main");
+		hex = player2_turn("main");
 	}
 
 	//UNVALIDATE
