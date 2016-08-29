@@ -99,7 +99,7 @@
 				  alert("Failed to load file");
 				}
 			}
-			
+
 			if (document.getElementById('left-input'))
 				document.getElementById('left-input').addEventListener('change', readSingleFile1, false);
 			if (document.getElementById('right-input'))
@@ -138,10 +138,6 @@
 			desc = (desc == undefined) ? "" : desc;
 
 			var out = "";
-			out += "@name "+name+"\n";
-			out += "@author "+author+"\n";
-			out += "@version "+version+"\n";
-			out += "@description\n"+desc+"\n@descriptionend\n";
-			out += "@script\n"+script+"\n@scriptend\n";
+			out += script
 			download(name+".hex",out);
 		}
