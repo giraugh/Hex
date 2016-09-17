@@ -221,7 +221,7 @@ function game_turns()
 		//WAS IT A SKIP?
 		if (xx== -3140 && yy== -3140) {
 			success = true;
-			console.log("Player " + String(turn+1) + " Skipped");
+			log("Player " + String(turn+1) + " Skipped");
 		}
 
 		//WAS IT LEGIT MOVE?
@@ -362,7 +362,7 @@ function game_loop()
 		game_update_connections();
 	}
 	//RESTART GAME IF USER PRESSES R
-	if (getKeyPressed("r")){console.clear();game_init();load_scripts();}
+	if (getKeyPressed("r")){console.clear();game_init();}
 }
 
 function game_draw_hexs(ctx)
