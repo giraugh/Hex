@@ -67,59 +67,18 @@ else if (`+longVariable+` == "props")
 		}
 	}
 
-	try {
-		eval("function lcode_ee(" + longVariable + "){"+lcode+"};lcode_ee();");
-	} catch (e) {
-		if (e instanceof SyntaxError) {
-			log("P1:SYNTAX:"+e.message);
-		}
-		log("P1:"+e.message);
-		lworked = false;
-	}
+	try {player1_turne = Function(longVariable,lcode);}
+	catch (e) {note("COMPILER ERROR: "+e);lcode = ""}
 
-	try {
-		eval("function rcode_ee(" + longVariable + "){"+rcode+"};rcode_ee();");
-	} catch (e) {
-		if (e instanceof SyntaxError) {
-			log("P2:SYNTAX:"+e.message);
-		}
-		else
-		{
-			log("P2:"+e.message);
-		}
-		rworked = false;
-	}
+	try {player2_turne = Function(longVariable,rcode);}
+	catch (e) {note("COMPILER ERROR: "+e);rcode = ""}
 
-	//Check if no returns
-	if (!doEventsL) {
-		if (lworked) {
-			player1_turne = Function(longVariable,lcode);
-			if (player1_turne("main") == null || player1_turne("main") == undefined){lworked = false;console.log("P1: NO RETURN VAL");}
-			else
-			{
-				if (player1_turne("main")[0] == null){lworked = false;console.log("P1: NO FIRST RETURN VAL");}
-				if (!typeof player1_turne("main") == 'object'){lworked = false;console.log("P1: INCORRECT RETURN TYPE, MUST BE ARRAY");}
-				if (player1_turne("main")[1] == null){lworked = false;console.log("P1: NO SECOND RETURN VAL");}
-			}
-		}
-	}
+	try {player1_turne()}
+	catch(e){note("COMPILER ERROR: "+e);lcode = ""}
 
-	if (!doEventsR) {
-		if (rworked) {
-			player2_turne = Function(longVariable,rcode);
-			if (player2_turne("main") == null || player2_turne("main") == undefined){rworked = false;console.log("P2: NO RETURN VAL");}
-			else
-			{
-				if (player2_turne("main")[0] == null){rworked = false;console.log("P2: NO FIRST RETURN VAL");}
-				if (!typeof player2_turne("main") == 'object'){rworked = false;console.log("P2: INCORRECT RETURN TYPE, MUST BE ARRAY");}
-				if (player2_turne("main")[1] == null){rworked = false;console.log("P2: NO SECOND RETURN VAL");}
-			}
-		}
-	}
+	try {player2_turne()}
+	catch(e){note("COMPILER ERROR: "+e);rcode = ""}
 
-	if (!lworked){window.document.getElementById("left-title").style = "background-color: white;";note("P1: Compiler Error");}else{window.document.getElementById("left-title").style = "background-color: "+game_wbackground();}
-	if (!rworked){window.document.getElementById("right-title").style = "background-color: white;";note("P2: Compiler Error");}else{window.document.getElementById("right-title").style = "background-color: "+game_wbackground();}
-
-	if (lworked && customScriptLeft){window.player1_turn = Function(longVariable, lcode);}
-	if (rworked && customScriptRight){window.player2_turn = Function(longVariable, rcode);}
+	if (lcode != ""){window.player1_turn = Function(longVariable, lcode);}
+	if (rcode != ""){window.player2_turn = Function(longVariable, rcode);}
 }

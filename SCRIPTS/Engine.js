@@ -154,6 +154,14 @@ function noteBlue(x) {
 }
 
 function note(x, col) {
+    let notifier = document.getElementsByClassName("alertify-notifier")[0];
+    if (notifier != undefined) {
+    for (i=0;i<notifier.children.length;i++) {
+      if (notifier.children[i].innerHTML == x) {
+        return null;
+     }
+    }
+  }
    if (col == "red" || col == 0) {
       noteRed(x);
       return;

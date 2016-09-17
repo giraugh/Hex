@@ -22,23 +22,21 @@ doLogReturns = false;
 
 /*SET UP BOXES*/
 defaultProgram =
-`
-var properties = {
+`var properties = {
 	name: "Player 1",
 	author: "Me",
 	description: "New Bot, its very cool.",
 	version: 1.0
 }
 
-
 function init (){
 
 }
 
 function main (){
-	let x = rndg();
-	let y = rndg();
-	return hex(x, y);
+	let x = rndg()
+	let y = rndg()
+	return hex(x, y)
 }`;
 
 if (document.getElementById("left"))
@@ -177,12 +175,14 @@ function game_turns()
 
 	//INIT (if we need to)
 	if (turnCount == 0) {
-		player1_turn("init");
+		try {player1_turn("init");}
+		catch (e) {note("RUNTIME ERROR: "+e)}
 		initialized1 = true;
 	}
 
 	if (turnCount == 1) {
-		player2_turn("init");
+		try {player2_turn("init");}
+		catch (e) {note("RUNTIME ERROR: "+e)}
 		initialized2 = true;
 	}
 
@@ -191,7 +191,14 @@ function game_turns()
 	if (turn == 0)
 	{
 		//FUNCTION DECIDES WHICH PEICE
-		hex = player1_turn("main");
+		hf = ()=>{
+			try {
+				return player1_turn("main");
+			} catch(e) {
+				note("RUNTIME ERROR: "+e);
+			}
+		}
+		hex= hf();
 	}
 
 	if (turn == 1)
@@ -205,7 +212,7 @@ function game_turns()
 	if (hex == undefined || hex==null || typeof hex != 'object' || hex.length < 2)
 	{
 		//IMPROPER HEX
-		console.warn("P"+(turn+1)+":INVALID RETURN");
+		note("RUNTIME ERROR: INVALID RETURN");
 	}
 	else
 	{
@@ -362,7 +369,11 @@ function game_loop()
 		game_update_connections();
 	}
 	//RESTART GAME IF USER PRESSES R
-	if (getKeyPressed("r")){console.clear();game_init();}
+	if (getKeyPressed("r")){game_restart();}
+}
+
+function game_restart() {
+	console.clear();game_init();
 }
 
 function game_draw_hexs(ctx)
