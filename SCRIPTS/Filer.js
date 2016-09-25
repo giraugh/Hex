@@ -61,7 +61,7 @@
 				script = matchA[1];
 			}
 
-			document.getElementById(person).value = script;
+			set_scripts(person, script)
 			useProps(name,author,version,description,person);
 		}
 

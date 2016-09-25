@@ -14,9 +14,12 @@ this.trace(e)},parse:function(e){function t(){var e;return e=f.lex()||p,"number"
 window.coffee = CoffeeScript.compile
 window.hexCoffee = function(x) {
    code = coffee(x);
-   code = code.split("\n")
-   code.splice(0, 2)
-   code.splice(-2,2)
-   code = code.join("\n")
+   codea = code.split("\n")
+   codea.splice(0, 2)
+   codea.splice(-2,2)
+   for (var i =0;i<codea.length;i++) {
+     codea[i] = codea[i].substr(2, codea[i].length)
+   }
+   code = codea.join("\n")
    return code;
 }

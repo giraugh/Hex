@@ -61,3 +61,11 @@ a.link {
 a.biglink:hover {
     color: grey;
 }
+
+.editor {
+  position: relative !important;
+  border: 1px solid lightgray;
+  margin: auto;
+  height: 400px;
+  width: 500px;
+}

@@ -70,15 +70,7 @@
                          font-family: 'Courier New', Georgia;
                          margin-top: 0px;">
                </p>
-               <textarea
-                  id="left"
-                  rows="20"
-                  cols="50"
-                  autocomplete="off"
-                  autocorrect="off"
-                  autocapitalize="off"
-                  spellcheck="false">
-               </textarea>
+               <div id="left-editor" class="editor"></div>
                <br>
                <input
                   id="left-input"
@@ -96,6 +88,10 @@
                   onclick="load_scripts();">
                      Apply
                </button>
+               <button id="coffee-left"
+                  onclick="set_coffee('left');">
+                     To Coffee
+               </button>
             </div>
 
 
@@ -112,15 +108,7 @@
                          Georgia;
                          margin-top: 0px;">
                </p>
-               <textarea
-                  id="right"
-                  rows="20"
-                  cols="50"
-                  autocomplete="off"
-                  autocorrect="off"
-                  autocapitalize="off"
-                  spellcheck="false">
-               </textarea>
+               <div id="right-editor" class="editor"></div>
                <br>
                <input
                   id="right-input"
@@ -137,6 +125,10 @@
                <button
                   onclick="load_scripts();">
                      Apply
+               </button>
+               <button id="coffee-right"
+                  onclick="set_coffee('right');">
+                     To Coffee
                </button>
             </div>
          </div>
@@ -155,6 +147,24 @@
          <link rel="stylesheet" href="STYLE/alertify.css">
          <link rel="stylesheet" href="STYLE/themes/bootstrap.css">
          <script src="SCRIPTS/LIB/alertify.min.js"></script>
+      <!--ACE LIB-->
+         <script src="SCRIPTS/LIB/src-min-noconflict/ace.js"></script>
+         <script>
+         window.EditorR = ace.edit("right-editor");
+         window.EditorL = ace.edit("left-editor");
+         EditorR.setTheme("ace/theme/monokai");
+         EditorL.setTheme("ace/theme/monokai");
+         EditorR.getSession().setMode("ace/mode/javascript");
+         EditorL.getSession().setMode("ace/mode/javascript");
+         EditorL.setShowPrintMargin(false);
+         EditorR.setShowPrintMargin(false);
+         EditorL.renderer.setShowGutter(false);
+         EditorR.renderer.setShowGutter(false);
+         EditorL.setHighlightActiveLine(false);
+         EditorR.setHighlightActiveLine(false);
+         </script>
+      <!--JS2COFFEE LIB-->
+         <script src="SCRIPTS/LIB/js2coffee.js"></script>
       <!--FRAMEWORK-->
          <script type="text/javascript" src="SCRIPTS/Parser.js"></script>
          <script type="text/javascript" src="SCRIPTS/Extra.js"></script>
