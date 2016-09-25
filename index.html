@@ -70,15 +70,6 @@
                          font-family: 'Courier New', Georgia;
                          margin-top: 0px;">
                </p>
-               <textarea
-                  id="left"
-                  rows="20"
-                  cols="50"
-                  autocomplete="off"
-                  autocorrect="off"
-                  autocapitalize="off"
-                  spellcheck="false">
-               </textarea>
                <div id="left-editor" class="editor"></div>
                <br>
                <input
@@ -113,15 +104,6 @@
                          Georgia;
                          margin-top: 0px;">
                </p>
-               <textarea
-                  id="right"
-                  rows="20"
-                  cols="50"
-                  autocomplete="off"
-                  autocorrect="off"
-                  autocapitalize="off"
-                  spellcheck="false">
-               </textarea>
                <div id="right-editor" class="editor"></div>
                <br>
                <input
@@ -160,12 +142,12 @@
       <!--ACE LIB-->
          <script src="SCRIPTS/LIB/src-min-noconflict/ace.js"></script>
          <script>
-         var editorr = ace.edit("right-editor");
-         var editorl = ace.edit("left-editor");
-         editorr.setTheme("ace/theme/monokai");
-         editorl.setTheme("ace/theme/monokai");
-         editorr.getSession().setMode("ace/mode/javascript");
-         editorl.getSession().setMode("ace/mode/javascript");
+         window.EditorR = ace.edit("right-editor");
+         window.EditorL = ace.edit("left-editor");
+         EditorR.setTheme("ace/theme/monokai");
+         EditorL.setTheme("ace/theme/monokai");
+         EditorR.getSession().setMode("ace/mode/javascript");
+         EditorL.getSession().setMode("ace/mode/javascript");
          </script>
       <!--FRAMEWORK-->
          <script type="text/javascript" src="SCRIPTS/Parser.js"></script>

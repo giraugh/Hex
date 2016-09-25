@@ -1,7 +1,7 @@
 function getContents() {
 	return [
-		document.getElementById("left").value,
-		document.getElementById("right").value
+		get_scripts("left"),
+		get_scripts("right")
 	]
 }
 var longVariable = "aNotSoLongNameThatNooneWillGuess";

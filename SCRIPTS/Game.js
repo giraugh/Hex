@@ -39,13 +39,25 @@ function main (){
 	return hex(x, y)
 }`;
 
-if (document.getElementById("left"))
-	document.getElementById("left").value = defaultProgram;
-if (document.getElementById("right"))
-	document.getElementById("right").value = defaultProgram.replace("Player 1","Player 2");
+if (document.getElementById("left-editor"))
+	set_scripts("left",defaultProgram);
+if (document.getElementById("right-editor"))
+	set_scripts("right", defaultProgram.replace("Player 1","Player 2"));
 
 
+	function set_scripts(which, what) {
+		if (which == "right")
+			return EditorR.setValue(what, -1);
+		else
+			return EditorL.setValue(what, -1);
+	}
 
+function get_scripts(which) {
+	if (which == "right")
+		return EditorR.getValue();
+	else
+		return EditorL.getValue();
+}
 
 
 /*GAME EVENTS*/
@@ -98,10 +110,6 @@ function game_init(game){
 			dg("left-title").style = "color:"+color+";";
 		if (dg("right-title"))
 			dg("right-title").style = "color:"+color+";";
-		if (dg("right"))
-			dg("right").style = "background-color:"+color+";";
-		if (dg("left"))
-			dg("left").style = "background-color:"+color+";";
 	}
 
 	setStyle(color);
