@@ -124,20 +124,6 @@
 		}
 
 		function exportScript(person) {
-			var script = document.getElementById(person).value;
-
-			var name = document.getElementById(person+"-title").innerHTML;
-			name = (name == "Player 1" || name == "Player 2") ? "Bot" : name;
-
-			var author = scripts[person+'-author'];
-			var version = scripts[person+'-version'];
-			var desc = scripts[person+'-description'];
-
-			author = (author == undefined) ? "unnamed" : author;
-			version = (version == undefined) ? "1.0" : version;
-			desc = (desc == undefined) ? "" : desc;
-
-			var out = "";
-			out += script
-			download(name+".hex",out);
+			var script = get_scripts(person)
+			download(name+".hex", script);
 		}
