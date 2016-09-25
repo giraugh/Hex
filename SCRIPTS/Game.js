@@ -59,6 +59,34 @@ function get_scripts(which) {
 		return EditorL.getValue();
 }
 
+function set_coffee(which) {
+	//which editor?
+	let editor;
+	if (which == "right")
+		editor = EditorR
+	else
+		editor = EditorL
+
+	//is it coffee?
+	if (!editor.coffee) {
+		//set to coffee
+		editor.coffee = true
+		document.getElementById("coffee-"+which).innerHTML = "To Javascript"
+		editor.getSession().setMode("ace/mode/coffee");
+		if (js2coffee)
+			editor.setValue(js2coffee.build(editor.getValue()).code, -1)
+		editor.setValue("#COFFEE\n"+editor.getValue(), -1);
+	} else {
+		//back to js
+		editor.coffee = false
+		document.getElementById("coffee-"+which).innerHTML = "To Coffee"
+		editor.getSession().setMode("ace/mode/javascript");
+		editor.setValue(editor.getValue().replace("#COFFEE\n",""), -1)
+		editor.setValue(hexCoffee(editor.getValue()), -1)
+	}
+
+}
+
 
 /*GAME EVENTS*/
 function game_init(game){
