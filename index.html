@@ -148,6 +148,12 @@
          EditorL.setTheme("ace/theme/monokai");
          EditorR.getSession().setMode("ace/mode/javascript");
          EditorL.getSession().setMode("ace/mode/javascript");
+         EditorL.setShowPrintMargin(false);
+         EditorR.setShowPrintMargin(false);
+         EditorL.renderer.setShowGutter(false);
+         EditorR.renderer.setShowGutter(false);
+         EditorL.setHighlightActiveLine(false);
+         EditorR.setHighlightActiveLine(false);
          </script>
       <!--FRAMEWORK-->
          <script type="text/javascript" src="SCRIPTS/Parser.js"></script>
