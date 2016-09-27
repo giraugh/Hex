@@ -66,7 +66,13 @@ document.onkeyup = function(e) {
     window.game.keys[code] = 0;
 };
 
+function doGetKeys() {
+  return true
+}
+
 function getKey(x) {
+    if (!doGetKeys())
+      return false
     if (!(window.document.getElementById('left') == document.activeElement || window.document.getElementById('right') == document.activeElement)) {
         var c = x.charCodeAt(0);
         return window.game.keys[c] > 0;
@@ -74,9 +80,11 @@ function getKey(x) {
 }
 
 function getKeyPressed(x) {
-    if (!(window.document.getElementById('left') == document.activeElement || window.document.getElementById('right') == document.activeElement)) {
-        var c = x.charCodeAt(0);
-        return window.game.keys[c] == 2 ? true : false;
+  if (!doGetKeys())
+    return false
+  if (!(window.document.getElementById('left') == document.activeElement || window.document.getElementById('right') == document.activeElement)) {
+      var c = x.charCodeAt(0);
+      return window.game.keys[c] == 2 ? true : false;
     }
 }
 

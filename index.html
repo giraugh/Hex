@@ -136,10 +136,20 @@
    </body>
 
 
-
    <footer>
-      <!--LANGUAGES-->
+      <!--ENGINE-->
          <script src="SCRIPTS/Engine.js"></script>
+         <script>
+            function doGetKeys() {
+              ae = document.activeElement
+              if (ae.parentElement.id == "left-editor")
+                return false
+              if (ae.parentElement.id == "right-editor")
+                return false
+              return true
+            }
+         </script>
+      <!--LANGUAGES-->
          <script src="https://rawgit.com/retroverse/Mocha/master/Mocha.js"></script>
          <script src="SCRIPTS/LANG/coffee.js"></script>
          <script src="SCRIPTS/LANG/tpt.js"></script>
@@ -150,18 +160,18 @@
       <!--ACE LIB-->
          <script src="SCRIPTS/LIB/src-min-noconflict/ace.js"></script>
          <script>
-         window.EditorR = ace.edit("right-editor");
-         window.EditorL = ace.edit("left-editor");
-         EditorR.setTheme("ace/theme/monokai");
-         EditorL.setTheme("ace/theme/monokai");
-         EditorR.getSession().setMode("ace/mode/javascript");
-         EditorL.getSession().setMode("ace/mode/javascript");
-         EditorL.setShowPrintMargin(false);
-         EditorR.setShowPrintMargin(false);
-         EditorL.renderer.setShowGutter(false);
-         EditorR.renderer.setShowGutter(false);
-         EditorL.setHighlightActiveLine(false);
-         EditorR.setHighlightActiveLine(false);
+           window.EditorR = ace.edit("right-editor");
+           window.EditorL = ace.edit("left-editor");
+           EditorR.setTheme("ace/theme/monokai");
+           EditorL.setTheme("ace/theme/monokai");
+           EditorR.getSession().setMode("ace/mode/javascript");
+           EditorL.getSession().setMode("ace/mode/javascript");
+           EditorL.setShowPrintMargin(false);
+           EditorR.setShowPrintMargin(false);
+           EditorL.renderer.setShowGutter(false);
+           EditorR.renderer.setShowGutter(false);
+           EditorL.setHighlightActiveLine(false);
+           EditorR.setHighlightActiveLine(false);
          </script>
       <!--JS2COFFEE LIB-->
          <script src="SCRIPTS/LIB/js2coffee.js"></script>
