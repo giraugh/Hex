@@ -85,6 +85,11 @@ function trace(x,y,colour)
 	traceHex.colour = colour;
 }
 
+//Get if its my first turn
+function isFirstTurn() {
+  return turn == turnCount
+}
+
 //GET ELEMENT OFFSET
 function getOffset( el ) {
     var _x = 0;

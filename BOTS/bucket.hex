@@ -1,22 +1,25 @@
-@name Bucket
-@author Ewan_Breakey
-@version 1.0
-@desc
-Basically it uses a fill algorithim with spread
-weights and a check for finishing moves.
-@descend
-@script
-#EVENTS
+var properties = {
+	name: "Bucket",
+	author: "E Breakey",
+	description: `
+	Uses a fill algorithim with spread
+  weights and a check for finishing moves.`,
+	version: 1.0
+}
 
-update {
+function init (){
+
+}
+
+function main (){
 	//FIRST TURN IS CENTRE
-	if (turnCount == turn && empty(5,5))
+	if (isFirstTurn() && empty(5,5))
 	{
 		return hex(5,5);
 	}
 
 	//DEFINE EVALUATE FUNCTION
-	function evaluate(board,cboard)
+	function evaluate(board)
 	{
 		var score = 0;
 		for (var i=0;i<gridSize;i++)
@@ -35,7 +38,7 @@ update {
 		}
 
 		//IF WE DO THIS DO WE WIN?
-		if (game_update_connections_ext(board,cboard,false) == turn+1) //MAKING SURE TO UNAUTHORIZE SO WE DON'T END THE GAME!
+		if (will_win(board))
 		{
 			//THEN DO IT!
 			score += 1000;
@@ -65,9 +68,8 @@ update {
 	for (i=0;i<moves.length;i++)
 	{
 		var work = clone();
-		var cwork = clone3d();
-		work[moves[i].x][moves[i].y] = turn+1;
-		scores.push(evaluate(work,cwork));
+		perform_move(work, moves[i].x, moves[i].y)
+		scores.push(evaluate(work));
 	}
 
 
@@ -85,4 +87,3 @@ update {
 
 	return hex(moves[bestI].x,moves[bestI].y);
 }
-@scriptend

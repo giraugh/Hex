@@ -1,29 +1,34 @@
-@name clock-random
-@author Ewan_Breakey
-@version 1.0
-@desc
-This one starts off by randomly filling
-the top left then bottom right then top right
-and then bottom left. 
-@descend
-@script
-var x = Math.round(Math.random()*(gridSize-1)/2);
-var y = Math.round(Math.random()*(gridSize-1)/2);
-if (!(get(hex(x,y),"colour") == blank))
-{
-	var x = Math.round(clamp(Math.random(),0.5,1.0)*(gridSize-1));
-	var y = Math.round(clamp(Math.random(),0.5,1.0)*(gridSize-1));
-	if (!(get(hex(x,y),"colour") == blank))
-	{
-		var x = Math.round(clamp(Math.random(),0.5,1.0)*(gridSize-1));
-		var y = Math.round(Math.random()*(gridSize-1)/2);
-		if (!(get(hex(x,y),"colour") == blank))
-		{
-			var x = Math.round(Math.random()*(gridSize-1)/2);
-			var y = Math.round(clamp(Math.random(),0.5,1.0)*(gridSize-1));
-		}
-	}
+let properties = {
+	name: "Clock Random",
+	author: "E Breakey",
+	description: `
+	Fills the quartes randomly while
+	going in a circle. (almost never wins)`,
+	version: 1.0
 }
 
-return hex(x,y);
-@scriptend
+function init (){
+
+}
+
+function main (){
+	let x = round(Math.random()*(gridSize-1)/2);
+  let y = round(Math.random()*(gridSize-1)/2);
+  if (!empty(x, y))
+  {
+  	x = round(clamp(Math.random(),0.5,1.0)*(gridSize-1));
+  	y = round(clamp(Math.random(),0.5,1.0)*(gridSize-1));
+  	if (!empty(x, y))
+  	{
+  		x = round(clamp(Math.random(),0.5,1.0)*(gridSize-1));
+  		y = round(Math.random()*(gridSize-1)/2);
+  		if (!empty(x, y))
+  		{
+  			x = round(Math.random()*(gridSize-1)/2);
+  			y = round(clamp(Math.random(),0.5,1.0)*(gridSize-1));
+  		}
+  	}
+  }
+
+  return hex(x,y);
+}
