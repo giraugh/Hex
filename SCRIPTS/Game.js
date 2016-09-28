@@ -87,6 +87,9 @@ function set_coffee(which) {
 
 }
 
+/* INITS THAT ARENT RESET */
+gamePaused = false;
+
 
 /*GAME EVENTS*/
 function game_init(game){
@@ -398,14 +401,27 @@ function game_loop()
 	//IF SOMEONE HASN'T ALREADY WON
 	if (!gameStopped)
 	{
-		//IF NOT HOLDING THE PAUSE KEY, TAKE TURN
-		if (!getKey("p")){game_turns();}
-
-		//UPDATE HEX CONNECTIONS
-		game_update_connections();
+		if (!gamePaused)
+		game_step()
 	}
 	//RESTART GAME IF USER PRESSES R
 	if (getKeyPressed("r")){game_restart();}
+}
+
+function game_togglePause() {
+	gamePaused = !gamePaused
+	if (gamePaused)
+		dg("icon-pause").children[0].innerHTML = "play_arrow"
+	else
+		dg("icon-pause").children[0].innerHTML = "pause"
+}
+
+function game_step() {
+	//DO TURNS
+	game_turns();
+
+	//UPDATE HEX CONNECTIONS
+	game_update_connections();
 }
 
 function game_restart() {

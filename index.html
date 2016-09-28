@@ -6,6 +6,8 @@
       <title>HEX</title>
       <link rel="icon" href="IMAGES/Icon.png">
       <link rel="stylesheet" type="text/css" href="STYLE/generic.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"> <!--ICONS!-->
    </head>
 
    <body id="body" onload="engine_init();" style="background-color: black;">
@@ -51,9 +53,11 @@
                         restart game
                   </a>
             </a>
+            <br>
+            <a id="icon-pause" onclick="game_togglePause()"><i class="button material-icons">pause</i></a>
+            <a id="icon-step" onclick="game_step()"><i class="button material-icons">skip_next</i></a>
+            <a id="icon-restart" onclick="game_restart()"><i class="button material-icons">replay</i></a>
          </h2>
-
-
          <canvas id="canvas"></canvas>
 
 
