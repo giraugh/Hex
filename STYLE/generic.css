@@ -78,6 +78,11 @@ a.biglink:hover {
   -ms-user-select: none;
   user-select: none;
   font-size: 48px !important;
+  vertical-align: middle;
+}
+
+.inactive {
+  color: rgba(127, 127, 127, .1) !important;
 }
 
 .button:hover {
