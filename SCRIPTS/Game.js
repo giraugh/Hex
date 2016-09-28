@@ -89,6 +89,7 @@ function set_coffee(which) {
 
 /* INITS THAT ARENT RESET */
 gamePaused = false;
+autoRestart = false;
 
 
 /*GAME EVENTS*/
@@ -366,6 +367,7 @@ function game_update_connections()
 		//PLAYER 1 WON
 		log("RED WON!");
 		noteRed("Red Won!")
+		increaseWins(0)
 		col = red;
 	}
 	if (win == 2)
@@ -373,10 +375,14 @@ function game_update_connections()
 		//PLAYER 2 WON
 		log("BLUE WON!");
 		noteBlue("Blue Won!")
+		increaseWins(1)
 		col = blue;
 	}
 	if (win != 0){
 		setStyle(col);
+		if (autoRestart) {
+			game_restart()
+		}
 	}
 }
 
@@ -414,6 +420,14 @@ function game_togglePause() {
 		dg("icon-pause").children[0].innerHTML = "play_arrow"
 	else
 		dg("icon-pause").children[0].innerHTML = "pause"
+}
+
+function game_toggleAutoRes() {
+	autoRestart = !autoRestart
+	if (autoRestart)
+		dg("icon-autorestart").children[0].innerHTML = "autorenew"
+	else
+		dg("icon-autorestart").children[0].innerHTML = "redo"
 }
 
 function game_step() {

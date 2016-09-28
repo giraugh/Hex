@@ -57,6 +57,7 @@
             <a id="icon-pause" onclick="game_togglePause()"><i class="button material-icons">pause</i></a>
             <a id="icon-step" onclick="game_step()"><i class="button material-icons">skip_next</i></a>
             <a id="icon-restart" onclick="game_restart()"><i class="button material-icons">replay</i></a>
+            <!--<a id="icon-autorestart" onclick="game_toggleAutoRes()"><i class="button material-icons">redo</i></a>-->
          </h2>
          <canvas id="canvas"></canvas>
 
@@ -72,7 +73,7 @@
                   id="left-desc"
                   style="color: white;
                          font-family: 'Courier New', Georgia;
-                         margin-top: 0px;">
+                         margin-top: 0px;"><br>Loading...
                </p>
                <div id="left-editor" class="editor"></div>
                <br>
@@ -110,7 +111,7 @@
                   style="color: white;
                          font-family: 'Courier New',
                          Georgia;
-                         margin-top: 0px;">
+                         margin-top: 0px;"><br>Loading...
                </p>
                <div id="right-editor" class="editor"></div>
                <br>
@@ -138,6 +139,11 @@
          </div>
       </div>
    </body>
+   <div id="charts">
+     <div id="div-ch-wins" width="400px" height="400px" style="margin: 200px;margin-top: 400px;">
+       <canvas id="chart-wins"></canvas>
+     </div>
+   </div>
 
 
    <footer>
@@ -179,6 +185,9 @@
          </script>
       <!--JS2COFFEE LIB-->
          <script src="SCRIPTS/LIB/js2coffee.js"></script>
+     <!--Charting LIB-->
+        <script src="SCRIPTS/LIB/chart.js"></script>
+        <script src="SCRIPTS/Charts.js"></script>
       <!--FRAMEWORK-->
          <script type="text/javascript" src="SCRIPTS/Parser.js"></script>
          <script type="text/javascript" src="SCRIPTS/Extra.js"></script>
