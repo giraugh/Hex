@@ -425,9 +425,9 @@ function game_togglePause() {
 function game_toggleAutoRes() {
 	autoRestart = !autoRestart
 	if (autoRestart)
-		dg("icon-autorestart").children[0].innerHTML = "autorenew"
+		removeClass(dg("icon-autorestart").children[0], "inactive")
 	else
-		dg("icon-autorestart").children[0].innerHTML = "redo"
+		addClass(dg("icon-autorestart").children[0], "inactive")
 }
 
 function game_step() {

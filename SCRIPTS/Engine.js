@@ -152,6 +152,22 @@ function updateMouse() {
         }
     }
 
+//CSS CLASSESS
+function addClass(el, className) {
+  if (el.classList)
+    el.classList.add(className)
+  else if (!hasClass(el, className)) el.className += " " + className
+}
+
+function removeClass(el, className) {
+  if (el.classList)
+    el.classList.remove(className)
+  else if (hasClass(el, className)) {
+    var reg = new RegExp('(\\s|^)' + className + '(\\s|$)')
+    el.className=el.className.replace(reg, ' ')
+  }
+}
+
 //NOTIFICATIONS
 function noteRed(x) {
    alertify.success(x || "");
@@ -161,9 +177,11 @@ function noteBlue(x) {
    alertify.error(x || "");
 }
 
-function note(x, col) {
+function note(x, col, override) {
+    if (override == undefined)
+    override = true
     let notifier = document.getElementsByClassName("alertify-notifier")[0];
-    if (notifier != undefined) {
+    if (notifier != undefined && override) {
     for (i=0;i<notifier.children.length;i++) {
       if (notifier.children[i].innerHTML == x) {
         return null;
