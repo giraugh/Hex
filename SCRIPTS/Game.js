@@ -22,7 +22,7 @@ doLogReturns = false;
 
 /*SET UP BOXES*/
 defaultProgram =
-`var properties = {
+`let properties = {
 	name: "Player 1",
 	author: "Me",
 	description: "New Bot, its very cool.",
