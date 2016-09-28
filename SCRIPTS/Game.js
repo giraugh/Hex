@@ -366,6 +366,7 @@ function game_update_connections()
 		//PLAYER 1 WON
 		log("RED WON!");
 		noteRed("Red Won!")
+		increaseWins(0)
 		col = red;
 	}
 	if (win == 2)
@@ -373,6 +374,7 @@ function game_update_connections()
 		//PLAYER 2 WON
 		log("BLUE WON!");
 		noteBlue("Blue Won!")
+		increaseWins(1)
 		col = blue;
 	}
 	if (win != 0){
