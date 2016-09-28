@@ -16,10 +16,6 @@ function game_width(){return 1200;}
 function game_height(){return 760;}
 window.game_scale = 1;
 
-/*AI DEBUGGING*/
-traceHex = {x: -1,y: -1,colour: 'black'};
-doLogReturns = false;
-
 /*SET UP BOXES*/
 defaultProgram =
 `let properties = {
@@ -90,7 +86,9 @@ function set_coffee(which) {
 /* INITS THAT ARENT RESET */
 gamePaused = false;
 autoRestart = false;
-
+traceHex = {x: -1,y: -1,colour: 'black'};
+doLogReturns = false;
+traceReturns = false;
 
 /*GAME EVENTS*/
 function game_init(game){
@@ -260,6 +258,7 @@ function game_turns()
 
 		//LOG RETURN VALUE IF WE SHOULD
 		if (doLogReturns){log(turn+": "+hex);}
+		if (traceReturns){trace(hex[0], hex[1]);}
 
 		//GET RETURNED VALUES
 		var xx = hex[0];
@@ -428,6 +427,14 @@ function game_toggleAutoRes() {
 		removeClass(dg("icon-autorestart").children[0], "inactive")
 	else
 		addClass(dg("icon-autorestart").children[0], "inactive")
+}
+
+function game_toggleTraceRets() {
+	traceReturns = !traceReturns
+	if (traceReturns)
+		removeClass(dg("icon-trace").children[0], "inactive")
+	else
+		addClass(dg("icon-trace").children[0], "inactive")
 }
 
 function game_step() {
