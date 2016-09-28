@@ -89,6 +89,7 @@ function set_coffee(which) {
 
 /* INITS THAT ARENT RESET */
 gamePaused = false;
+autoRestart = false;
 
 
 /*GAME EVENTS*/
@@ -379,6 +380,9 @@ function game_update_connections()
 	}
 	if (win != 0){
 		setStyle(col);
+		if (autoRestart) {
+			game_restart()
+		}
 	}
 }
 
@@ -416,6 +420,14 @@ function game_togglePause() {
 		dg("icon-pause").children[0].innerHTML = "play_arrow"
 	else
 		dg("icon-pause").children[0].innerHTML = "pause"
+}
+
+function game_toggleAutoRes() {
+	autoRestart = !autoRestart
+	if (autoRestart)
+		dg("icon-autorestart").children[0].innerHTML = "autorenew"
+	else
+		dg("icon-autorestart").children[0].innerHTML = "redo"
 }
 
 function game_step() {
