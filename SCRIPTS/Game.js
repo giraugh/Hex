@@ -89,6 +89,8 @@ autoRestart = false;
 traceHex = {x: -1,y: -1,colour: 'black'};
 doLogReturns = false;
 traceReturns = false;
+showConnectionValues = false;
+saturateColours = false;
 
 /*GAME EVENTS*/
 function game_init(game){
@@ -100,8 +102,6 @@ function game_init(game){
 	gridOff = 2;
 
 	//DEBUG VALUES
-	showConnectionValues = false;
-	saturateColours = false;
 	customScriptLeft = true;
 	customScriptRight = true;
 
@@ -109,8 +109,8 @@ function game_init(game){
 	blank = '#3D3D3D';
 	red = '#E52D3D';
 	blue = '#655DE2';
-	redSat = '#FF0000';
-	blueSat = '#0000FF';
+	redSat = '#C20F20';
+	blueSat = '#463ED6';
 
 	//DYNAMIC
 	turn = 0;
@@ -340,7 +340,7 @@ function game_update_connections_ext(board,cboard,auth)
 										// SET VALUE!
 										cboard[x+i][y+j][e] = 1;
 
-										if (cboard[x+i][y+j][e == 0 ? 1 : 0] && !gameStopped)
+										if (cboard[x+i][y+j][+(!e)] && !gameStopped)
 										{
 											if(auth){if (board[x][y] != 0){gameStopped = true;log("STOPPED GAME W/ VAL: " + board[x][y]);}}
 											return board[x][y];
