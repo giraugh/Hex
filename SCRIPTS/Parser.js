@@ -58,7 +58,7 @@ else if (`+longVariable+` == "props")
 	return properties;`
 
 	lcode += callSelector;
-	rcode += callSelector.replace("vP1", "vP2");
+	rcode += callSelector.split("vP1").join("vP2");
 
 	if (mathsReg.test(lcode) || mathsReg.test(rcode)){
 		keys = Object.getOwnPropertyNames(Math);
