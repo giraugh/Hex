@@ -118,7 +118,7 @@ function getKey(x, raw) {
     }
 }
 
-function getKeyPressed(x) {
+function getKeyPressed(x, raw) {
   if (!doGetKeys())
     return false
   if (!(window.document.getElementById('left') == document.activeElement || window.document.getElementById('right') == document.activeElement)) {
