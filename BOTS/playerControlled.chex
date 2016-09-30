@@ -1,0 +1,37 @@
+#coffee
+properties =
+  name: 'Player Controlled'
+  author: 'E Breakey'
+  description: "
+    Use WASD to control, <br>
+    press E to select"
+  version: 1.0
+
+init = ->
+    #Selection Starting Position
+    @x = 5
+    @y = 5
+
+main = ->
+    #Get inputs
+    r = keyPressed 'd'
+    l = keyPressed 'a'
+    u = keyPressed 'w'
+    d = keyPressed 's'
+
+    #Calculate Movement (either -1, 0 or 1 on each axis)
+    h = r - l
+    v = d - u
+
+    #Apply Movement to Selection
+    @x += h
+    @y += v
+
+    #Trace Selection (so we can see it)
+    trace @x, @y, if turn then blueSat else redSat
+
+    #Returning
+    if keyPressed "e" or getKey InputCodes.enter, true
+        hex @x, @y
+    else
+        hex -1, -1
