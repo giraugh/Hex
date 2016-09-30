@@ -125,9 +125,9 @@ function colour(x,y) {
 
 //GETS WHETHER HEX IS EMPTY
 function empty(x,y) {
-   if (x < gridSize && y < gridSize)
+   if (x < gridSize && y < gridSize && x >= 0 && y >= 0)
 	  return grid[x][y] == 0;
-   console.warn("Empty: Outside bounds");
+   note("RUNTIME ERROR: call to empty out of bounds"+e)
    return false
 }
 
