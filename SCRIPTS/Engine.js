@@ -48,6 +48,29 @@ function show(x) {
 window.game = {};
 window.game.keys = new Array();
 
+/* KEY CONSTS */
+window.InputCodes = {
+   "space": 32,
+   "left": 37,
+   "up": 38,
+   "right": 39,
+   "down": 40,
+   "shift": 16,
+   "tab": 9,
+   "enter": 13,
+   "backspace": 8,
+   "tab": 9,
+   "tilde": 192,
+   "alt": 18,
+   "control": 17,
+   "delete": 46,
+   "home": 36,
+   "end": 35,
+   "comma": 188,
+   "period": 190,
+   "escape": 27
+}
+
 /*KEYBOARD CHECKING*/
 for (var i = 0; i < 300; i++) {
     window.game.keys[i] = false;
@@ -70,11 +93,27 @@ function doGetKeys() {
   return true
 }
 
-function getKey(x) {
+function key(x, raw) {
+  if (InputCodes[x] != undefined) {
+    x = InputCodes[x]
+    raw = true
+  }
+  return getKey(x, raw)
+}
+
+function keyPressed(x, raw) {
+  if (InputCodes[x] != undefined) {
+    x = InputCodes[x]
+    raw = true
+  }
+  return getKeyPressed(x, raw)
+}
+
+function getKey(x, raw) {
     if (!doGetKeys())
       return false
     if (!(window.document.getElementById('left') == document.activeElement || window.document.getElementById('right') == document.activeElement)) {
-        var c = x.charCodeAt(0);
+        var c = !raw ? x.charCodeAt(0) : x
         return window.game.keys[c] > 0;
     }
 }
@@ -83,7 +122,7 @@ function getKeyPressed(x) {
   if (!doGetKeys())
     return false
   if (!(window.document.getElementById('left') == document.activeElement || window.document.getElementById('right') == document.activeElement)) {
-      var c = x.charCodeAt(0);
+      var c = !raw ? x.charCodeAt(0) : x
       return window.game.keys[c] == 2 ? true : false;
     }
 }
