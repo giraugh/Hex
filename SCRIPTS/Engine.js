@@ -75,7 +75,7 @@ window.InputCodes = {
 for (var i = 0; i < 300; i++) {
     window.game.keys[i] = false;
 }
-document.onkeypress = function(e) {
+document.onkeydown = function(e) {
     e = e || window.event;
     var code = e.keyCode;
     if (window.game.keys[code] == 0) {
@@ -85,7 +85,7 @@ document.onkeypress = function(e) {
 
 document.onkeyup = function(e) {
     e = e || window.event;
-    var code = e.keyCode + 32;
+    var code = e.keyCode;
     window.game.keys[code] = 0;
 };
 
@@ -93,20 +93,22 @@ function doGetKeys() {
   return true
 }
 
-function key(x, raw) {
+function key(x) {
   if (InputCodes[x] != undefined) {
     x = InputCodes[x]
-    raw = true
+  } else {
+    x = x.charCodeAt(0) - 32
   }
-  return getKey(x, raw)
+  return getKey(x, true)
 }
 
 function keyPressed(x, raw) {
   if (InputCodes[x] != undefined) {
     x = InputCodes[x]
-    raw = true
+  } else {
+    x = x.charCodeAt(0) - 32
   }
-  return getKeyPressed(x, raw)
+  return getKeyPressed(x, true)
 }
 
 function getKey(x, raw) {

@@ -410,7 +410,7 @@ function game_loop()
 		game_step()
 	}
 	//RESTART GAME IF USER PRESSES R
-	if (getKeyPressed("r")){game_restart();}
+	if (keyPressed("r")){game_restart();}
 }
 
 function game_togglePause() {
