@@ -212,13 +212,13 @@ function game_turns()
 	validated = true;
 
 	//INIT (if we need to)
-	if (turnCount == 0) {
+	if (attemptCount == 0) {
 		try {player1_turn("init");}
 		catch (e) {note("RUNTIME ERROR: "+e)}
 		initialized1 = true;
 	}
 
-	if (turnCount == 1) {
+	if (attemptCount == 1) {
 		try {player2_turn("init");}
 		catch (e) {note("RUNTIME ERROR: "+e)}
 		initialized2 = true;
