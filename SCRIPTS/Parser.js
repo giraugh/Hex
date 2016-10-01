@@ -48,6 +48,32 @@ function load_scripts()
 		rcode = hexCoffee(rcode);
 	}
 
+	//Shadower
+	let shadower = `
+		var window,
+				document,
+				turns,
+				vP1,
+				vP2,
+				grid = clone(),
+				cgrid = clone3d(),
+				turn = turn,
+				turnCount = turnCount,
+				attemptCount = attemptCount,
+				blue = blue,
+				red = red,
+				blank = blank,
+				redSat = redSat,
+				blueSat = blueSat,
+				gameStopped = gameStopped,
+				props1 = props1,
+				props2 = props2,
+				gridSize = gridSize,
+				gridRes = gridRes,
+				gridPad = gridPad,
+				gridOff = gridOff
+	`
+
 	// Add JS call selector, interface for calling functions within the code
 	let callSelector = `
 if (` + longVariable + ` == "init")
@@ -58,7 +84,9 @@ else if (`+longVariable+` == "props")
 	return properties;`
 
 	lcode += callSelector;
+	lcode = shadower + lcode;
 	rcode += callSelector.split("vP1").join("vP2");
+	rcode = shadower + rcode;
 
 	if (mathsReg.test(lcode) || mathsReg.test(rcode)){
 		keys = Object.getOwnPropertyNames(Math);
@@ -67,10 +95,10 @@ else if (`+longVariable+` == "props")
 		}
 	}
 
-	try {player1_turne = Function(longVariable,lcode);}
+	try {player1_turne = Function(longVariable,lcode).bind({});}
 	catch (e) {note("COMPILER ERROR: "+e);lcode = ""}
 
-	try {player2_turne = Function(longVariable,rcode);}
+	try {player2_turne = Function(longVariable,rcode).bind({});}
 	catch (e) {note("COMPILER ERROR: "+e);rcode = ""}
 
 	try {player1_turne()}
@@ -79,6 +107,6 @@ else if (`+longVariable+` == "props")
 	try {player2_turne()}
 	catch(e){note("COMPILER ERROR: "+e);rcode = ""}
 
-	if (lcode != ""){window.player1_turn = Function(longVariable, lcode);}
-	if (rcode != ""){window.player2_turn = Function(longVariable, rcode);}
+	if (lcode != ""){window.player1_turn = Function(longVariable, lcode).bind({});}
+	if (rcode != ""){window.player2_turn = Function(longVariable, rcode).bind({});}
 }
