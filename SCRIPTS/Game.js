@@ -107,7 +107,7 @@ function set_coffee(which) {
 			editor.setValue(js2coffee.build(editor.getValue()).code, -1)
 
 			//fix tabs
-			editor.setValue(editor.getValue().replace(/  /g, "\t"))
+			editor.setValue(editor.getValue().replace(/  /g, "    "))
 
 			//undo the ensurint thing
 			editor.setValue(editor.getValue().replace(/let properties/g, "properties"))
