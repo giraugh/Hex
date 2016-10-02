@@ -90,6 +90,32 @@ function isFirstTurn() {
   return turn == turnCount
 }
 
+function list(filter) {
+  let list = []
+  for (let x = 0;x<gridSize;x++) {
+    for (let y = 0;y<gridSize;y++) {
+      //create hex object
+      let hex = {
+          x: x,
+          y: y,
+          value: grid[x][y]
+      }
+
+      //do we have a filter?
+      if (filter) {
+        //does it apply
+        if (filter(hex)) {
+          list.push(hex)
+        }
+      } else {
+        //just add it then
+        list.push(hex)
+      }
+    }
+  }
+  return list
+}
+
 //GET ELEMENT OFFSET
 function getOffset( el ) {
     var _x = 0;
