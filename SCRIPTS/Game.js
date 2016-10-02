@@ -91,8 +91,19 @@ function set_coffee(which) {
 		//set to coffee
 		editor.coffee = true
 		document.getElementById("coffee-"+which).innerHTML = "To Javascript"
-		if (js2coffee)
+		if (js2coffee) {
+			//ensure props stays at top
+			editor.setValue(editor.getValue().replace(/properties/g, "let properties"))
+
+			//convert to coffee
 			editor.setValue(js2coffee.build(editor.getValue()).code, -1)
+
+			//fix tabs
+			editor.setValue(editor.getValue().replace(/  /g, "\t"))
+
+			//undo the ensurint thing
+			editor.setValue(editor.getValue().replace(/let properties/g, "properties"))			
+		}
 		editor.setValue("#COFFEE\n"+editor.getValue(), -1);
 	} else {
 		//back to js
