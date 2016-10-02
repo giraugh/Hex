@@ -518,8 +518,13 @@ function game_draw_hexs(ctx)
 }
 
 function game_draw(ctx,game){
+	//are editors supposed to be in coffee mode?
+	update_coffee()
 
+	//main loop
 	game_loop();
+
+	//draw hexes
 	game_draw_hexs(ctx);
 
 	//DISPLAY END MESSAGE IF NECESSARY

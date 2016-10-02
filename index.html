@@ -190,20 +190,20 @@
            EditorR.renderer.setShowGutter(false);
            EditorL.setHighlightActiveLine(false);
            EditorR.setHighlightActiveLine(false);
-           EditorR.on('change', function() {
+           EditorR.$blockScrolling = Infinity
+           EditorL.$blockScrolling = Infinity
+           function update_coffee() {
+             if (/#coffee/i.test(EditorL.getValue())) {
+               EditorL.getSession().setMode("ace/mode/coffee")
+             } else {
+               EditorL.getSession().setMode("ace/mode/javascript")
+             }
              if (/#coffee/ig.test(EditorR.getValue())) {
                EditorR.getSession().setMode("ace/mode/coffee");
              } else {
                EditorR.getSession().setMode("ace/mode/javascript");
              }
-           });
-           EditorL.on('change', function() {
-             if (/#coffee/ig.test(EditorL.getValue())) {
-               EditorL.getSession().setMode("ace/mode/coffee");
-             } else {
-               EditorL.getSession().setMode("ace/mode/javascript");
-             }
-           });
+           }
          </script>
       <!--JS2COFFEE LIB-->
          <script src="SCRIPTS/LIB/js2coffee.js"></script>
