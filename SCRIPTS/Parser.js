@@ -4,7 +4,8 @@ function getContents() {
 		get_scripts("right")
 	]
 }
-var longVariable = "aNotSoLongNameThatNooneWillGuess";
+
+let callSelectorVarName = "callSelectionVar";
 function load_scripts()
 {
 	var lcode = getContents()[0];
@@ -50,43 +51,50 @@ function load_scripts()
 
 	//Shadower
 	let shadower = `
-		var window,
-				document,
-				turns,
-				vP1,
-				vP2,
-				grid = clone(),
-				cgrid = clone3d(),
-				turn = turn,
-				turnCount = turnCount,
-				attemptCount = attemptCount,
-				blue = blue,
-				red = red,
-				blank = blank,
-				redSat = redSat,
-				blueSat = blueSat,
-				gameStopped = gameStopped,
-				props1 = props1,
-				props2 = props2,
-				gridSize = gridSize,
-				gridRes = gridRes,
-				gridPad = gridPad,
-				gridOff = gridOff
-	`
+var window,
+	document,
+	turns,
+	vP1,
+	vP2,
+	grid = clone(),
+	cgrid = clone3d(),
+	turn = turn,
+	turnCount = turnCount,
+	attemptCount = attemptCount,
+	blue = blue,
+	red = red,
+	blank = blank,
+	redSat = redSat,
+	blueSat = blueSat,
+	gameStopped = gameStopped,
+	props1 = props1,
+	props2 = props2,
+	gridSize = gridSize,
+	gridRes = gridRes,
+	gridPad = gridPad,
+	gridOff = gridOff`
+
+	let defaults = `
+
+def_properties = {name: "", author: "",  description: "", version: 0}
+function init(){}
+function main(){return [-1, -1]}`
 
 	// Add JS call selector, interface for calling functions within the code
 	let callSelector = `
-if (` + longVariable + ` == "init")
+
+if (` + callSelectorVarName + ` == "init")
 	return init.bind(vP1)();
- else if (`+longVariable+` == "main")
+else if (`+callSelectorVarName+` == "main")
 	return main.bind(vP1)();
-else if (`+longVariable+` == "props")
-	return properties;`
+else if (`+callSelectorVarName+` == "props")
+	return properties || def_properties;
+`
 
 	lcode += callSelector;
-	lcode = shadower + lcode;
+	lcode = shadower + defaults + lcode;
 	rcode += callSelector.split("vP1").join("vP2");
-	rcode = shadower + rcode;
+	rcode = shadower + defaults + rcode;
 
 	if (mathsReg.test(lcode) || mathsReg.test(rcode)){
 		keys = Object.getOwnPropertyNames(Math);
@@ -95,10 +103,10 @@ else if (`+longVariable+` == "props")
 		}
 	}
 
-	try {player1_turne = Function(longVariable,lcode).bind({});}
+	try {player1_turne = Function(callSelectorVarName,lcode).bind({});}
 	catch (e) {note("COMPILER ERROR: "+e);lcode = ""}
 
-	try {player2_turne = Function(longVariable,rcode).bind({});}
+	try {player2_turne = Function(callSelectorVarName,rcode).bind({});}
 	catch (e) {note("COMPILER ERROR: "+e);rcode = ""}
 
 	try {player1_turne()}
@@ -107,6 +115,6 @@ else if (`+longVariable+` == "props")
 	try {player2_turne()}
 	catch(e){note("COMPILER ERROR: "+e);rcode = ""}
 
-	if (lcode != ""){window.player1_turn = Function(longVariable, lcode).bind({});}
-	if (rcode != ""){window.player2_turn = Function(longVariable, rcode).bind({});}
+	if (lcode != ""){window.player1_turn = Function(callSelectorVarName, lcode).bind({});}
+	if (rcode != ""){window.player2_turn = Function(callSelectorVarName, rcode).bind({});}
 }
