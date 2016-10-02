@@ -18,7 +18,7 @@ window.game_scale = 1;
 
 /*SET UP BOXES*/
 defaultProgram =
-`let properties = {
+`properties = {
 	name: "Player 1",
 	author: "Me",
 	description: "New Bot, its very cool.",

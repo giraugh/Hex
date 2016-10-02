@@ -76,7 +76,7 @@ var window,
 
 	let defaults = `
 
-def_properties = {name: "", author: "",  description: "", version: 0}
+let properties = {name: "", author: "",  description: "", version: 0}
 function init(){}
 function main(){return [-1, -1]}`
 
@@ -88,7 +88,7 @@ if (` + callSelectorVarName + ` == "init")
 else if (`+callSelectorVarName+` == "main")
 	return main.bind(vP1)();
 else if (`+callSelectorVarName+` == "props")
-	return properties || def_properties;
+	return properties;
 `
 
 	lcode += callSelector;
