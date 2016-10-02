@@ -38,15 +38,22 @@ function load_scripts()
 		lcode = lcode.replace(coffeeReg, "");
 
 		// Compile code
-		lcode = hexCoffee(lcode);
+		try {
+			lcode = hexCoffee(lcode);
+		} catch (e) {
+			note("COFFEE ERROR: "+e.message);lcode = ""
+		}
 	}
 
 	if (coffeeReg.test(rcode)) {
 		// Remove header
 		rcode = rcode.replace(coffeeReg, "");
 
-		// Compile code
-		rcode = hexCoffee(rcode);
+		try {
+			rcode = hexCoffee(rcode);
+		} catch (e) {
+			note("COFFEE ERROR: "+e.message);rcode = ""
+		}
 	}
 
 	//Shadower
