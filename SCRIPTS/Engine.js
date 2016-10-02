@@ -219,6 +219,7 @@ function noteBlue(x) {
 }
 
 function note(x, col, override) {
+    x = JSON.stringify(x)
     if (override == undefined)
     override = true
     let notifier = document.getElementsByClassName("alertify-notifier")[0];
