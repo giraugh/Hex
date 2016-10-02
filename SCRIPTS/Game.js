@@ -78,6 +78,16 @@ function get_scripts(which) {
 		return EditorL.getValue();
 }
 
+function update_gui_set_coffee(which, set) {
+	let editor;
+	if (which == "right")
+		editor = EditorR
+	else
+		editor = EditorL
+	editor.coffee = set
+	document.getElementById("coffee-"+which).innerHTML = editor.coffee ? "To Javascript" : "To Coffee"
+}
+
 function set_coffee(which) {
 	//which editor?
 	let editor;
@@ -88,9 +98,7 @@ function set_coffee(which) {
 
 	//is it coffee?
 	if (!editor.coffee) {
-		//set to coffee
-		editor.coffee = true
-		document.getElementById("coffee-"+which).innerHTML = "To Javascript"
+		//update_gui_set_coffee(which, true)
 		if (js2coffee) {
 			//ensure props stays at top
 			editor.setValue(editor.getValue().replace(/properties/g, "let properties"))
@@ -102,13 +110,12 @@ function set_coffee(which) {
 			editor.setValue(editor.getValue().replace(/  /g, "\t"))
 
 			//undo the ensurint thing
-			editor.setValue(editor.getValue().replace(/let properties/g, "properties"))			
+			editor.setValue(editor.getValue().replace(/let properties/g, "properties"))
 		}
 		editor.setValue("#COFFEE\n"+editor.getValue(), -1);
 	} else {
 		//back to js
-		editor.coffee = false
-		document.getElementById("coffee-"+which).innerHTML = "To Coffee"
+		//update_gui_set_coffee(which, false)
 		editor.setValue(editor.getValue().replace("#COFFEE\n",""), -1)
 		editor.setValue(hexCoffee(editor.getValue()), -1)
 	}

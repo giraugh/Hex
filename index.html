@@ -194,13 +194,17 @@
            EditorL.$blockScrolling = Infinity
            function update_coffee() {
              if (/#coffee/i.test(EditorL.getValue())) {
+               update_gui_set_coffee("left", true)
                EditorL.getSession().setMode("ace/mode/coffee")
              } else {
+               update_gui_set_coffee("left", false)
                EditorL.getSession().setMode("ace/mode/javascript")
              }
              if (/#coffee/ig.test(EditorR.getValue())) {
+               update_gui_set_coffee("right", true)
                EditorR.getSession().setMode("ace/mode/coffee");
              } else {
+               update_gui_set_coffee("right", true)
                EditorR.getSession().setMode("ace/mode/javascript");
              }
            }
