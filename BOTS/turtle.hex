@@ -1,4 +1,4 @@
-var properties = {
+properties = {
 	name: "Turtle",
 	author: "E Breakey",
 	description: `

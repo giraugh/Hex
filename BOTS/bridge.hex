@@ -1,12 +1,12 @@
-var properties = {
+properties = {
 	name: "Bridge",
 	author: "E Breakey",
 	description: `Draws a diagonal line then uses
-an 'eval' method to choose moves
-which give about 2-3 similiar
-neighbours & 0-2 enemy neighbours
-while also penalising for too many
-similiar neighbours`,
+	an 'eval' method to choose moves
+	which give about 2-3 similiar
+	neighbours & 0-2 enemy neighbours
+	while also penalising for too many
+	similiar neighbours`,
 	version: 1.0
 }
 

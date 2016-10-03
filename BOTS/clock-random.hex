@@ -1,4 +1,4 @@
-let properties = {
+properties = {
 	name: "Clock Random",
 	author: "E Breakey",
 	description: `
