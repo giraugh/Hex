@@ -117,7 +117,7 @@ function list(filter) {
   return list
 }
 
-function amountInColumn(x, val) {
+function amount_in_column(x, val) {
   let amount = 0
   for (let y = 0;y<gridSize;y++) {
     if (grid[x][y] == val)
@@ -127,7 +127,7 @@ function amountInColumn(x, val) {
   return amount
 }
 
-function amountInRow(y, val) {
+function amount_in_row(y, val) {
   let amount = 0
   for (let x = 0;x<gridSize;x++) {
     if (grid[x][y] == val)
@@ -253,11 +253,12 @@ function turn_player(turn) {
 
 
 //Return whether board will win
-//0 - no
-//1 - player 1
-//2 - player 2
 function will_win(board) {
    return game_update_connections_ext(board, clone3d(), false) == turn+1;
+}
+
+function turn_will_win(x, y) {
+  return will_win(perform_move(clone(), x, y))
 }
 
 function get_future(board) {
