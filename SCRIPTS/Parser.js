@@ -76,10 +76,10 @@ var window,
 	gameStopped = gameStopped,
 	props1 = props1,
 	props2 = props2,
-	gridSize = gridSize,
-	gridRes = gridRes,
-	gridPad = gridPad,
-	gridOff = gridOff`
+	gridSize = 11,
+	gridRes = 64,
+	gridPad = 10,
+	gridOff = 2`
 
 	let defaults = `
 
