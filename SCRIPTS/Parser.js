@@ -58,28 +58,27 @@ function load_scripts()
 
 	//Shadower
 	let shadower = `
-var window,
-	document,
+var document,
 	turns,
 	vP1,
 	vP2,
 	grid = clone(),
 	cgrid = clone3d(),
-	turn = turn,
-	turnCount = turnCount,
-	attemptCount = attemptCount,
-	blue = blue,
-	red = red,
-	blank = blank,
-	redSat = redSat,
-	blueSat = blueSat,
-	gameStopped = gameStopped,
-	props1 = props1,
-	props2 = props2,
-	gridSize = 11,
-	gridRes = 64,
-	gridPad = 10,
-	gridOff = 2`
+	turn = window.turn,
+	turnCount = window.turnCount,
+	attemptCount = window.attemptCount,
+	blue = window.blue,
+	red = window.red,
+	blank = window.blank,
+	redSat = window.redSat,
+	blueSat = window.blueSat,
+	gameStopped = window.gameStopped,
+	props1 = window.props1,
+	props2 = window.props2,
+	gridSize = window.gridSize,
+	gridRes = window.gridRes,
+	gridPad = window.gridPad,
+	gridOff = window.gridOff`
 
 	let defaults = `
 
