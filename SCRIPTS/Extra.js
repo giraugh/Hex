@@ -116,6 +116,26 @@ function list(filter) {
   return list
 }
 
+function amountInColumn(x, val) {
+  let amount = 0
+  for (let y = 0;y<gridSize;y++) {
+    if (grid[x][y] == val)
+      amount++
+  }
+
+  return amount
+}
+
+function amountInRow(y, val) {
+  let amount = 0
+  for (let x = 0;x<gridSize;x++) {
+    if (grid[x][y] == val)
+      amount++
+  }
+
+  return amount
+}
+
 //GET ELEMENT OFFSET
 function getOffset( el ) {
     var _x = 0;
