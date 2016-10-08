@@ -83,6 +83,7 @@ function trace(x,y,colour)
 	traceHex.x = x;
 	traceHex.y = y;
 	traceHex.colour = colour;
+  return traceHex.colour
 }
 
 //Get if its my first turn
@@ -265,6 +266,7 @@ function get_future(board) {
 
 function perform_move(board, x, y) {
    board[x][y] = turn+1;
+   return board
 }
 
 function neighbours_ext(x1,y1,colour,board)
