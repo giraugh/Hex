@@ -41,7 +41,7 @@
 			"Which hex do you want to take?"<br>
 			<br>
 			and you specify an X value<br>
-			and Y value of the hex you want<br>
+			and a Y value of the hex you want<br>
 			to take, like this:<br>
 			<br>
 			<code>return hex(X,Y);</code><br>
@@ -82,17 +82,17 @@ function main (){ <br>
 } <br>
 			</code><br>
 			<br>
-			The code has 3 parts, at the top. You can define the AI's "properties"<br>
+			The code has 3 parts, at the top you can define the AI's "properties"<br>
 			like name, author, version and description, which are shown when the bot is used.<br>
 			This is a standard JS object.
 			<br>
-			The init function can also be defined which is the code that is run at the start of the game, <br>
-			before the ai starts playing. This is useful for writing code that initializes values that you <br>
+			The init function is also defined which is the code that is run at the start of the game <br>
+			before the ai starts playing. This is useful for writing code that initializes variables that you <br>
 			would like to use later. <br>
 			<br>
-			Finally, there is the main function, this function is called every time it is the AI's turn <br>
+			Finally, there is the main function which is called every time it is the AI's turn. <br>
 			<br>
-			The main function needs to returns a hex. As shown above, this can be done with <code>return hex(x,y);</code><br>
+			The main function needs to returns a hex. As shown above, this is done with <code>return hex(x,y);</code><br>
 			where <code>x</code> and <code>y</code> are the coordinates of the selected hex.<br>
 			<br>
 			In hex, you play on an 11x11 board. The coordinates go from (0,0) in the top left to <br>
@@ -101,13 +101,13 @@ function main (){ <br>
 			The code here defines two variables, <code>x</code> and <code>y</code>.<br>
 			It defines them to be the result of the function <code>rndg()</code> which returns<br>
 			a random number from zero to the grid size minus one, that is, a random number from 0 to 10.<br>
-			The code then returns the chosen hex, and that piece is taken and it is then the other player's turn<br>
+			The code then returns the chosen hex, that piece is taken and then it is the other player's turn<br>
 			<br>
 			<h1>BOT VARIABLE OBJECTS</h1>
-			Use a <code>~</code> before variables in your script to make them available
-			later<br>but not to the other player. For example <code>~x = 1</code> sets the
-			bots <code>x</code> variable to <code>1</code><br>and if you wanted to display
-			it in the console you could do <code>console.log(~x)</code>.
+			When the bot code is run, it is bound to a play object. For this reason you can use <code>this.</code> before variables
+			in order to use them later. For instance <code>this.a = 1</code> stores an <code>a</code> variable on the player object.
+			variables that you want to use again when the code is rerun must be placed on a player object. <i>note: in Coffeescript
+			you can use <code>@</code> as an alias for <code>this.</code>, i.e <code>@a = 1</code></i>.
 			<h1>HASH PARAMS</h1>
 			In hex you write your code in Javascript, but you can also write it<br>
 			in <a href="http://Coffeescript.org">CoffeeScript</a>. In order to do this,<br>
@@ -116,7 +116,6 @@ function main (){ <br>
 			<ul>
 				<li><strong><code>#COFFEE or #COFFEESCRIPT</code></strong><br>Compile code as coffeescript.<br>
 					Note that the structures such as props and event definitions are also compiled.</li>
-				<li><strong><code>#MOCHA or #MOCHASCRIPT</code></strong><br>Compile code as mochascript. not recommended.</li>
 				<li><strong><code>#LATTE or #TIPPYTOE</code></strong><br>Pre-compile code as pythonic coffeescript (or lattescript or tipPYToe).</li>
 				<li><strong><code>#MATHS</code></strong><br>Releases maths objects to global namespace i.e use <code>round(x)</code> instead of <code>Math.round(x)</code>.</li>
 			</ul>
