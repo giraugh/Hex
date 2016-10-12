@@ -174,7 +174,7 @@ function colour(x,y) {
 function empty(x,y) {
    if (x < gridSize && y < gridSize && x >= 0 && y >= 0)
 	  return grid[x][y] == 0;
-   note("RUNTIME ERROR: call to empty out of bounds"+e)
+   note("RUNTIME ERROR: call to empty out of bounds: "+x+", "+y)
    return false
 }
 
