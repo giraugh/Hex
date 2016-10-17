@@ -343,7 +343,7 @@ function isEdgeConnectedExt(x, y, edge, cboard)
 {
   if (edge == "left" || edge == "top"){edge = 0;}
 	if (edge == "right" || edge == "bottom"){edge = 1;}
-	return cboard[x][y][edge];
+	return cboard[x][y][edge] == 1;
 }
 
 function isEdgeConnected(x, y, edge)
