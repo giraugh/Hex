@@ -332,7 +332,7 @@ function game_turns()
 	attemptCount++;
 }
 
-function game_update_connections_ext(board,cboard,auth)
+function game_update_connections_ext(board, cboard, auth)
 {
 	//MAKE SURE EDGES ARE SET
 	for (var x=0;x<gridSize;x++)

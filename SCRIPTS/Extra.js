@@ -261,6 +261,14 @@ function turn_will_win(x, y) {
   return will_win(perform_move(clone(), x, y))
 }
 
+function turn_will_edge(x, y, edge) {
+  let board = clone(), cboard = clone3d()
+  updateCBoard(board, cboard)
+  perform_move(board, x, y)
+  updateCBoard(board, cboard)
+  return isEdgeConnectedExt(x, y, edge, cboard)
+}
+
 function get_future(board) {
    return game_update_connections_ext(board, clone3d(), false);
 }
@@ -268,6 +276,11 @@ function get_future(board) {
 function perform_move(board, x, y) {
    board[x][y] = turn+1;
    return board
+}
+
+function updateCBoard(board, cboard) {
+   game_update_connections_ext(board, cboard, false)
+   return cboard
 }
 
 function neighbours_ext(x1,y1,colour,board)
@@ -326,11 +339,16 @@ function connected(x1,y1,x2,y2)
 }
 
 //RETURNS WHETHER A HEX IS CONNECTED TO A CERTAIN EDGE INDIRECTLY
-function isEdgeConnected(x,y,edge)
+function isEdgeConnectedExt(x, y, edge, cboard)
 {
-	if (edge == "left" || edge == "top"){edge = 0;}
+  if (edge == "left" || edge == "top"){edge = 0;}
 	if (edge == "right" || edge == "bottom"){edge = 1;}
-	return cgrid[x][y][edge];
+	return cboard[x][y][edge];
+}
+
+function isEdgeConnected(x, y, edge)
+{
+	return isEdgeConnectedExt(x, y, edge, cgrid)
 }
 
 //notify functions
