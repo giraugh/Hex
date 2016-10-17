@@ -155,12 +155,12 @@ function main (){ <br>
 				<li><strong><code>amount_in_row(y, value)</code></strong><br>Returns amount of hex's in a row with a certain value.</li>
 				<li><strong><code>amount_in_column(x, value)</code></strong><br>Returns amount of hex's in a column with a certain value.</li>
 				<li><strong><code>connected(x1, y1, x2, y2)</code></strong><br>Returns whether given hex's are neighbours.</li>
-				<li><strong><code>isEdgeConnected(x, y, edge)</code></strong><br>Returns whether given hex is indirectly connected to the given edge.</li>
 				<li><strong><code>list(func(hex))</code></strong><br>Returns a list of all hex's which meet the criteria defined by the <code>func</code></li>
 				<li><strong><code>clone()</code></strong><br>Returns a copy of the game grid.</li>
 				<li><strong><code>clone3d()</code></strong><br>Returns a copy of the games connections grid. You shouldn't have to do this.</li>
 				<li><strong><code>will_win(cloned_board)</code></strong><br>Returns whether this board is in a winning state for the current player.</li>
 				<li><strong><code>turn_will_win(x, y)</code></strong><br>Returns whether performing a move would win.</li>
+				<li><strong><code>turn_will_edge(x, y, edge)</code></strong><br>Returns whether performing a move would connect hex to certain edge.</li>
 				<li><strong><code>get_future(cloned_board)</code></strong><br>Returns the game state at the end of the turn. 0 = Continue, 1 = Player 1 will win, 2 = Player 2 will win</li>
 				<li><strong><code>perform_move(cloned_board, x, y)</code></strong><br>Performs a move on a cloned board.</li>
 				<li><strong><code>get_turn(count)</code></strong><br>Returns turn performed on <code>count</code> move. Negatives return previous turns i.e <code>get_turn(-1)</code> returns last move.</li>
