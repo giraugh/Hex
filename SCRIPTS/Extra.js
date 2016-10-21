@@ -191,6 +191,10 @@ function skip(verbose) {
 	return ret;
 }
 
+function emptyCboard() {
+	return create3dArray(gridSize)	
+}
+
 //GET COPY OF GRID
 function clone()
 {
@@ -262,7 +266,18 @@ function turn_will_win(x, y) {
 }
 
 function turn_will_edge(x, y, edge) {
-  let board = clone(), cboard = clone3d()
+ return turn_will_edge_ext(x, y, edge, clone(), clone3d())
+}
+
+function turn_will_edge_ext_h(x, y, edge, board) {
+	let cboard = emptyCBoard()
+	for (let i = 50;i--;) {
+		updateCBoard(board, cboard)
+	}
+	return turn_will_edge(x, y, edge, board, cboard)
+}
+
+function turn_will_edge_ext(x, y, edge, board, cboard) {
   updateCBoard(board, cboard)
   perform_move(board, x, y)
   updateCBoard(board, cboard)
