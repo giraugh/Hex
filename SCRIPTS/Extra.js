@@ -270,7 +270,7 @@ function turn_will_edge(x, y, edge) {
 }
 
 function turn_will_edge_ext_h(x, y, edge, board) {
-	let cboard = emptyCBoard()
+	let cboard = emptyCboard()
 	for (let i = 50;i--;) {
 		updateCBoard(board, cboard)
 	}
