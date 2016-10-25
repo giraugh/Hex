@@ -60,8 +60,6 @@ function load_scripts()
 	let shadower = `
 var document,
 	turns,
-	vP1,
-	vP2,
 	grid = clone(),
 	cgrid = clone3d(),
 	turn = window.turn,
@@ -84,7 +82,8 @@ var document,
 
 let properties = {name: "", author: "",  description: "", version: 0}
 function init(){}
-function main(){return [-1, -1]}`
+function main(){return [-1, -1]}
+`
 
 	// Add JS call selector, interface for calling functions within the code
 	let callSelector = `
@@ -101,6 +100,8 @@ else if (`+callSelectorVarName+` == "props")
 	lcode = shadower + defaults + lcode;
 	rcode += callSelector.split("vP1").join("vP2");
 	rcode = shadower + defaults + rcode;
+
+	console.log(lcode)
 
 	if (mathsReg.test(lcode) || mathsReg.test(rcode)){
 		keys = Object.getOwnPropertyNames(Math);
