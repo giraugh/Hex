@@ -262,6 +262,11 @@ function turn_player(turn) {
    return turn.player;
 }
 
+//perform turn object on board
+function turn_perform(turn, board) {
+  perform_move(board, turn.x, turn.y, turn.player)
+}
+
 
 
 //Return whether board will win
