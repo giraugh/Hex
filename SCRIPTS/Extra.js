@@ -166,12 +166,12 @@ function get(hex,what)
 
 //GETS HEX'S VALUE
 function value(x,y) {
-	return hex(x,y)[3];
+	return grid[x][y];
 }
 
 //GETS HEX'S COLOUR
 function colour(x,y) {
-	return hex(x,y)[3] == 0 ? blank : hex(x,y)[3] == 1 ? red : blue;
+	return grid[x][y] == 0 ? blank : grid[x][y] == 1 ? red : blue;
 }
 
 //GETS WHETHER HEX IS EMPTY
@@ -193,6 +193,10 @@ function skip(verbose) {
 		ret[3] = grid[0][0];
 	}
 	return ret;
+}
+
+function emptyBoard() {
+  return create2dArray(gridSize)
 }
 
 function emptyCboard() {
