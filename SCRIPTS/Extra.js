@@ -236,7 +236,7 @@ function clone3d()
 //Get info about turns
 function get_turn(x) {
    if (x < 0)
-      x = turns.length-x;
+      x = turns.length+x;
    return turns[x];
 }
 
