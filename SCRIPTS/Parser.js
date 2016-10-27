@@ -101,8 +101,6 @@ else if (`+callSelectorVarName+` == "props")
 	rcode += callSelector.split("vP1").join("vP2");
 	rcode = shadower + defaults + rcode;
 
-	console.log(lcode)
-
 	if (mathsReg.test(lcode) || mathsReg.test(rcode)){
 		keys = Object.getOwnPropertyNames(Math);
 		for (let i = 0;i<keys.length;i++) {
