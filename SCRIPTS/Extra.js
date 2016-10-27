@@ -92,6 +92,10 @@ function isFirstTurn() {
 }
 
 function list(filter) {
+  return list_ext(grid, filter)
+}
+
+function list_ext(board, filter) {
   let list = []
   for (let x = 0;x<gridSize;x++) {
     for (let y = 0;y<gridSize;y++) {
@@ -99,7 +103,7 @@ function list(filter) {
       let hex = {
           x: x,
           y: y,
-          value: grid[x][y]
+          value: board[x][y]
       }
 
       //do we have a filter?
@@ -192,7 +196,7 @@ function skip(verbose) {
 }
 
 function emptyCboard() {
-	return create3dArray(gridSize)	
+	return create3dArray(gridSize)
 }
 
 //GET COPY OF GRID
