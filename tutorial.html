@@ -156,19 +156,23 @@ function main (){ <br>
 				<li><strong><code>amount_in_column(x, value)</code></strong><br>Returns amount of hex's in a column with a certain value.</li>
 				<li><strong><code>connected(x1, y1, x2, y2)</code></strong><br>Returns whether given hex's are neighbours.</li>
 				<li><strong><code>list(func(hex))</code></strong><br>Returns a list of all hex's which meet the criteria defined by the <code>func</code></li>
+				<li><strong><code>list_ext(board, func(hex))</code></strong><br>Returns a list of all hex's which meet the criteria defined by the <code>func</code> on the supplied board</li>
 				<li><strong><code>clone()</code></strong><br>Returns a copy of the game grid.</li>
 				<li><strong><code>clone3d()</code></strong><br>Returns a copy of the games connections grid. You shouldn't have to do this.</li>
 				<li><strong><code>will_win(cloned_board)</code></strong><br>Returns whether this board is in a winning state for the current player.</li>
 				<li><strong><code>turn_will_win(x, y)</code></strong><br>Returns whether performing a move would win.</li>
 				<li><strong><code>turn_will_edge(x, y, edge)</code></strong><br>Returns whether performing a move would connect hex to certain edge.</li>
 				<li><strong><code>get_future(cloned_board)</code></strong><br>Returns the game state at the end of the turn. 0 = Continue, 1 = Player 1 will win, 2 = Player 2 will win</li>
-				<li><strong><code>perform_move(cloned_board, x, y)</code></strong><br>Performs a move on a cloned board.</li>
+				<li><strong><code>perform_move(cloned_board, x, y, player?)</code></strong><br>Performs a move on a cloned board.</li>
 				<li><strong><code>get_turn(count)</code></strong><br>Returns turn performed on <code>count</code> move. Negatives return previous turns i.e <code>get_turn(-1)</code> returns last move.</li>
 				<li><strong><code>last_turn()</code></strong><br>Returns previous turn.</li>
 				<li><strong><code>turn_position(turn object)</code></strong><br>Returns position that given turn captured. i.e <code>turn_position(get_turn(-1))</code> returns the position of the last turn.</li>
 				<li><strong><code>turn_position_x(turn object)</code></strong><br>Returns x value of position that given turn captured.</li>
 				<li><strong><code>turn_position_y(turn object)</code></strong><br>Returns y value of position that given turn captured.</li>
 				<li><strong><code>turn_player(turn object)</code></strong><br>Returns which player performed set move. i.e <code>turn_player(get_turn(0))</code> returns which player had the first move (always red)</li>
+				<li><strong><code>turn_perform(cloned_board, turn object)</code></strong><br>Performs a turn on an external board.</li>
+				<li><strong><code>emptyBoard()</code></strong><br>Returns a new empty board.</li>
+				<li><strong><code>emptyCBoard()</code></strong><br>Returns a new empty connections board.</li>
 			</ul>
 		</p>
 	</body>
