@@ -296,8 +296,8 @@ function get_future(board) {
    return game_update_connections_ext(board, clone3d(), false);
 }
 
-function perform_move(board, x, y) {
-   board[x][y] = turn+1;
+function perform_move(board, x, y, player) {
+   board[x][y] = (player||turn)+1;
    return board
 }
 
