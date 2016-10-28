@@ -65,7 +65,9 @@
             <a id="icon-step" onclick="game_step()"><i class="button material-icons">skip_next</i></a>
             <a id="icon-restart" onclick="game_restart()"><i class="button material-icons">replay</i></a>
             <a id="icon-autorestart" onclick="game_toggleAutoRes();note('Auto Restart Toggled', null, false)"><i class="button material-icons inactive">autorenew</i></a>
-            <a id="icon-trace" onclick="game_toggleTraceRets();note('Return Tracing Toggled', null, false)"><i class="button material-icons inactive">create</i></a>
+            <a id="icon-link" onclick="copy_url(0);note('Copied red bot url to clipboard')">Red <i class="button material-icons">link</i></a>
+            &nbsp;
+            <a id="icon-link" onclick="copy_url(1);note('Copied blue bot url to clipboard')">Blue <i class="button material-icons">link</i></a>
          </h2>
          <canvas id="canvas"></canvas>
 

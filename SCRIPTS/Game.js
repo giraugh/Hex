@@ -58,7 +58,15 @@ if (window.location.href.includes("?")) {
 		loc = window.location.href.match(/([^?]*)/g)[0]
 		code = get_scripts(which)
 		code = URIencode(code)
-		prompt('',loc + "?bot" + (which+1) + "=" + code)
+		return loc + "?bot" + (which+1) + "=" + code
+	}
+
+	function show_url(which) {
+		prompt("", get_url(which))
+	}
+
+	function copy_url(which) {
+		return copyTextToClipboard(get_url(which))
 	}
 
 	function set_scripts(which, what) {
