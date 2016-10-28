@@ -240,3 +240,12 @@ function note(x, col, override) {
    }
    alertify.warning(x || "");
 }
+
+//URI Stuff
+function URIencode(x) {
+	return encodeURIComponent(x).replace(/'/g,"%27").replace(/"/g,"%22");
+}
+
+function URIdecode(x) {
+	return decodeURIComponent(x.replace(/\+/g,  " "));
+}

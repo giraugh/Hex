@@ -43,25 +43,22 @@ if (document.getElementById("right-editor"))
 
 //Does the url have any data in it?
 if (window.location.href.includes("?")) {
-	botData = /bot(1|2)=%22([\s\S]*)%22/
+	botData = /bot(1|2)=([\s\S]*)/
 	//%22 is the char code for "
 	if (botData.test(window.location.href)) {
 		match = window.location.href.match(botData)
 		which = match[1]-1
-		code = match[2].split("%20").join(" ").split("BR").join("\n").split("%22").join("	").split("QUOTE").join("\"")
-		console.log("bot data found:\n"+code)
+		code = URIdecode(match[2])
 		set_scripts(which, code)
 	}
 }
 
 
 	function get_url(which) {
+		loc = window.location.href.match(/([^?]*)/g)[0]
 		code = get_scripts(which)
-		code = code.split("\"").join("QUOTE")
-		code = code.split("\n").join("BR")
-		code = code.split("\t").join("%22")
-		code = code.split(" ").join("%20")
-		prompt('',window.location.href + "?bot" + (which+1) + "=\"" + code + "\"")
+		code = URIencode(code)
+		prompt('',loc + "?bot" + (which+1) + "=" + code)
 	}
 
 	function set_scripts(which, what) {
