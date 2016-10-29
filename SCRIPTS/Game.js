@@ -258,13 +258,19 @@ function game_turns()
 	//INIT (if we need to)
 	if (attemptCount == 0) {
 		try {player1_turn("init");}
-		catch (e) {note("RUNTIME ERROR: "+e)}
+		catch (e) {
+			let ma = (/([a-zA-Z._$]+) \(<anonymous>:([0-9]+):([0-9]+)\)/g).exec(e.stack)
+			note("RUNTIME ERROR " + e + " @" + String(ma[1]).replace("Object.init", "Init") + ":" + String(ma[2]-26) + ":" + String(ma[3]))
+		}
 		initialized1 = true;
 	}
 
 	if (attemptCount == 1) {
 		try {player2_turn("init");}
-		catch (e) {note("RUNTIME ERROR: "+e)}
+		catch (e) {
+			let ma = (/([a-zA-Z._$]+) \(<anonymous>:([0-9]+):([0-9]+)\)/g).exec(e.stack)
+			note("RUNTIME ERROR " + e + " @" + String(ma[1]).replace("Object.init", "Init") + ":" + String(ma[2]-26) + ":" + String(ma[3]))
+		}
 		initialized2 = true;
 	}
 
@@ -277,7 +283,8 @@ function game_turns()
 			try {
 				return player1_turn("main");
 			} catch(e) {
-				note("RUNTIME ERROR: "+e);
+				let ma = (/([a-zA-Z._$]+) \(<anonymous>:([0-9]+):([0-9]+)\)/g).exec(e.stack)
+				note("RUNTIME ERROR " + e + " @" + String(ma[1]).replace("Object.main","Main") + ":" + String(ma[2]-26) + ":" + String(ma[3]))
 			}
 		}
 		hex= hf();
@@ -285,7 +292,15 @@ function game_turns()
 
 	if (turn == 1)
 	{
-		hex = player2_turn("main");
+		hf = ()=>{
+			try {
+				return player2_turn("main");
+			} catch(e) {
+				let ma = (/([a-zA-Z._$]+) \(<anonymous>:([0-9]+):([0-9]+)\)/g).exec(e.stack)
+				note("RUNTIME ERROR " + e + " @" + String(ma[1]).replace("Object.main","Main") + ":" + String(ma[2]-26) + ":" + String(ma[3]))
+			}
+		}
+		hex= hf();
 	}
 
 	//UNVALIDATE
