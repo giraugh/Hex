@@ -1,0 +1,199 @@
+properties = {
+	name: "Light",
+	author: "Sam Nolan",
+	description: "Aims for speed and board dominance, implements a<br> working and defensive bridge. Resembles lightning in it's<br> aproach, and winning times",
+	version: 1.2
+}
+
+var bridges = [
+	[[1, -1], [1, 0]],
+	[[0, -1], [1, -1]],
+	[[1, 0], [0, 1]],
+	[[-1, 0], [0, -1]],
+	[[0, 1], [-1, 1]],
+	[[-1, 1], [-1, 0]]
+];
+
+function init (){
+	
+	Array.prototype.equals = function (array) {
+    // if the other array is a falsy value, return
+    if (!array)
+        return false;
+
+    // compare lengths - can save a lot of time 
+    if (this.length != array.length)
+        return false;
+
+    for (var i = 0, l=this.length; i < l; i++) {
+        // Check if we have nested arrays
+        if (this[i] instanceof Array && array[i] instanceof Array) {
+            // recurse into the nested arrays
+            if (!this[i].equals(array[i]))
+                return false;       
+        }           
+        else if (this[i] != array[i]) { 
+            // Warning - two different object instances will never be equal: {x:20} != {x:20}
+            return false;   
+        }           
+    }       
+    return true;
+	}
+	// Hide method from for-in loops
+	Object.defineProperty(Array.prototype, "equals", {enumerable: false});
+	
+	~watchList = [];
+	~tileChain = [];
+	~winMode = false;
+}
+
+function getHead(){
+	return ~tileChain[~tileChain.length - 1];
+}
+
+function outOfBounds(position){
+	return position[0] > 10 || position[0] < 0 || position[1] > 10 || position[1] < 0;
+}
+
+function add(x, y){
+	return [x[0] +y[0], x[1]+ y[1]]
+}
+
+function sub(x, y){
+	return [x[0] - y[0], x[1] - y[1]]
+}
+
+function isEmpty(pos){
+	return (turn == PLAYER1) ? empty(pos[0], pos[1]) : empty(pos[1], pos[0])
+}
+
+function watch(pair){
+	for(let i = 0; i <~watchList.length; i++){
+		if(~watchList[i] == pair) return;
+	}
+	~watchList.push(pair)
+}
+
+function place(position){
+	// Can we bridge to the edge?
+	if(position[0] == 9){
+		let bridgeStep1 = add(position, [1, -1])
+		let bridgeStep2 = add(position,[1, 0])
+		// We have made it all the way across!
+		if(isEmpty(bridgeStep1) && isEmpty(bridgeStep2)){
+			say("Light has won")
+			watch([bridgeStep1, bridgeStep2])
+			~winMode = true
+		}
+	}
+	
+	if(position[0] == 10){
+		say("Light has won")
+		~winMode = true
+	}
+	return (turn == PLAYER1) ? hex(position[0], position[1]) : hex(position[1], position[0])
+}
+
+function getBridge(head){
+	// Check for any easy bridges
+	for(let i = 0; i < bridges.length; i++){
+		let fullBridge = add(bridges[i][0], bridges[i][1])
+		
+		// First make sure that I am not bridging out of the board
+		if(outOfBounds(add(head, fullBridge))) continue;
+		
+		// If does not advance
+		if(fullBridge[0] < 0 ) continue;
+		
+		// Check if I am obstructured before checking bridge
+		let bridgeStep1 = add(head, bridges[i][0]);
+		if(!isEmpty(bridgeStep1)){
+			continue;
+		}
+		
+		let bridgeStep2 = add(head, bridges[i][1])
+		if(!isEmpty(bridgeStep2)){
+			continue;
+		}
+		
+		// Finally, check if the bridge is taken
+		if(!isEmpty(add(head, fullBridge))){
+			continue;
+		}
+		
+		// If we got here, then we should take this and bridge!
+		watch([bridgeStep1, bridgeStep2])
+		
+		return add(head, fullBridge)
+	}
+	return [];
+}
+
+function main (){
+	
+
+	
+	// Check for any attempts to burst through my bridge, enforce my wall
+	for(var i = 0; i<~watchList.length; i++){
+		let watchPair = ~watchList[i]
+		if(!isEmpty(watchPair[0])){
+			~watchList.splice(i, 1);
+			return place(watchPair[1])
+		}
+		if(!isEmpty(watchPair[1])){
+			~watchList.splice(i, 1);
+			return place(watchPair[0])
+		}
+	}
+	
+	// Check if we have already won and need to fill in bridges
+	if(~winMode){
+		let bridge = ~watchList.pop();
+		return (turn == PLAYER1) ? hex(bridge[0][0], bridge[0][1]) :hex(bridge[0][1], bridge[0][0])
+	}
+	
+	// Make bridges
+	while(~tileChain.length > 0){
+		// Most of the time, we get this first shot
+		let bridge = getBridge(getHead());
+		if(bridge.length > 0){ 
+			~tileChain.push(bridge)
+			return place(bridge);
+		}
+		
+		// no possible bridges, the head is covered, drop the head
+		let lostHead = ~tileChain.pop();
+		
+		// drop not needed watch pair
+		for(let i = 0; i < ~watchList.length; i++){
+			
+			if(add(getHead(), add(sub(~watchList[i][0], getHead()), sub(~watchList[i][1], getHead()))).equals(lostHead)){
+				~watchList.splice(i, 1)
+				break;
+			}
+		}
+	}
+	
+	let foundEmpty = false;
+	for(let i = 5; i < 10; i++){
+		if(isEmpty([1, i])){
+			foundEmpty = true;
+			break;
+		}
+	}
+	
+	// Start chain if we have none
+	if(~tileChain.length == 0 && foundEmpty){
+		let starty = 5 + rnd(4)
+		watch([[0, starty], [0, starty + 1]])
+		~tileChain.push([1, starty])
+		return (turn == PLAYER1) ? hex(1, starty) : hex(starty, 1)
+	}
+	
+	// Very last resort, incredibly rare
+	do{
+	var x = rndg()
+	var y = rndg()
+	} while(!empty(x, y))
+	return hex(x, y)
+}
