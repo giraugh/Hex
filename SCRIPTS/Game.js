@@ -49,7 +49,7 @@ if (window.location.href.includes("?")) {
 		match = window.location.href.match(botData)
 		which = match[1]-1
 		code = URIdecode(match[2])
-		set_scripts(which, code)
+		set_scripts(which == 0 ? "left" : "right", code)
 	}
 }
 
