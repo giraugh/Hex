@@ -30,7 +30,6 @@ function engine_draw() {
 function engine_init() {
     document.getElementById('canvas').width = game_width();
     document.getElementById('canvas').height = game_height();
-    document.getElementById('body').style = "background-color:" + game_wbackground() + ";"
     game_init(window.game);
     engine_draw();
 }
@@ -291,3 +290,19 @@ function copyTextToClipboard(text) {
 
   document.body.removeChild(textArea);
 }
+
+function doGetKeys() {
+  ae = document.activeElement
+  if (ae.parentElement.id == "left-editor")
+    return false
+  if (ae.parentElement.id == "right-editor")
+    return false
+  return true
+}
+
+/*GAME-ENGINE DEFINITIONS*/
+function game_title(){return 'HEX';}
+function game_background(){return '#1d1d1d';}
+function game_width(){return 1200;}
+function game_height(){return 760;}
+window.game_scale = 1;

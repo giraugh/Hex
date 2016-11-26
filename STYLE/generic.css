@@ -2,6 +2,10 @@
     padding-left: 20%;
 }
 
+body {
+  background-color: #1d1d1d;
+}
+
 * {
     tab-size: 4;
 }

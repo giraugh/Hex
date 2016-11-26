@@ -1,231 +1,94 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<meta charset="utf-8">
+	<title>HEX</title>
+	<link href="IMAGES/Icon.png" rel="icon">
+	<link href="STYLE/generic.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+	<a href="https://github.com/retroverse/Hex" target="_blank"><img alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" style="position: absolute; top: 0; right: 0; border: 0;"></a>
+	<div id="content">
+		<h1 id="title">HEX</h1>
+		<p style="font-size: 30px;"><b>Hex</b> is a board game originally by <a class="link" href="https://en.wikipedia.org/wiki/Piet_Hein_(scientist)#Work" target="_blank">Piet Hein</a><br>
+		and popularized by <a class="link" href="https://en.wikipedia.org/wiki/John_Forbes_Nash,_Jr." target="_blank">John Nash</a>.<br>
+		The goal of the game is to connect your sides of the board.<br>
+		<span style="color:#E52D3D;">red</span> connects the left and right of the board whilst<br>
+		<span style="color:#655DE2;">blue</span> connect the top and bottom of the board.<br>
+		You take turns to choose a hex to take.<br>
+		In HEX though, you program an AI in <a class="link" href="https://en.wikipedia.org/wiki/JavaScript" target="_blank">Javascript</a> to choose your hex's for you.<br>
+		<br>
+		Below You can see an example two AI's which choose hex's<br>
+		at random playing against each other, feel free to muck<br>
+		around with the code there.<br>
+		<br>
+		Hex is open sourced and on github, if you have an idea,<br>
+		a bug or a suggestion head on over <a class="link" href="https://github.com/retroverse/Hex" target="_blank">there!</a></p>
+		<h2 id="link"><a class="biglink" href="https://github.com/retroverse/HEX/tree/gh-pages/BOTS" style="text-decoration: none;" target="_blank">BROWSE BOT EXAMPLES</a> &nbsp; &nbsp; <a class="biglink" href="tutorial.html" style="text-decoration: none;" target="_blank">VIEW TUTORIAL</a> <a>- press 'R' to</a> <a class="link" onclick="game_restart();">restart game</a><br>
+		<a id="icon-pause" onclick="game_togglePause()"><i class="button material-icons">pause</i></a> <a id="icon-step" onclick="game_step()"><i class="button material-icons">skip_next</i></a> <a id="icon-restart" onclick="game_restart()"><i class="button material-icons">replay</i></a> <a id="icon-autorestart" onclick="game_toggleAutoRes();note('Auto Restart Toggled', null, false)"><i class="button material-icons inactive">autorenew</i></a> <a id="icon-link" onclick="copy_url(0);note('Copied red bot url to clipboard')">Red <i class="button material-icons">link</i></a> &nbsp; <a id="icon-link" onclick="copy_url(1);note('Copied blue bot url to clipboard')">Blue <i class="button material-icons">link</i></a></h2>
+		<canvas id="canvas"></canvas>
+		<div id="boxes">
+			<div class="box" id="left-div">
+				<h1 id="left-title">Player 1</h1>
+				<p id="left-desc" style="color: white; font-family: 'Courier New', Georgia; margin-top: 0px;"><br>
+				Loading...</p>
+				<div class="editor" id="left-editor"></div><br>
+				<input class="fileinput" id="left-input" type="file"> &nbsp; <input id="left-export" onclick="exportScript('left');" type="button" value="Export"> <button onclick="load_scripts();">Apply</button> <button id="coffee-left" onclick="set_coffee('left');">To Coffee</button>
+			</div>
+			<div class="box" id="right-div">
+				<h1 id="right-title">Player 2</h1>
+				<p id="right-desc" style="color: white; font-family: 'Courier New', Georgia; margin-top: 0px;"><br>
+				Loading...</p>
+				<div class="editor" id="right-editor"></div><br>
+				<input class="fileinput" id="right-input" type="file"> &nbsp; <input id="right-export" onclick="exportScript('right');" type="button" value="Export"> <button onclick="load_scripts();">Apply</button> <button id="coffee-right" onclick="set_coffee('right');">To Coffee</button>
+			</div>
+		</div>
+	</div>
+	<div id="charts">
+		<div id="div-ch-wins" style="margin: 200px;margin-top: 400px;">
+			<canvas id="chart-wins"></canvas>
+		</div>
+	</div>
+	<footer>
 
-   <head>
-      <meta charset="utf-8" />
-      <title>HEX</title>
-      <link rel="icon" href="IMAGES/Icon.png">
-      <link rel="stylesheet" type="text/css" href="STYLE/generic.css">
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"> <!--ICONS!-->
-      <a target="_blank" href="https://github.com/retroverse/Hex">
-        <img style="position: absolute; top: 0; right: 0; border: 0;"
-            src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67"
-            alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png">
-      </a>
-   </head>
+		<!--ENGINE-->
+		<script src="SCRIPTS/Engine.js"/></script>
 
-   <body id="body" onload="engine_init();" style="background-color: black;">
-      <div id="content">
+    <!--LANGUAGES-->
+		<script src="https://rawgit.com/retroverse/Mocha/master/Mocha.js"/></script>
+		<script src="SCRIPTS/LANG/coffee.js"/></script>
+		<script src="SCRIPTS/LANG/tpt.js"/></script>
 
+		<!--ALERTIFY LIB-->
+		<link href="STYLE/alertify.css" rel="stylesheet">
+		<link href="STYLE/themes/bootstrap.css" rel="stylesheet">
+		<script src="SCRIPTS/LIB/alertify.min.js"/></script>
 
-         <h1
-            id="title">
-            HEX
-         </h1>
-         <p style="font-size: 30px;">
+		<!--ACE LIB-->
+		<script src="SCRIPTS/LIB/src-min-noconflict/ace.js"/></script>
+		<script src="SCRIPTS/InitEditors.js"/></script>
 
-         <b>Hex</b> is a board game originally by <a class="link" href="https://en.wikipedia.org/wiki/Piet_Hein_(scientist)#Work" target="_blank">Piet Hein</a>
-         <br>and popularized by <a class="link" href="https://en.wikipedia.org/wiki/John_Forbes_Nash,_Jr." target="_blank">John Nash</a>.<br> The goal of the game is to connect your sides of the board. <br>
-         <span style="color:#E52D3D;">red</span> connects the left and right of the board whilst <br>
-         <span style="color:#655DE2;">blue</span> connect the top and bottom of the board.<br> You take turns to choose a hex to take. <br> In HEX though, you program an AI in <a class="link" href="https://en.wikipedia.org/wiki/JavaScript" target="_blank">Javascript</a> to choose your hex's for you.<br>
-         <br>Below You can see an example two AI's which choose hex's<br>
-         at random playing against each other, feel free to muck<br>
-         around with the code there.<br><br>
-         Hex is open sourced and on github, if you have an idea,<br>
-         a bug or a suggestion head on over <a href="https://github.com/retroverse/Hex" target="_blank" class="link">there!</a>
-         </p>
-         <h2 id="link">
-            <a
-               class="biglink"
-               href="https://github.com/retroverse/HEX/tree/gh-pages/BOTS"
-               target="_blank"
-               style="text-decoration: none;">
-                  BROWSE BOT EXAMPLES
-            </a>
-            &nbsp;
-            &nbsp;
-            <a
-               href="tutorial.html"
-               target="_blank"
-               style="text-decoration: none;"
-               class="biglink">
-                  VIEW TUTORIAL
-            </a>
-            <a>
-                - press 'R' to
-                  <a
-                     onclick="game_restart();"
-                     class="link">
-                        restart game
-                  </a>
-            </a>
-            <br>
-            <a id="icon-pause" onclick="game_togglePause()"><i class="button material-icons">pause</i></a>
-            <a id="icon-step" onclick="game_step()"><i class="button material-icons">skip_next</i></a>
-            <a id="icon-restart" onclick="game_restart()"><i class="button material-icons">replay</i></a>
-            <a id="icon-autorestart" onclick="game_toggleAutoRes();note('Auto Restart Toggled', null, false)"><i class="button material-icons inactive">autorenew</i></a>
-            <a id="icon-link" onclick="copy_url(0);note('Copied red bot url to clipboard')">Red <i class="button material-icons">link</i></a>
-            &nbsp;
-            <a id="icon-link" onclick="copy_url(1);note('Copied blue bot url to clipboard')">Blue <i class="button material-icons">link</i></a>
-         </h2>
-         <canvas id="canvas"></canvas>
+    <!--JS2COFFEE LIB-->
+		<script src="SCRIPTS/LIB/js2coffee.js"/></script>
 
+    <!--Charting LIB-->
+		<script src="SCRIPTS/LIB/chart.js"/></script>
+		<script src="SCRIPTS/Charts.js"/></script>
 
-
-         <div id="boxes">
-            <div id="left-div" class="box">
-               <h1
-                  id="left-title">
-                     Player 1
-               </h1>
-               <p
-                  id="left-desc"
-                  style="color: white;
-                         font-family: 'Courier New', Georgia;
-                         margin-top: 0px;"><br>Loading...
-               </p>
-               <div id="left-editor" class="editor"></div>
-               <br>
-               <input
-                  id="left-input"
-                  class="fileinput"
-                  type="file">
-               </input>
-               &nbsp;
-               <input
-                  id="left-export"
-                  type="button"
-                  value="Export"
-                  onclick="exportScript('left');">
-               </input>
-               <button
-                  onclick="load_scripts();">
-                     Apply
-               </button>
-               <button id="coffee-left"
-                  onclick="set_coffee('left');">
-                     To Coffee
-               </button>
-            </div>
-
-
-
-            <div id="right-div" class="box">
-               <h1
-                  id="right-title">
-                     Player 2
-               </h1>
-               <p
-                  id="right-desc"
-                  style="color: white;
-                         font-family: 'Courier New',
-                         Georgia;
-                         margin-top: 0px;"><br>Loading...
-               </p>
-               <div id="right-editor" class="editor"></div>
-               <br>
-               <input
-                  id="right-input"
-                  class="fileinput"
-                  type="file">
-               </input>
-               &nbsp;
-               <input
-                  id="right-export"
-                  type="button"
-                  value="Export"
-                  onclick="exportScript('right');">
-               </input>
-               <button
-                  onclick="load_scripts();">
-                     Apply
-               </button>
-               <button id="coffee-right"
-                  onclick="set_coffee('right');">
-                     To Coffee
-               </button>
-            </div>
-         </div>
-      </div>
-   </body>
-   <div id="charts">
-     <div id="div-ch-wins" width="400px" height="400px" style="margin: 200px;margin-top: 400px;">
-       <canvas id="chart-wins"></canvas>
-     </div>
-   </div>
-
-
-   <footer>
-      <!--ENGINE-->
-         <script src="SCRIPTS/Engine.js"></script>
-         <script>
-            function doGetKeys() {
-              ae = document.activeElement
-              if (ae.parentElement.id == "left-editor")
-                return false
-              if (ae.parentElement.id == "right-editor")
-                return false
-              return true
-            }
-         </script>
-      <!--LANGUAGES-->
-         <script src="https://rawgit.com/retroverse/Mocha/master/Mocha.js"></script>
-         <script src="SCRIPTS/LANG/coffee.js"></script>
-         <script src="SCRIPTS/LANG/tpt.js"></script>
-      <!--ALERTIFY LIB-->
-         <link rel="stylesheet" href="STYLE/alertify.css">
-         <link rel="stylesheet" href="STYLE/themes/bootstrap.css">
-         <script src="SCRIPTS/LIB/alertify.min.js"></script>
-      <!--ACE LIB-->
-         <script src="SCRIPTS/LIB/src-min-noconflict/ace.js"></script>
-         <script>
-           window.EditorR = ace.edit("right-editor");
-           window.EditorL = ace.edit("left-editor");
-           EditorR.setTheme("ace/theme/monokai");
-           EditorL.setTheme("ace/theme/monokai");
-           EditorR.getSession().setMode("ace/mode/javascript");
-           EditorL.getSession().setMode("ace/mode/javascript");
-           EditorL.setShowPrintMargin(false);
-           EditorR.setShowPrintMargin(false);
-           EditorL.renderer.setShowGutter(false);
-           EditorR.renderer.setShowGutter(false);
-           EditorL.setHighlightActiveLine(false);
-           EditorR.setHighlightActiveLine(false);
-           EditorR.$blockScrolling = Infinity
-           EditorL.$blockScrolling = Infinity
-           function update_coffee() {
-             if (/#coffee/i.test(EditorL.getValue())) {
-               update_gui_set_coffee("left", true)
-               EditorL.getSession().setMode("ace/mode/coffee")
-             } else {
-               update_gui_set_coffee("left", false)
-               EditorL.getSession().setMode("ace/mode/javascript")
-             }
-             if (/#coffee/ig.test(EditorR.getValue())) {
-               update_gui_set_coffee("right", true)
-               EditorR.getSession().setMode("ace/mode/coffee");
-             } else {
-               update_gui_set_coffee("right", true)
-               EditorR.getSession().setMode("ace/mode/javascript");
-             }
-           }
-         </script>
-      <!--JS2COFFEE LIB-->
-         <script src="SCRIPTS/LIB/js2coffee.js"></script>
-     <!--Charting LIB-->
-        <script src="SCRIPTS/LIB/chart.js"></script>
-        <script src="SCRIPTS/Charts.js"></script>
-      <!--FRAMEWORK-->
-         <script type="text/javascript" src="SCRIPTS/Parser.js"></script>
-         <script type="text/javascript" src="SCRIPTS/Extra.js"></script>
-         <script type="text/javascript" src="SCRIPTS/Game.js"></script>
-         <script type="text/javascript" src="SCRIPTS/Filer.js"></script>
-         <script type="text/javascript" src="SCRIPTS/Examples.js"></script>
-      <script>
-         doResizeCanvas(1);
-         document.title = game_title();
-      </script>
-   </footer>
-
+		<!--FRAMEWORK-->
+		<script src="SCRIPTS/Parser.js" type="text/javascript"/></script>
+		<script src="SCRIPTS/Extra.js" type="text/javascript"/></script>
+		<script src="SCRIPTS/ScriptIO.js" type="text/javascript"/></script>
+		<script src="SCRIPTS/Page.js" type="text/javascript"/></script>
+		<script src="SCRIPTS/Game.js" type="text/javascript"/></script>
+		<script src="SCRIPTS/Filer.js" type="text/javascript"/></script>
+		<script src="SCRIPTS/Examples.js" type="text/javascript"/></script>
+		<script>
+		                         doResizeCanvas(1);
+		                         document.title = game_title();
+                             engine_init()
+		</script>
+	</footer>
+</body>
 </html>

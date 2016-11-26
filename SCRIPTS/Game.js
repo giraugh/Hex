@@ -1,132 +1,3 @@
-/* NOTES
-	HEX.html by Ewan Breakey
-
-	The goal is to draw a line across/down the screen before your opponent.
-
-	player 1 (RED) goes ACROSS the page
-					&
-	player 2 (BLUE) goes DOWN the page
-*/
-
-/*GAME DEFINITIONS*/
-function game_title(){return 'HEX';}
-function game_background(){return '#1d1d1d';}
-function game_wbackground(){return '#1d1d1d';}
-function game_width(){return 1200;}
-function game_height(){return 760;}
-window.game_scale = 1;
-
-/*SET UP BOXES*/
-defaultProgram =
-`properties = {
-	name: "Player 1",
-	author: "Me",
-	description: "New Bot, its very cool.",
-	version: 1.0
-}
-
-function init (){
-
-}
-
-function main (){
-	let x = rndg()
-	let y = rndg()
-	return hex(x, y)
-}`;
-
-if (document.getElementById("left-editor"))
-	set_scripts("left",defaultProgram);
-if (document.getElementById("right-editor"))
-	set_scripts("right", defaultProgram.replace("Player 1","Player 2"));
-
-
-//Does the url have any data in it?
-if (window.location.href.includes("?")) {
-	botData = /bot(1|2)=([\s\S]*)/
-	//%22 is the char code for "
-	if (botData.test(window.location.href)) {
-		match = window.location.href.match(botData)
-		which = match[1]-1
-		code = URIdecode(match[2])
-		set_scripts(which == 0 ? "left" : "right", code)
-	}
-}
-
-
-	function get_url(which) {
-		loc = window.location.href.match(/([^?]*)/g)[0]
-		code = get_scripts(which)
-		code = URIencode(code)
-		return loc + "?bot" + (which+1) + "=" + code
-	}
-
-	function show_url(which) {
-		prompt("", get_url(which))
-	}
-
-	function copy_url(which) {
-		return copyTextToClipboard(get_url(which))
-	}
-
-	function set_scripts(which, what) {
-		if (which == "right")
-			return EditorR.setValue(what, -1);
-		else
-			return EditorL.setValue(what, -1);
-	}
-
-function get_scripts(which) {
-	if (which == "right")
-		return EditorR.getValue();
-	else
-		return EditorL.getValue();
-}
-
-function update_gui_set_coffee(which, set) {
-	let editor;
-	if (which == "right")
-		editor = EditorR
-	else
-		editor = EditorL
-	editor.coffee = set
-	document.getElementById("coffee-"+which).innerHTML = editor.coffee ? "To Javascript" : "To Coffee"
-}
-
-function set_coffee(which) {
-	//which editor?
-	let editor;
-	if (which == "right")
-		editor = EditorR
-	else
-		editor = EditorL
-
-	//is it coffee?
-	if (!editor.coffee) {
-		//update_gui_set_coffee(which, true)
-		if (js2coffee) {
-			//ensure props stays at top
-			editor.setValue(editor.getValue().replace(/properties/g, "let properties"))
-
-			//convert to coffee
-			editor.setValue(js2coffee.build(editor.getValue()).code, -1)
-
-			//fix tabs
-			editor.setValue(editor.getValue().replace(/  /g, "    "))
-
-			//undo the ensurint thing
-			editor.setValue(editor.getValue().replace(/let properties/g, "properties"))
-		}
-		editor.setValue("#COFFEE\n"+editor.getValue(), -1);
-	} else {
-		//back to js
-		//update_gui_set_coffee(which, false)
-		editor.setValue(editor.getValue().replace("#COFFEE\n",""), -1)
-		editor.setValue(hexCoffee(editor.getValue()), -1)
-	}
-
-}
-
 /* INITS THAT ARENT RESET */
 gamePaused = false;
 autoRestart = false;
@@ -136,8 +7,11 @@ traceReturns = false;
 showConnectionValues = false;
 saturateColours = false;
 
-/*GAME EVENTS*/
-function game_init(game){
+//Set Default Scripts and check URL For Data
+init_scripts()
+
+//Initialize variables and functions used by game
+function game_init(game) {
 
 	//GRID CONSTANTS
 	gridSize = 11;
@@ -217,8 +91,8 @@ function game_init(game){
 	load_scripts();
 }
 
-function init_sprites()
-{
+//Define sprites used by game
+function init_sprites() {
 	//DEFINE HEX SPRITE
 	sHex = new Image();
 	sHex.src = "IMAGES/Hex.png"
@@ -228,23 +102,8 @@ function init_sprites()
 	sHexI.src = "IMAGES/InvertedHex.png"
 }
 
-function clear()
-{
-	//FOR EACH HEX
-	for (var x=0;x<gridSize;x++)
-	{
-		for (var y=0;y<gridSize;y++)
-		{
-			//SET TO BLANK
-			grid[x][y] = 0;
-		}
-	}
-
-
-}
-
-function game_turns()
-{
+//Do the supplied turns whilst looking for runtime errors
+function game_turns() {
 
 	var success = false; //BOOL - DID THE PLAYER CHOOSE A LEGITIMATE HEX?
 	var hex = new Array();
@@ -352,8 +211,8 @@ function game_turns()
 	attemptCount++;
 }
 
-function game_update_connections_ext(board, cboard, auth)
-{
+//Used to check connections on a board
+function game_update_connections_ext(board, cboard, auth) {
 	//MAKE SURE EDGES ARE SET
 	for (var x=0;x<gridSize;x++)
 	{
@@ -401,7 +260,7 @@ function game_update_connections_ext(board, cboard, auth)
 
 										if (cboard[x+i][y+j][+(!e)] && !gameStopped)
 										{
-											if(auth){if (board[x][y] != 0){gameStopped = true;log("STOPPED GAME W/ VAL: " + board[x][y]);}}
+											if(auth){if (board[x][y] != 0){gameStopped = true;}}
 											return board[x][y];
 										}
 									}
@@ -416,8 +275,8 @@ function game_update_connections_ext(board, cboard, auth)
 	return 0;
 }
 
-function game_update_connections()
-{
+//Check connections and whether someone has won
+function game_update_connections() {
 	var win = game_update_connections_ext(grid,cgrid,true);
 	var col = blank;
 	if (win == 1)
@@ -444,25 +303,13 @@ function game_update_connections()
 	}
 }
 
-function game_loop()
-{
+//Update Page then perform game step
+function game_loop() {
 
-	//UPDATE PROPERTIES
-	if(player1_turn){
-		let props1 = player1_turn("props");
-		if (props1 != undefined) {
-			useProps(props1.name,props1.author,props1.version,props1.description,'left');
-		}
-	}
+	//Update Page
+	page_update()
 
-	if(player2_turn){
-		let props2 = player2_turn("props");
-		if (props2 != undefined) {
-			useProps(props2.name,props2.author,props2.version,props2.description,'right');
-		}
-	}
-
-	//IF SOMEONE HASN'T ALREADY WON
+	//If game hasnt stopped and isnt paused
 	if (!gameStopped)
 	{
 		if (!gamePaused)
@@ -470,30 +317,7 @@ function game_loop()
 	}
 }
 
-function game_togglePause() {
-	gamePaused = !gamePaused
-	if (gamePaused)
-		dg("icon-pause").children[0].innerHTML = "play_arrow"
-	else
-		dg("icon-pause").children[0].innerHTML = "pause"
-}
-
-function game_toggleAutoRes() {
-	autoRestart = !autoRestart
-	if (autoRestart)
-		removeClass(dg("icon-autorestart").children[0], "inactive")
-	else
-		addClass(dg("icon-autorestart").children[0], "inactive")
-}
-
-function game_toggleTraceRets() {
-	traceReturns = !traceReturns
-	if (traceReturns)
-		removeClass(dg("icon-trace").children[0], "inactive")
-	else
-		addClass(dg("icon-trace").children[0], "inactive")
-}
-
+//Perform game turns and update connections
 function game_step() {
 	//DO TURNS
 	game_turns();
@@ -502,12 +326,8 @@ function game_step() {
 	game_update_connections();
 }
 
-function game_restart() {
-	console.clear();game_init();
-}
-
-function game_draw_hexs(ctx)
-{
+//Draw hex grid
+function game_draw_hexs(ctx) {
 	//FOR EACH GRID SPOT
 	for (var x=0;x<gridSize;x++)
 	{
@@ -553,34 +373,11 @@ function game_draw_hexs(ctx)
 	}
 }
 
-function game_hotkeys() {
-	//Restart
-	if (keyPressed("r")) game_restart()
-
-	//Play / Pause
-	if (keyPressed("p")) game_togglePause()
-
-	//Step
-	if (keyPressed("s")) game_step()
-}
-
-function game_draw(ctx,game){
-	//are editors supposed to be in coffee mode?
-	update_coffee()
-
-	//check hotkeys
-	game_hotkeys()
-
-	//main loop
+//Main loop - Update game and draw hex's
+function game_draw(ctx, game) {
+	//Main loop
 	game_loop();
 
-	//draw hexes
+	//Draw hexes
 	game_draw_hexs(ctx);
-
-	//DISPLAY END MESSAGE IF NECESSARY
-	if (willDisplayEnd != "")
-	{
-		alert(willDisplayEnd);
-		willDisplayEnd = "";
-	}
 }
