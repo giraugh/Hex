@@ -468,8 +468,6 @@ function game_loop()
 		if (!gamePaused)
 		game_step()
 	}
-	//RESTART GAME IF USER PRESSES R
-	if (keyPressed("r")){game_restart();}
 }
 
 function game_togglePause() {
@@ -555,9 +553,23 @@ function game_draw_hexs(ctx)
 	}
 }
 
+function game_hotkeys() {
+	//Restart
+	if (keyPressed("r")) game_restart()
+
+	//Play / Pause
+	if (keyPressed("p")) game_togglePause()
+
+	//Step
+	if (keyPressed("s")) game_step()
+}
+
 function game_draw(ctx,game){
 	//are editors supposed to be in coffee mode?
 	update_coffee()
+
+	//check hotkeys
+	game_hotkeys()
 
 	//main loop
 	game_loop();
