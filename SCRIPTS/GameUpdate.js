@@ -114,15 +114,15 @@ function game_turns() {
 //Used to check connections on a board
 function game_update_connections_ext(board, cboard, auth) {
     //MAKE SURE EDGES ARE SET
-    for (let x = 0; x < gridSize; x++) {
-        for (let y = 0; y < gridSize; y++) {
-            let check = -1;
+    for (var x = 0; x < gridSize; x++) {
+        for (var y = 0; y < gridSize; y++) {
+            var check = -1;
             //CHECKING HORIZONTAL OR VERTICAL?
             if (board[x][y] == 1) {
-                let check = x;
+                var check = x;
             }
             if (board[x][y] == 2) {
-                let check = y;
+                var check = y;
             }
 
             //WE HAVE A VALUE TO CHECK
@@ -135,17 +135,17 @@ function game_update_connections_ext(board, cboard, auth) {
     }
 
     // FOR EACH HEX
-    for (let x = 0; x < gridSize; x++) {
-        for (let y = 0; y < gridSize; y++) {
-            for (let e = 0; e < 2; e++) //FOR BOTH EDGES
+    for (var x = 0; x < gridSize; x++) {
+        for (var y = 0; y < gridSize; y++) {
+            for (var e = 0; e < 2; e++) //FOR BOTH EDGES
             {
                 if (board[x][y] != 0) // ARE WE COLOURED?
                 {
                     if (cboard[x][y][e]) // ARE WE CONNECTED TO THAT EDGE
                     {
                         // FOR ALL HEX'S IN A GRID AROUND US
-                        for (let i = -1; i < 2; i++) {
-                            for (let j = -1; j < 2; j++) {
+                        for (var i = -1; i < 2; i++) {
+                            for (var j = -1; j < 2; j++) {
                                 if ((x + i >= 0 && x + i < gridSize) && (y + j >= 0 && y + j < gridSize) && (i != j)) // ARE WE INSIDE GRID AND NOT A CORNER OR CENTER?
                                 {
                                     if (board[x + i][y + j] == board[x][y] && cboard[x + i][y + j][e] != 1) // IS OUR NEIGHBOUR OUR COLOUR AND ARE THEY NOT ALREADY SET?
@@ -214,6 +214,7 @@ function game_loop() {
 
 //Perform game turns and update connections
 function game_step() {
+
     //DO TURNS
     game_turns();
 
