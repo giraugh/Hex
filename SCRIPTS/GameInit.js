@@ -11,6 +11,9 @@ traceReturns = false;
 showConnectionValues = false;
 saturateColours = false;
 
+gameDelay = 0;
+gameDelayMax = 0;
+
 //Set Default Scripts and check URL For Data
 init_scripts()
 

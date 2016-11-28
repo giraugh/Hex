@@ -3,6 +3,7 @@ function page_update() {
   page_properties()
   page_hotkeys()
   page_coffee()
+  page_sim_speed()
 }
 
 //Update whether editors should show coffee syntax
@@ -21,6 +22,14 @@ function page_coffee() {
     update_gui_set_coffee("right", true)
     EditorR.getSession().setMode("ace/mode/javascript");
   }
+}
+
+function page_sim_speed() {
+  let slowest = 25
+  let sv = document.getElementById("sim_speed").value
+
+  let v = (1-sv) * slowest
+  gameDelayMax = v
 }
 
 //Update properties

@@ -215,9 +215,14 @@ function game_loop() {
 //Perform game turns and update connections
 function game_step() {
 
-    //DO TURNS
-    game_turns();
+    //DO TURNS IF TIME UP
+    if (gameDelay == 0) {
+      game_turns()
+      gameDelay = gameDelayMax
+    } else {
+      gameDelay = Math.max(gameDelay - 1, 0)
+    }
 
     //UPDATE HEX CONNECTIONS
-    game_update_connections();
+    game_update_connections()
 }
