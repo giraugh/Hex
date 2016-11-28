@@ -383,3 +383,17 @@ function isEdgeConnected(x, y, edge)
 function say(x) {
    note(x, turn);
 }
+
+/* Weird thing that logan asked for*/
+function grid_to_text(g) {
+  str = ""
+  for (var i=0;i<gridSize;i++)
+	{
+		for (var j=0;j<gridSize;j++)
+		{
+			str += g[i][j]
+		}
+    str += "\n" + " ".repeat(i+1)
+	}
+  return str
+}
