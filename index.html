@@ -29,7 +29,7 @@
 		</div>
 		<h2 id="link"><a class="biglink" href="https://github.com/retroverse/HEX/tree/gh-pages/BOTS" style="text-decoration: none;" target="_blank">BROWSE BOT EXAMPLES</a> &nbsp; &nbsp; <a class="biglink" href="tutorial.html" style="text-decoration: none;" target="_blank">VIEW TUTORIAL</a> <a>- press 'R' to</a> <a class="link" onclick="game_restart();">restart game</a><br>
 		<a id="icon-pause" onclick="game_togglePause()"><i class="button material-icons">pause</i></a>
-		<a id="icon-step" onclick="game_step()"><i class="button material-icons">skip_next</i></a>
+		<a id="icon-step" onclick="gameDelay=0;game_step()"><i class="button material-icons">skip_next</i></a>
 		<a id="icon-restart" onclick="game_restart()"><i class="button material-icons">replay</i></a>
 		<a id="icon-autorestart" onclick="game_toggleAutoRes();note('Auto Restart Toggled', null, false)"><i class="button material-icons inactive">autorenew</i></a>
 		<a id="icon-link" onclick="copy_url(0);note('Copied red bot url to clipboard')">Red <i class="button material-icons">link</i></a>
