@@ -10,7 +10,6 @@
 		scripts = {};
 
 		function useProps(name,author,version,description,person) {
-			if (description == "" || description == undefined){description = " ";}
 			if (author != "" && author != undefined){scripts[person+'-author'] = author;}
 			if (version != "" && version != undefined){scripts[person+'-version'] = version;}
 			if (description != "" && description != undefined){scripts[person+'-description'] = description;}
